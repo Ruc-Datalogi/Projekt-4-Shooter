@@ -13,11 +13,11 @@ screen = pygame.display.set_mode(SCREEN_SIZE)
 
 # Title and Icon
 pygame.display.set_caption("Martins Test")
-icon = pygame.image.load('sprites/playerLV1.png')
+icon = pygame.image.load('Game/sprites/playerLV1.png')
 pygame.display.set_icon(icon)
 
 # player
-playerImg = pygame.image.load("sprites/playerLV1.png")
+playerImg = pygame.image.load("Game/sprites/playerLV1.png")
 playerX = 300 
 playerY = 600
 playerSpeedX = 0
@@ -25,7 +25,7 @@ playerSpeedY = 0
 generalSpeed = 3.5
 
 # Enemy
-enemyImg = pygame.image.load("sprites/enemy1.png")
+enemyImg = pygame.image.load("Game/sprites/enemy1.png")
 enemyX = 100 
 enemyY = 100
 enemySpeedX = 1.5
@@ -33,7 +33,7 @@ enemySpeedY = 0
 
 
 # Background
-backGroundImg = pygame.image.load("sprites/background/preview.png")
+backGroundImg = pygame.image.load("Game/sprites/background/preview.png")
 
 def drawBackground():   
     width = backGroundImg.get_width()
@@ -69,6 +69,8 @@ while RUNNING:
                 playerSpeedY = generalSpeed
             if event.key == pygame.K_ESCAPE:
                 sys.exit()
+            if event.key == pygame.K_SPACE:
+                print("pew pew")
         
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT: 
