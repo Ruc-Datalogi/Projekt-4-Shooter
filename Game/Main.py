@@ -1,4 +1,4 @@
-import sys, pygame, random  
+import sys, pygame, random
 pygame.init()
 
 # Constant variables
@@ -34,13 +34,18 @@ enemySpeedY = 0
 
 # Background
 backGroundImg = pygame.image.load("Game/sprites/background/preview.png")
+backGroundImg_1 = pygame.image.load("Game/sprites/background/background_1.png")
+backGroundImg_2 = pygame.image.load("Game/sprites/background/background_2.png")
+backGroundImg_3 = pygame.image.load("Game/sprites/background/background_3.png")
+backGroundImg_4 = pygame.image.load("Game/sprites/background/background_4.png")
 
-def drawBackground():   
+def drawBackground(): 
     width = backGroundImg.get_width()
     height = backGroundImg.get_height()
     for i in range(0, int(600/width)+1):
         for j in range(0, int(800/height +1)):
-            screen.blit(backGroundImg, (i*width, j*height))
+            screen.blit(backGroundImg,(i*width, j*height))
+
     width = backGroundImg.get_width()
     height = backGroundImg.get_height()
 
@@ -97,11 +102,12 @@ while RUNNING:
         playerX = 584
     if playerY <= 0: 
         playerY = 0
-    if playerY >= 784: 
+    if playerY >= 784:
         playerY = 784
     
     player(playerX, playerY)
     enemy(enemyX,enemyY)
+    
     pygame.display.update()
     fpsClock.tick(FPS)
 
