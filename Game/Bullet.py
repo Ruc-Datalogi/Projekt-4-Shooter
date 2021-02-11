@@ -9,21 +9,24 @@ class Bullet:
         self.bulletY = yPos -30
         self.bulletSpeedX = 0
         self.bulletSpeedY = 10
-        #self.bulletState = "ready"
+        self.bulletRect = self.img.get_rect()
+
+    @property
+    def getBulletRect(self):
+        return self.bulletRect
+
+    @property  
+    def getBulletY(self):
+        return self.bulletY
     
-    
+    def is_collided_with(self, img):
+        return self.rect.colliderect(img.rect)
+
     def bulletDraw(self , screen):        
         screen.blit(self.img,(self.bulletX,self.bulletY))
 
     def bulletMove(self):
         self.bulletX -= self.bulletSpeedX
         self.bulletY -= self.bulletSpeedY
-
-
-    # Bullet movement
-    # if statements for skudene
-    # Når bulletY er mindre end eller lig med 0, så skal bulletY reset, så der kan skydes igen.
     
-
     
-                

@@ -18,10 +18,16 @@ class Player:
     
     def playerDraw(self , screen):        
         screen.blit(self.img,(self.playerX,self.playerY))
+    
         for i in range(len(self.bulletlist)):
+            print(len(self.bulletlist))
             self.bulletlist[i].bulletMove()
             self.bulletlist[i].bulletDraw(screen)
 
+    def bulletCollision(self, enemy):
+        for i in range(len(self.bulletlist)):
+            if self.bulletlist[i].getBulletRect.colliderect(enemy.getEnemyRect):
+                print("JA TAK")
 
     def playerMove(self):
         self.playerX += self.playerSpeedX

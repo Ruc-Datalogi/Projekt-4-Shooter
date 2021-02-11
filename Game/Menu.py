@@ -74,4 +74,3 @@ class Menu:
             return 'options'
         if input == 2:
             return 'quit'            
-

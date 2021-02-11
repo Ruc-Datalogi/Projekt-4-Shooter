@@ -24,11 +24,11 @@ pygame.display.set_icon(icon)
 p1 = Player(screen)
 
 # Enemy
-enemy1 = Enemy()
+enemy1 = Enemy(100, 200)
 
+    
 
-
-
+ 
 # Background
 backGroundImg = pygame.image.load("Game/sprites/background/preview.png")
 backGroundImg_1 = pygame.image.load("Game/sprites/background/background_1.png")
@@ -67,6 +67,7 @@ while RUNNING:
         
 
         p1.playerDraw(screen)
+        p1.bulletCollision(enemy1)
         p1.playerMove()
 
         enemy1.enemyDraw(screen)
