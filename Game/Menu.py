@@ -12,7 +12,7 @@ class Menu:
         self.selected = 0
 
 
-    #To escpae menu
+    #
     @property
     def get_menu(self):
         return self.menuOn
@@ -68,5 +68,6 @@ class Menu:
         if input == 1:
             return 'options'
         if input == 2:
-            return 'quit'
+            sys.exit()
+            
 
