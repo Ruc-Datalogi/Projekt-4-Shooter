@@ -12,12 +12,16 @@ class Player:
         self.generalSpeed = 3.5
         self.moving = False
         self.screen = screen
+        self.bulletlist = []
+        self.increment = 0
     
     
     def playerDraw(self , screen):        
         screen.blit(self.img,(self.playerX,self.playerY))
-        b.bulletDraw(self.screen)
-        b.bulletMove()
+        for i in range(len(self.bulletlist)):
+            self.bulletlist[i].bulletMove()
+            self.bulletlist[i].bulletDraw(screen)
+
 
     def playerMove(self):
         self.playerX += self.playerSpeedX
@@ -49,7 +53,7 @@ class Player:
             if event.key == pygame.K_ESCAPE:
                 sys.exit()
             if event.key == pygame.K_SPACE:
-                b = Bullet(self.playerX, self.playerY)
+                self.bulletlist.append(Bullet(self.playerX, self.playerY))
                 print("pew pew")
         
         if event.type == pygame.KEYUP:
