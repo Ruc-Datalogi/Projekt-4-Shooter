@@ -12,7 +12,7 @@ class Menu:
         self.selected = 0
 
 
-    #
+    #Getter to escape Menu
     @property
     def get_menu(self):
         return self.menuOn
@@ -51,9 +51,14 @@ class Menu:
             if event.key == pygame.K_UP:
                 self.selected -= 1
             if event.key == pygame.K_RETURN:
-                self.menuOn = False
-                self.menuSelecter(self.selected)            
-        
+                #Start Game
+                if self.selected == 0:
+                    self.menuOn = False
+                if self.selected == 1:
+                    pass
+                if self.selected == 2:
+                    sys.exit()
+                    
         if self.selected > 2:
             self.selected = 0
         
@@ -68,6 +73,5 @@ class Menu:
         if input == 1:
             return 'options'
         if input == 2:
-            sys.exit()
-            
+            return 'quit'            
 
