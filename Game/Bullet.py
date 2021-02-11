@@ -3,35 +3,27 @@ import sys, pygame, random
 
 class Bullet:
 
-    def __init__(self):
+    def __init__(self, xPos, yPos):
         self.img = pygame.image.load("Game/sprites/bullet.png")
-        self.playerX = 300 
-        self.playerY = 600
-        self.playerSpeedX = 0
-        self.playerSpeedY = 0
-        self.generalSpeed = 3.5
-        self.moving = False
+        self.bulletX = xPos -8.5
+        self.bulletY = yPos -30
+        self.bulletSpeedX = 0
+        self.bulletSpeedY = 10
+        #self.bulletState = "ready"
     
     
-    def playerDraw(self , screen):        
-        screen.blit(self.img,(self.playerX,self.playerY))
+    def bulletDraw(self , screen):        
+        screen.blit(self.img,(self.bulletX,self.bulletY))
 
-    def playerMove(self):
-        self.playerX += self.playerSpeedX
-        self.playerY += self.playerSpeedY
-
-        if self.playerX <= 0:
-            self.playerX = 0
-        if self.playerX >= 584:
-            self.playerX = 584
-        if self.playerY <= 0: 
-            self.playerY = 0
-        if self.playerY >= 784:
-            self.playerY = 784
+    def bulletMove(self):
+        self.bulletX -= self.bulletSpeedX
+        self.bulletY -= self.bulletSpeedY
 
 
+    # Bullet movement
+    # if statements for skudene
+    # Når bulletY er mindre end eller lig med 0, så skal bulletY reset, så der kan skydes igen.
+    
 
-    def playerKey(self, event):
-            if event.key == pygame.K_SPACE:
-                print("pew pew")
+    
                 

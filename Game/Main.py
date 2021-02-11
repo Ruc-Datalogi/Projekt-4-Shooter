@@ -21,10 +21,11 @@ icon = pygame.image.load('Game/sprites/playerLV1.png')
 pygame.display.set_icon(icon)
 
 # player
-p1 = Player()
+p1 = Player(screen)
 
 # Enemy
 enemy1 = Enemy()
+
 
 
 

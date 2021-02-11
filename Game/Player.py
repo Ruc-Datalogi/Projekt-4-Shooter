@@ -1,9 +1,9 @@
 import sys, pygame, random
-
+from Bullet import Bullet
 
 class Player:
 
-    def __init__(self):
+    def __init__(self, screen):
         self.img = pygame.image.load("Game/sprites/playerLV1.png")
         self.playerX = 300 
         self.playerY = 600
@@ -11,10 +11,13 @@ class Player:
         self.playerSpeedY = 0
         self.generalSpeed = 3.5
         self.moving = False
+        self.screen = screen
     
     
     def playerDraw(self , screen):        
         screen.blit(self.img,(self.playerX,self.playerY))
+        b.bulletDraw(self.screen)
+        b.bulletMove()
 
     def playerMove(self):
         self.playerX += self.playerSpeedX
@@ -46,6 +49,7 @@ class Player:
             if event.key == pygame.K_ESCAPE:
                 sys.exit()
             if event.key == pygame.K_SPACE:
+                b = Bullet(self.playerX, self.playerY)
                 print("pew pew")
         
         if event.type == pygame.KEYUP:
