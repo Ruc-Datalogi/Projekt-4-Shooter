@@ -13,7 +13,7 @@ class Enemy:
 
     @property
     def getEnemyRect(self):
-        self.enemyRect = pygame.Rect((self.enemyX, self.enemyY),(self.enemyX+self.img.get_width(),self.enemyY+self.img.get_height()))
+        
         return self.enemyRect
     
     def enemyDraw(self, screen):
@@ -24,4 +24,4 @@ class Enemy:
         if self.enemyX >= 576 or self.enemyX <= 24:
             self.enemySpeedX *= -1
             self.enemyY += 50
-        self.enemyRect = self.img.get_rect()
+        self.enemyRect = self.img.get_rect(x=self.enemyX, y=self.enemyY)
