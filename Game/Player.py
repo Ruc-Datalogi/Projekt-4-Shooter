@@ -1,5 +1,6 @@
 import sys, pygame, random
 from Bullet import Bullet
+from Enemy import Enemy
 
 class Player:
 
@@ -27,8 +28,6 @@ class Player:
         for i in range(len(self.bulletlist)):
             if self.bulletlist[i].getBulletRect.colliderect(enemy.getEnemyRect):
                 print(enemy.getEnemyRect)
-                self.bulletlist[i].getBulletRect
-                print("JA TAK")
 
     def playerMove(self):
         self.playerX += self.playerSpeedX
