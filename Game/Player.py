@@ -20,13 +20,14 @@ class Player:
         screen.blit(self.img,(self.playerX,self.playerY))
     
         for i in range(len(self.bulletlist)):
-            print(len(self.bulletlist))
             self.bulletlist[i].bulletMove()
             self.bulletlist[i].bulletDraw(screen)
 
     def bulletCollision(self, enemy):
         for i in range(len(self.bulletlist)):
             if self.bulletlist[i].getBulletRect.colliderect(enemy.getEnemyRect):
+                print(enemy.getEnemyRect)
+                self.bulletlist[i].getBulletRect
                 print("JA TAK")
 
     def playerMove(self):
@@ -47,7 +48,6 @@ class Player:
     def playerKey(self, event):
         if event.type == pygame.KEYDOWN:
             self.moving = True
-            print('Key down')
             if event.key == pygame.K_LEFT: 
                 self.playerSpeedX = -self.generalSpeed
             if event.key == pygame.K_RIGHT: 
@@ -63,7 +63,6 @@ class Player:
                 print("pew pew")
         
         if event.type == pygame.KEYUP:
-            print('Key up')
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT: 
                 self.playerSpeedX = 0
             if event.key == pygame.K_UP or event.key == pygame.K_DOWN:
