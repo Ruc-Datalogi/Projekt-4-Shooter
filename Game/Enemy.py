@@ -13,7 +13,6 @@ class Enemy:
 
     @property
     def getEnemyRect(self):
-        
         return self.enemyRect
     
     def enemyDraw(self, screen):
