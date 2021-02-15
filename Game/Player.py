@@ -6,8 +6,9 @@ class Player:
 
     def __init__(self, screen):
         self.img = pygame.image.load("Game/sprites/playerLV1.png")
-        self.playerX = 300 
-        self.playerY = 600
+        self.playerX = 100 
+        self.playerY = 100
+
         self.playerSpeedX = 0
         self.playerSpeedY = 0
         self.generalSpeed = 3.5
@@ -15,6 +16,7 @@ class Player:
         self.screen = screen
         self.bulletlist = []
         self.increment = 0
+
     
     
     def playerDraw(self , screen):        
@@ -40,12 +42,12 @@ class Player:
 
         if self.playerX <= 0:
             self.playerX = 0
-        if self.playerX >= 584:
-            self.playerX = 584
+        if self.playerX >= 400 - 14:
+            self.playerX = 400 - 14
         if self.playerY <= 0: 
             self.playerY = 0
-        if self.playerY >= 784:
-            self.playerY = 784
+        if self.playerY >= 540:
+            self.playerY = 540
 
 
 

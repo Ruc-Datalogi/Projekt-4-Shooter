@@ -22,9 +22,9 @@ class Menu:
     def drawMenu(self, screen, SCREEN_SIZE):
         screen.fill((0,0,0))
 
-        font = pygame.font.SysFont('chalkduster.ttf',72)
-        font1 = pygame.font.SysFont('chalkduster.ttf',72)
-        font2 = pygame.font.SysFont('chalkduster.ttf',72)
+        font = pygame.font.SysFont('chalkduster.ttf',48)
+        font1 = pygame.font.SysFont('chalkduster.ttf',48)
+        font2 = pygame.font.SysFont('chalkduster.ttf',48)
         if self.selected == 0:
             start = font.render('Start', True, (100,100,100))
         else:
@@ -38,9 +38,9 @@ class Menu:
         else: 
             quit = font1.render('Quit', True, (50,50,50))
     
-        screen.blit(start, (150, 200))
-        screen.blit(options, (150, 300))
-        screen.blit(quit, (150, 400))
+        screen.blit(start,(SCREEN_SIZE[0]/4, (SCREEN_SIZE[1]/6)*2))
+        screen.blit(options, (SCREEN_SIZE[0]/4, (SCREEN_SIZE[1]/6)*3))
+        screen.blit(quit, (SCREEN_SIZE[0]/4, (SCREEN_SIZE[1]/6)*4))
 
 
 

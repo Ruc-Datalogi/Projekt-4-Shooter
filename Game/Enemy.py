@@ -20,7 +20,7 @@ class Enemy:
 
     def enemyMove(self):
         self.enemyX += self.enemySpeedX
-        if self.enemyX >= 576 or self.enemyX <= 24:
+        if self.enemyX >= 300 or self.enemyX <= 12:
             self.enemySpeedX *= -1
             self.enemyY += 50
         self.enemyRect = self.img.get_rect(x=self.enemyX, y=self.enemyY)
