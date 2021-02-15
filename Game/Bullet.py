@@ -4,9 +4,9 @@ import sys, pygame, random
 class Bullet:
 
     def __init__(self, xPos, yPos):
-        self.img = pygame.image.load("Game/sprites/bullet.png")
-        self.bulletX = xPos -8.5
-        self.bulletY = yPos -30
+        self.img = pygame.image.load("Game/sprites/bullets/red_bullet.png")
+        self.bulletX = xPos 
+        self.bulletY = yPos 
         self.bulletSpeedX = 0
         self.bulletSpeedY = 10
         self.bulletRect = self.img.get_rect()
