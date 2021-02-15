@@ -65,7 +65,10 @@ class Player:
             if event.key == pygame.K_ESCAPE:
                 sys.exit()
             if event.key == pygame.K_SPACE:
-                self.bulletlist.append(Bullet(self.playerX, self.playerY))
+                self.bulletlist.append(Bullet(self.playerX + 2, self.playerY - 10))
+                self.bulletlist.append(Bullet(self.playerX + 10, self.playerY - 10))
+                self.bulletlist.append(Bullet(self.playerX + -6, self.playerY - 10))
+
                 print("pew pew")
         
         if event.type == pygame.KEYUP:

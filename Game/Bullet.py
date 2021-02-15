@@ -8,7 +8,7 @@ class Bullet:
         self.bulletX = xPos 
         self.bulletY = yPos 
         self.bulletSpeedX = 0
-        self.bulletSpeedY = 10
+        self.bulletSpeedY = 12
         self.bulletRect = self.img.get_rect()
 
     @property
