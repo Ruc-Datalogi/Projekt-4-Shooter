@@ -8,11 +8,12 @@ class Enemy:
         self.enemyY = enemyYPos
         self.enemySpeedX = 1.5
         self.enemySpeedY = 0
+        self.enemyRect = self.img.get_rect()
         
 
     @property
     def getEnemyRect(self):
-        print(self.enemyRect)
+        self.enemyRect = pygame.Rect((self.enemyX, self.enemyY),(self.enemyX+self.img.get_width(),self.enemyY+self.img.get_height()))
         return self.enemyRect
     
     def enemyDraw(self, screen):

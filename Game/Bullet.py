@@ -13,6 +13,7 @@ class Bullet:
 
     @property
     def getBulletRect(self):
+        self.bulletRect = pygame.Rect((self.bulletX, self.bulletY),(self.bulletX+self.img.get_width(),self.bulletY+self.img.get_height()))
         return self.bulletRect
 
     @property  
