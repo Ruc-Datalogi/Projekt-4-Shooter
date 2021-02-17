@@ -10,12 +10,30 @@ class Menu:
         pygame.font.init()
         self.menuOn = True
         self.selected = 0
+        self.backGroundImg = pygame.image.load("Game/sprites/background/preview.png")
+        self.backGroundImg_1 = pygame.image.load("Game/sprites/background/background_1.png")
+        self.backGroundImg_2 = pygame.image.load("Game/sprites/background/background_2.png")
+        self.backGroundImg_3 = pygame.image.load("Game/sprites/background/background_3.png")
+        self.backGroundImg_4 = pygame.image.load("Game/sprites/background/background_4.png")
 
 
     #Getter to escape Menu
     @property
     def get_menu(self):
         return self.menuOn
+
+
+    def drawBackground(self, display, DISPLAY_SIZE):
+        width = self.backGroundImg.get_width()
+        height = self.backGroundImg.get_height()
+        for i in range(0, int(DISPLAY_SIZE[0]/width)+1):
+            for j in range(0, int(DISPLAY_SIZE[1]/height +1)):
+                display.blit(self.backGroundImg,(i*width, j*height))
+
+        width = self.backGroundImg.get_width()
+        height = self.backGroundImg.get_height() 
+        
+               
 
 
 

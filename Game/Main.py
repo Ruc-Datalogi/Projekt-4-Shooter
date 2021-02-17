@@ -28,26 +28,6 @@ p1 = Player(screen)
 # Enemy
 enemy1 = Enemy(100, 200)
 
-    
-
- 
-# Background
-backGroundImg = pygame.image.load("Game/sprites/background/preview.png")
-backGroundImg_1 = pygame.image.load("Game/sprites/background/background_1.png")
-backGroundImg_2 = pygame.image.load("Game/sprites/background/background_2.png")
-backGroundImg_3 = pygame.image.load("Game/sprites/background/background_3.png")
-backGroundImg_4 = pygame.image.load("Game/sprites/background/background_4.png")
-
-def drawBackground(): 
-    width = backGroundImg.get_width()
-    height = backGroundImg.get_height()
-    for i in range(0, int(DISPLAY_SIZE[0]/width)+1):
-        for j in range(0, int(DISPLAY_SIZE[1]/height +1)):
-            display.blit(backGroundImg,(i*width, j*height))
-
-    width = backGroundImg.get_width()
-    height = backGroundImg.get_height()            
-
 
 while RUNNING:
     #Menu
@@ -64,12 +44,13 @@ while RUNNING:
         pygame.display.update()
     else:
     #game loop
-        drawBackground()
+        
         for event in pygame.event.get():
             if event.type == pygame.QUIT: 
                 RUNNING = False
             
-        
+        menu.drawBackground(display,DISPLAY_SIZE)
+
         p1.update()
         p1.playerDraw(display)
         p1.bulletCollision(enemy1)
