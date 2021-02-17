@@ -16,6 +16,7 @@ class Enemy:
         self.enemySpeedX = 1.5
         self.enemySpeedY = 0
         self.enemyRect = self.img.get_rect()
+    
         
 
     @property
