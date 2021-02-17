@@ -16,6 +16,7 @@ class Player:
         self.screen = screen
         self.bulletlist = []
         self.increment = 0
+        self.timer = 0
 
     
     
@@ -62,12 +63,16 @@ class Player:
             self.playerSpeedY = -8
         if keystate[pygame.K_DOWN]:
             self.playerSpeedY = 8
-        if keystate[pygame.K_SPACE]:
+        if self.timer > 10 and keystate[pygame.K_SPACE]:
+            self.timer = 0
             self.bulletlist.append(Bullet(self.playerX + 2, self.playerY - 10))
             self.bulletlist.append(Bullet(self.playerX + 10, self.playerY - 10))
             self.bulletlist.append(Bullet(self.playerX + -6, self.playerY - 10))
         if keystate[pygame.K_ESCAPE]:
             sys.exit()
+
+        self.timer +=1
+
 
 '''
     def playerKey(self, event):
