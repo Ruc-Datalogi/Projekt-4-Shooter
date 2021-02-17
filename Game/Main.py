@@ -26,12 +26,13 @@ pygame.display.set_icon(icon)
 p1 = Player(screen)
 
 # Enemy
-enemy1 = Enemy(100, 200)
+enemy1 = Enemy(100, 200,2)
 
 
 while RUNNING:
     #Menu
     if menu.get_menu: 
+        menu.drawBackground(display,(DISPLAY_SIZE))
         menu.drawMenu(display, (DISPLAY_SIZE))
         for event in pygame.event.get():
             if event.type == pygame.QUIT: 
@@ -49,7 +50,7 @@ while RUNNING:
             if event.type == pygame.QUIT: 
                 RUNNING = False
             
-        menu.drawBackground(display,DISPLAY_SIZE)
+        menu.drawBackgroundScrolling(display,DISPLAY_SIZE)
 
         p1.update()
         p1.playerDraw(display)

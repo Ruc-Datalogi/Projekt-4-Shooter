@@ -15,6 +15,10 @@ class Menu:
         self.backGroundImg_2 = pygame.image.load("Game/sprites/background/background_2.png")
         self.backGroundImg_3 = pygame.image.load("Game/sprites/background/background_3.png")
         self.backGroundImg_4 = pygame.image.load("Game/sprites/background/background_4.png")
+        self.scroller = 0
+        self.movingBackground = True
+
+
 
 
     #Getter to escape Menu
@@ -23,20 +27,29 @@ class Menu:
         return self.menuOn
 
 
+    def drawBackgroundScrolling(self, display, DISPLAY_SIZE):
+        width = self.backGroundImg.get_width()
+        height = self.backGroundImg.get_height()
+        for i in range(0,2):
+            for j in range(-4,8):
+                display.blit(self.backGroundImg,(i*width,j*height + self.scroller))
+        
+
+        self.scroller += 1
+        if self.scroller >= height:
+            self.scroller = 0
+
     def drawBackground(self, display, DISPLAY_SIZE):
         width = self.backGroundImg.get_width()
         height = self.backGroundImg.get_height()
-        for i in range(0, int(DISPLAY_SIZE[0]/width)+1):
-            for j in range(0, int(DISPLAY_SIZE[1]/height +1)):
+        
+        for i in range(-1, int(DISPLAY_SIZE[0]/width)+1):
+            for j in range(-1, int(DISPLAY_SIZE[1]/height +1)):
                 display.blit(self.backGroundImg,(i*width, j*height))
-
         width = self.backGroundImg.get_width()
         height = self.backGroundImg.get_height() 
         
-               
-
-
-
+        
     def drawMenu(self, screen, SCREEN_SIZE):
         screen.fill((0,0,0))
 

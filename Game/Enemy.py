@@ -2,8 +2,15 @@ import sys, pygame, random
 
 class Enemy:
 
-    def __init__(self, enemyXPos, enemyYPos):
+    def __init__(self, enemyXPos, enemyYPos, enemyID):
         self.img = pygame.image.load("Game/sprites/enemy1.png")
+        if enemyID == 0: 
+            self.img = pygame.image.load("Game/sprites/enemy1.png")
+        if enemyID == 1:
+            self.img = pygame.image.load("Game/sprites/enemy2.png")
+        if enemyID == 2:
+            self.img = pygame.image.load("Game/sprites/enemy3.png")
+             
         self.enemyX = enemyXPos 
         self.enemyY = enemyYPos
         self.enemySpeedX = 1.5
