@@ -18,7 +18,7 @@ screen = pygame.display.set_mode(SCREEN_SIZE)
 display = pygame.Surface((DISPLAY_SIZE))
 
 # Title and Icon
-pygame.display.set_caption("Martins Test")
+pygame.display.set_caption("Space Hero")
 icon = pygame.image.load('Game/sprites/playerLV1.png')
 pygame.display.set_icon(icon)
 

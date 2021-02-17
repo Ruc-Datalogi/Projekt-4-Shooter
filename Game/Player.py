@@ -56,13 +56,13 @@ class Player:
         self.playerSpeedY = 0
         keystate = pygame.key.get_pressed()
         if keystate[pygame.K_LEFT]:
-            self.playerSpeedX = -8
+            self.playerSpeedX -= self.generalSpeed
         if keystate[pygame.K_RIGHT]:
-            self.playerSpeedX = 8
+            self.playerSpeedX = self.generalSpeed
         if keystate[pygame.K_UP]:
-            self.playerSpeedY = -8
+            self.playerSpeedY -= self.generalSpeed
         if keystate[pygame.K_DOWN]:
-            self.playerSpeedY = 8
+            self.playerSpeedY = self.generalSpeed
         if self.timer > 10 and keystate[pygame.K_SPACE]:
             self.timer = 0
             self.bulletlist.append(Bullet(self.playerX + 2, self.playerY - 10))
