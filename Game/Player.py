@@ -50,7 +50,7 @@ class Player:
         if self.playerY >= 540:
             self.playerY = 540
 
-
+###Character movement###
     def update(self):
         self.playerSpeedX = 0
         self.playerSpeedY = 0
@@ -63,11 +63,14 @@ class Player:
             self.playerSpeedY -= self.generalSpeed
         if keystate[pygame.K_DOWN]:
             self.playerSpeedY = self.generalSpeed
+###Delay between bullets###    
         if self.timer > 10 and keystate[pygame.K_SPACE]:
             self.timer = 0
+###3 bullets of same bullet image next to eachother###
             self.bulletlist.append(Bullet(self.playerX + 2, self.playerY - 10))
             self.bulletlist.append(Bullet(self.playerX + 10, self.playerY - 10))
             self.bulletlist.append(Bullet(self.playerX + -6, self.playerY - 10))
+###Exits our game###        
         if keystate[pygame.K_ESCAPE]:
             sys.exit()
 
