@@ -68,9 +68,9 @@ while RUNNING:
         for event in pygame.event.get():
             if event.type == pygame.QUIT: 
                 RUNNING = False
-            p1.playerKey(event)
+            
         
-
+        p1.update()
         p1.playerDraw(display)
         p1.bulletCollision(enemy1)
         p1.playerMove()

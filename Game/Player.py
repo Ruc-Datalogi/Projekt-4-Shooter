@@ -50,7 +50,26 @@ class Player:
             self.playerY = 540
 
 
+    def update(self):
+        self.playerSpeedX = 0
+        self.playerSpeedY = 0
+        keystate = pygame.key.get_pressed()
+        if keystate[pygame.K_LEFT]:
+            self.playerSpeedX = -8
+        if keystate[pygame.K_RIGHT]:
+            self.playerSpeedX = 8
+        if keystate[pygame.K_UP]:
+            self.playerSpeedY = -8
+        if keystate[pygame.K_DOWN]:
+            self.playerSpeedY = 8
+        if keystate[pygame.K_SPACE]:
+            self.bulletlist.append(Bullet(self.playerX + 2, self.playerY - 10))
+            self.bulletlist.append(Bullet(self.playerX + 10, self.playerY - 10))
+            self.bulletlist.append(Bullet(self.playerX + -6, self.playerY - 10))
+        if keystate[pygame.K_ESCAPE]:
+            sys.exit()
 
+'''
     def playerKey(self, event):
         if event.type == pygame.KEYDOWN:
             self.moving = True
@@ -76,4 +95,5 @@ class Player:
                 self.playerSpeedX = 0
             if event.key == pygame.K_UP or event.key == pygame.K_DOWN:
                 self.playerSpeedY = 0
+                '''
                 
