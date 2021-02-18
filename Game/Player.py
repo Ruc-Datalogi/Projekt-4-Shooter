@@ -75,12 +75,12 @@ class Player:
         if keystate[pygame.K_DOWN]:
             self.playerSpeedY = self.generalSpeed
             
-        if self.timer > 10 and keystate[pygame.K_SPACE]:
+        if self.timer > 5 and keystate[pygame.K_SPACE]:
             self.timer = 0
             self.bulletlist.append(Bullet(self.playerX + 2, self.playerY - 10))
             self.bulletlist.append(Bullet(self.playerX + 10, self.playerY - 10))
             self.bulletlist.append(Bullet(self.playerX + -6, self.playerY - 10))
-            
+
         if keystate[pygame.K_ESCAPE]:
             sys.exit()
 
