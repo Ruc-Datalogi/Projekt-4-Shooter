@@ -5,8 +5,8 @@ from Menu import Menu
 pygame.init()
 
 # Constant variables
-SCREEN_SIZE = (800,1080)
-DISPLAY_SIZE = (400,540)
+SCREEN_SIZE = (600,880)
+DISPLAY_SIZE = (300,440)
 DARK_GREY = (50,50,50)
 menu = Menu()
 RUNNING = True
