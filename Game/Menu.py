@@ -157,11 +157,6 @@ class Menu:
             self.selectOptions = 1
 
         
-
-
-
-    
-    
     def menuSelecter(self, input):
         if input == 0:
             return 'start'

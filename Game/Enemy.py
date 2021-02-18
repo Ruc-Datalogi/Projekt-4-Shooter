@@ -16,7 +16,7 @@ class Enemy:
         self.enemyY = enemyYPos
         self.enemySpeedX = 1.5
         self.enemySpeedY = 0
-        self.enemyHealth = 100 
+        self.enemyHealth = 2 
         self.enemyRect = self.img.get_rect()
     
         
