@@ -1,4 +1,5 @@
 import sys, pygame, random
+from Enemy import Enemy
 
 
 class Bullet:
@@ -10,6 +11,7 @@ class Bullet:
         self.bulletSpeedX = 0
         self.bulletSpeedY = 12
         self.bulletRect = self.img.get_rect()
+        self.bullet_hit = False
 
     @property
     def getBulletRect(self):
