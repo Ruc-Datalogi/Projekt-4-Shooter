@@ -15,7 +15,7 @@ class Enemy:
         self.enemyY = enemyYPos
         self.enemySpeedX = 1.5
         self.enemySpeedY = 0
-        self.enemyHealth = 1 
+        self.enemyHealth = 100 
         self.enemyRect = self.img.get_rect()
     
         
@@ -39,7 +39,7 @@ class Enemy:
 
     def enemyMove(self):
         self.enemyX += self.enemySpeedX
-        if self.enemyX >= 300 or self.enemyX <= 12:
+        if self.enemyX >= 300 or self.enemyX <= 0:
             self.enemySpeedX *= -1
-            self.enemyY += 50
+            self.enemyY += 20
         self.enemyRect = self.img.get_rect(x=self.enemyX, y=self.enemyY)

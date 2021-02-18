@@ -27,11 +27,10 @@ pygame.display.set_icon(icon)
 # player
 p1 = Player(screen)
 enemyList = []
-enemyList.append(Enemy (10,10,1))
-enemyList.append(Enemy (20,10,1))
-enemyList.append(Enemy (30,10,0))
-enemyList.append(Enemy (40,10,0))
-enemyList.append(Enemy (50,10,0))
+for i in range (-1, 5):
+    for j in range (0, 10):
+        enemyList.append(Enemy (j*20,i*-40,2))
+
 
 
 # Enemy
