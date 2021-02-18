@@ -60,18 +60,26 @@ class Menu:
             start = font.render('Start', True, (100,100,100))
         else:
             start = font.render('Start', True, (50,50,50))
+
         if self.selected == 1:
             options = font.render('Options', True, (100,100,100))
         else:
             options = font.render('Options', True, (50,50,50))
+
         if self.selected == 2:
+            upgrades = font1.render('Upgrades', True, (100,100,100))
+        else:
+            upgrades = font1.render('Upgrades', True, (50,50,50))
+
+        if self.selected == 3:
             quit = font1.render('Quit', True, (100,100,100))
         else: 
             quit = font1.render('Quit', True, (50,50,50))
     
         screen.blit(start,(SCREEN_SIZE[0]/4, (SCREEN_SIZE[1]/6)*2))
         screen.blit(options, (SCREEN_SIZE[0]/4, (SCREEN_SIZE[1]/6)*3))
-        screen.blit(quit, (SCREEN_SIZE[0]/4, (SCREEN_SIZE[1]/6)*4))
+        screen.blit(upgrades, (SCREEN_SIZE[0]/4, (SCREEN_SIZE[1]/6)*4))
+        screen.blit(quit, (SCREEN_SIZE[0]/4, (SCREEN_SIZE[1]/6)*5))
 
 
 
@@ -88,13 +96,15 @@ class Menu:
                 if self.selected == 1:
                     pass
                 if self.selected == 2:
+                    pass
+                if self.selected == 3:
                     sys.exit()
                     
-        if self.selected > 2:
+        if self.selected > 3:
             self.selected = 0
         
         if self.selected < 0:
-            self.selected = 2
+            self.selected = 3
 
     
     
