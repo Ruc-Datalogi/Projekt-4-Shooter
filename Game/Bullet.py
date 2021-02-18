@@ -11,12 +11,16 @@ class Bullet:
         self.bulletSpeedX = 0
         self.bulletSpeedY = 12
         self.bulletRect = self.img.get_rect()
-        self.bullet_hit = False
+        self.bulletDamage = 10
+    
 
     @property
     def getBulletRect(self):
-        
         return self.bulletRect
+    
+    @property
+    def getBulletDamage(self):
+        return self.bulletDamage
 
     @property  
     def getBulletY(self):

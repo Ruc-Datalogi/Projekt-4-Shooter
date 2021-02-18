@@ -18,6 +18,7 @@ class Player:
         self.increment = 0
         self.timer = 0
 
+
     
     
     def playerDraw(self , screen):        
@@ -36,6 +37,8 @@ class Player:
         for i in range(len(self.bulletlist)):
             if self.bulletlist[i].getBulletRect.colliderect(enemy.getEnemyRect):
                 print(enemy.getEnemyRect)
+                enemy.setHealth(-10)
+                break
 
     def playerMove(self):
         self.playerX += self.playerSpeedX
@@ -63,45 +66,18 @@ class Player:
             self.playerSpeedY -= self.generalSpeed
         if keystate[pygame.K_DOWN]:
             self.playerSpeedY = self.generalSpeed
-###Delay between bullets###    
+        ###Delay between bullets###    
         if self.timer > 10 and keystate[pygame.K_SPACE]:
             self.timer = 0
-###3 bullets of same bullet image next to eachother###
+        ###3 bullets of same bullet image next to eachother###
+
             self.bulletlist.append(Bullet(self.playerX + 2, self.playerY - 10))
             self.bulletlist.append(Bullet(self.playerX + 10, self.playerY - 10))
             self.bulletlist.append(Bullet(self.playerX + -6, self.playerY - 10))
-###Exits our game###        
+        ###Exits our game###        
         if keystate[pygame.K_ESCAPE]:
             sys.exit()
 
         self.timer +=1
 
-
-'''
-    def playerKey(self, event):
-        if event.type == pygame.KEYDOWN:
-            self.moving = True
-            if event.key == pygame.K_LEFT: 
-                self.playerSpeedX = -self.generalSpeed
-            if event.key == pygame.K_RIGHT: 
-                self.playerSpeedX = self.generalSpeed
-            if event.key == pygame.K_UP:
-                self.playerSpeedY = -self.generalSpeed
-            if event.key == pygame.K_DOWN:
-                self.playerSpeedY = self.generalSpeed
-            if event.key == pygame.K_ESCAPE:
-                sys.exit()
-            if event.key == pygame.K_SPACE:
-                self.bulletlist.append(Bullet(self.playerX + 2, self.playerY - 10))
-                self.bulletlist.append(Bullet(self.playerX + 10, self.playerY - 10))
-                self.bulletlist.append(Bullet(self.playerX + -6, self.playerY - 10))
-
-                print("pew pew")
-        
-        if event.type == pygame.KEYUP:
-            if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT: 
-                self.playerSpeedX = 0
-            if event.key == pygame.K_UP or event.key == pygame.K_DOWN:
-                self.playerSpeedY = 0
-                '''
                 

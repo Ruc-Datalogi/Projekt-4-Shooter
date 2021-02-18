@@ -24,9 +24,16 @@ pygame.display.set_icon(icon)
 
 # player
 p1 = Player(screen)
+enemyList = []
+enemyList.append(Enemy (10,10,1))
+enemyList.append(Enemy (20,10,1))
+enemyList.append(Enemy (30,10,0))
+enemyList.append(Enemy (40,10,0))
+enemyList.append(Enemy (50,10,0))
+
 
 # Enemy
-enemy1 = Enemy(100, 200,2)
+
 
 
 while RUNNING:
@@ -54,10 +61,22 @@ while RUNNING:
 
         p1.update()
         p1.playerDraw(display)
-        p1.bulletCollision(enemy1)
         p1.playerMove()
-        enemy1.enemyDraw(display)
-        enemy1.enemyMove()
+
+        for i in range(len(enemyList)):
+            enemyList[i].enemyMove()
+            enemyList[i].enemyDraw(display)
+            p1.bulletCollision(enemyList[i])
+        
+        for i in range(len(enemyList)):
+            print(enemyList[i].getEnemyHealth)
+            if enemyList[i].getEnemyHealth <= 0:
+                enemyList.pop(i)
+            break
+
+
+        
+
         surf = pygame.transform.scale(display, SCREEN_SIZE)
         screen.blit(surf, (0,0 ))
         pygame.display.update()
