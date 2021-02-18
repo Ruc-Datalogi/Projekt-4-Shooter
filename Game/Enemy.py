@@ -2,6 +2,7 @@ import sys, pygame, random
 
 class Enemy:
 
+    ## Choose enemy sprite ##
     def __init__(self, enemyXPos, enemyYPos, enemyID):
         self.img = pygame.image.load("Game/sprites/enemy1.png")
         if enemyID == 0: 
@@ -37,6 +38,8 @@ class Enemy:
     def enemyDraw(self, screen):
         screen.blit(self.img, (self.enemyX, self.enemyY))
 
+
+    ##Make sure the enemy stays in the screen
     def enemyMove(self):
         self.enemyX += self.enemySpeedX
         if self.enemyX >= 300 or self.enemyX <= 0:

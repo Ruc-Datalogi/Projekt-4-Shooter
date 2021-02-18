@@ -20,7 +20,7 @@ screen = pygame.display.set_mode(SCREEN_SIZE)
 display = pygame.Surface((DISPLAY_SIZE))
 
 # Title and Icon
-pygame.display.set_caption("Space Hero")
+pygame.display.set_caption("The Falcon")
 icon = pygame.image.load('Game/sprites/playerLV1.png')
 pygame.display.set_icon(icon)
 
@@ -38,7 +38,7 @@ for i in range (-1, 5):
 
 
 while RUNNING:
-    #Menu
+    ## Draw Menu ##
     if menu.get_menu: 
         menu.drawBackground(display,(DISPLAY_SIZE))
         menu.drawMenu(display, (DISPLAY_SIZE))
@@ -52,8 +52,7 @@ while RUNNING:
         screen.blit(surf, (0,0))
         pygame.display.update()
     else:
-    #game loop
-        
+    ## Game loop ##
         for event in pygame.event.get():
             if event.type == pygame.QUIT: 
                 RUNNING = False
@@ -75,10 +74,8 @@ while RUNNING:
                 break
 
 
-        
-        timer += 1
         surf = pygame.transform.scale(display, SCREEN_SIZE)
-        screen.blit(surf, (0,0 ))
+        screen.blit(surf, (0,0))
         pygame.display.update()
         fpsClock.tick(FPS)
 

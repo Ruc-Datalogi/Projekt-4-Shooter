@@ -5,7 +5,7 @@ import os
 class Menu:
     
 
-    #Constructor
+    ## Constructor ##
     def __init__(self):
         pygame.font.init()
         self.menuOn = True
@@ -32,7 +32,7 @@ class Menu:
     def get_menu(self):
         return self.menuOn
 
-
+    ## Scrolling background ##
     def drawBackgroundScrolling(self, display, DISPLAY_SIZE):
         width = self.backGroundImg.get_width()
         height = self.backGroundImg.get_height()
@@ -45,17 +45,19 @@ class Menu:
         if self.scroller >= height:
             self.scroller = 0
 
+    ## Normal background ##
     def drawBackground(self, display, DISPLAY_SIZE):
         width = self.backGroundImg.get_width()
         height = self.backGroundImg.get_height()
         
+        ## Draw the pictures side by side to fill the screen ##
         for i in range(-1, int(DISPLAY_SIZE[0]/width)+1):
             for j in range(-1, int(DISPLAY_SIZE[1]/height +1)):
                 display.blit(self.backGroundImg,(i*width, j*height))
         width = self.backGroundImg.get_width()
         height = self.backGroundImg.get_height() 
         
-        
+    ## Draw menu, options, or upgrade menu ##
     def drawMenu(self, screen, SCREEN_SIZE):
         screen.fill((0,0,0))
 
@@ -101,7 +103,7 @@ class Menu:
     
     
 
-
+    ## Handling input in the menu ##      
     def menuInput(self, event):
         if self.menuOn:
             if event.type == pygame.KEYDOWN:
@@ -110,9 +112,10 @@ class Menu:
                 if event.key == pygame.K_UP:
                     self.selected -= 1
                 if event.key == pygame.K_RETURN:
-                    #Start Game
+                    ## Start Game ##
                     if self.selected == 0:
                         self.menuOn = False
+                    ##Options ##    
                     if self.selected == 1:
                         pass
                     if self.selected == 2:
@@ -120,13 +123,15 @@ class Menu:
                         self.optionsOn = True
                     if self.selected == 3:
                         sys.exit()
-                        
+            
+            ## For scrolling in the menu ## 
             if self.selected > 3:
                 self.selected = 0
             
             if self.selected < 0:
                 self.selected = 3
 
+        ## Options screen input ##
         elif self.optionsOn:
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_DOWN:
@@ -141,16 +146,17 @@ class Menu:
                         self.optionsOn = False
                         self.menuOn = True
 
+        if self.movingBackground > 1:
+            self.movingBackground = 0
 
-        
+        ## For scrolling in the options ##
         if self.selectOptions > 1:
             self.selectOptions = 0
         
         if self.selectOptions < 0:
             self.selectOptions = 1
 
-        if self.movingBackground > 1:
-            self.movingBackground = 0
+        
 
 
 
