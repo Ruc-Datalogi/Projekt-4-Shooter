@@ -27,7 +27,7 @@ class Menu:
 
 
 
-    #Getter to escape Menu
+    ## Getter to escape menu ##
     @property
     def get_menu(self):
         return self.menuOn
@@ -54,6 +54,7 @@ class Menu:
         for i in range(-1, int(DISPLAY_SIZE[0]/width)+1):
             for j in range(-1, int(DISPLAY_SIZE[1]/height +1)):
                 display.blit(self.backGroundImg,(i*width, j*height))
+
         width = self.backGroundImg.get_width()
         height = self.backGroundImg.get_height() 
         
