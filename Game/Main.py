@@ -11,6 +11,8 @@ DARK_GREY = (50,50,50)
 menu = Menu()
 RUNNING = True
 FPS = 60 
+timer = 0
+
 fpsClock = pygame.time.Clock()
 #The real screen
 screen = pygame.display.set_mode(SCREEN_SIZE)
@@ -69,14 +71,13 @@ while RUNNING:
             p1.bulletCollision(enemyList[i])
         
         for i in range(len(enemyList)):
-            print(enemyList[i].getEnemyHealth)
             if enemyList[i].getEnemyHealth <= 0:
                 enemyList.pop(i)
-            break
+                break
 
 
         
-
+        timer += 1
         surf = pygame.transform.scale(display, SCREEN_SIZE)
         screen.blit(surf, (0,0 ))
         pygame.display.update()

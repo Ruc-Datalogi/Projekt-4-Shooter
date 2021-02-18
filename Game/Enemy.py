@@ -27,6 +27,7 @@ class Enemy:
 
     ## Damage the enemy
     def setHealth(self, x):
+        print(self.enemyHealth)
         self.enemyHealth += x
 
     @property
