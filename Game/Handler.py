@@ -1,7 +1,6 @@
 from Player import Player
 from EnemyBullet import EnemyBullet
 from Enemy import Enemy
-from Bullet import Bullet
 
 class Handler:
 
@@ -13,9 +12,9 @@ class Handler:
         self.p1 = Player(self.screen)
         self.enemy_list = []
         self.enemy_bullet_list = []
-        for i in range (-4, 4):
-            for j in range (0, 10):
-                self.enemy_list.append(Enemy (j*20,i*-20,2))
+        #for i in range (-4, 4):
+            #for j in range (0, 10):
+        self.enemy_list.append(Enemy (100,100,2))
 
 
 
