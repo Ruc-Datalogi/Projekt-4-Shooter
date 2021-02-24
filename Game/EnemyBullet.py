@@ -1,11 +1,11 @@
 import sys, pygame, random
-from Enemy import Enemy
 
 
-class Bullet:
+
+class EnemyBullet:
     
     def __init__(self, xPos, yPos):
-        self.img = pygame.image.load("Game/sprites/bullets/red_bullet.png")
+        self.img = pygame.image.load("Game/sprites/bullets/enemy_bullets/green_bullet.png")
         self.bulletX = xPos 
         self.bulletY = yPos 
         self.bulletSpeedX = 0
