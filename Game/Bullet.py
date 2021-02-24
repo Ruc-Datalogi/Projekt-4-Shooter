@@ -1,5 +1,5 @@
 import sys, pygame, random
-from Enemy import Enemy
+
 
 
 class Bullet:
