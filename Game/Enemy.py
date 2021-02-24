@@ -11,10 +11,8 @@ class Enemy:
             self.img = pygame.image.load("Game/sprites/enemy2.png")
         if enemyID == 2:
             self.img = pygame.image.load("Game/sprites/enemy3.png")
-        self.enemy_bullet_cooldown = random.randint(30,60)
-        self.enemy_timer = 0
         
-             
+        
         self.enemyX = enemyXPos 
         self.enemyY = enemyYPos
         self.enemySpeedX = 1.5
@@ -49,4 +47,3 @@ class Enemy:
             self.enemySpeedX *= -1
             self.enemyY += 20
         self.enemyRect = self.img.get_rect(x=self.enemyX, y=self.enemyY)
-

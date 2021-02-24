@@ -59,7 +59,7 @@ class Player:
             self.player_y = 540
 
     ## Get keypressed and use it for movement ##
-    def update(self):
+    def player_input(self):
         self.player_speed_x = 0
         self.player_speed_y = 0
         keystate = pygame.key.get_pressed()

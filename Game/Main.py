@@ -60,7 +60,7 @@ while RUNNING:
             
         menu.drawBackgroundScrolling(display,DISPLAY_SIZE)
 
-        p1.update()
+        p1.player_input()
         p1.playerDraw(display)
         p1.playerMove()
 
