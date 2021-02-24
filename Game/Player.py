@@ -35,6 +35,7 @@ class Player:
             if self.bulletlist[i].getBulletRect.colliderect(enemy.getEnemyRect):
                 print(enemy.getEnemyRect)
                 enemy.setHealth(-10)
+                self.bulletlist.pop(i)
                 break
 
         ## remove bullets
