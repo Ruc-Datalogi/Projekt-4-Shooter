@@ -2,7 +2,7 @@ import sys, pygame, random
 
 
 
-class Bullet:
+class Friendly_Bullet:
     
     def __init__(self, xPos, yPos):
         self.img = pygame.image.load("Game/sprites/bullets/red_bullet.png")

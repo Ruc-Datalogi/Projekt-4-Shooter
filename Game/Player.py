@@ -1,5 +1,5 @@
 import sys, pygame, random
-from Bullet import Bullet
+from Friendly_Bullet import Friendly_Bullet
 from Enemy import Enemy
 
 class Player:
@@ -78,9 +78,9 @@ class Player:
             
         if self.timer > 10 and keystate[pygame.K_SPACE]:
             self.timer = 0
-            self.bullet_list.append(Bullet(self.player_x + 2, self.player_y - 10))
-            self.bullet_list.append(Bullet(self.player_x + 10, self.player_y - 10))
-            self.bullet_list.append(Bullet(self.player_x + -6, self.player_y - 10))
+            self.bullet_list.append(Friendly_Bullet(self.player_x + 2, self.player_y - 10))
+            self.bullet_list.append(Friendly_Bullet(self.player_x + 10, self.player_y - 10))
+            self.bullet_list.append(Friendly_Bullet(self.player_x + -6, self.player_y - 10))
 
         if keystate[pygame.K_ESCAPE]:
             sys.exit()
