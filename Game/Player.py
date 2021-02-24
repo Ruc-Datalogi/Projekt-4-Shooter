@@ -4,6 +4,7 @@ from Enemy import Enemy
 
 class Player:
 
+    ## Constructor for player ## 
     def __init__(self, screen):
         self.img = pygame.image.load("Game/sprites/playerLV1.png")
         self.playerX = 100 
@@ -15,28 +16,34 @@ class Player:
         self.moving = False
         self.screen = screen
         self.bulletlist = []
-        self.increment = 0
         self.timer = 0
 
+
     
-    
+    ## Draw player and bullets at given pos ##
     def playerDraw(self , screen):        
         screen.blit(self.img,(self.playerX,self.playerY))
-        for i in range(len(self.bulletlist)):
-            if self.bulletlist[i].getBulletY < -100:
-                self.bulletlist.pop(i)
-                break
+        
 
         for i in range(len(self.bulletlist)):
             self.bulletlist[i].bulletMove()
             self.bulletlist[i].bulletDraw(screen)
         
-
+    ## check bullet collision and damage enemy
     def bulletCollision(self, enemy):
         for i in range(len(self.bulletlist)):
             if self.bulletlist[i].getBulletRect.colliderect(enemy.getEnemyRect):
                 print(enemy.getEnemyRect)
+                enemy.setHealth(-10)
+                break
 
+        ## remove bullets
+        for i in range(len(self.bulletlist)):
+            if self.bulletlist[i].getBulletY < -100:
+                self.bulletlist.pop(i)
+                break
+
+    ## Character move and game boundaries ##
     def playerMove(self):
         self.playerX += self.playerSpeedX
         self.playerY += self.playerSpeedY
@@ -50,58 +57,33 @@ class Player:
         if self.playerY >= 540:
             self.playerY = 540
 
-###Character movement###
+    ## Get keypressed and use it for movement ##
     def update(self):
         self.playerSpeedX = 0
         self.playerSpeedY = 0
         keystate = pygame.key.get_pressed()
+
         if keystate[pygame.K_LEFT]:
             self.playerSpeedX -= self.generalSpeed
+
         if keystate[pygame.K_RIGHT]:
             self.playerSpeedX = self.generalSpeed
+
         if keystate[pygame.K_UP]:
             self.playerSpeedY -= self.generalSpeed
+
         if keystate[pygame.K_DOWN]:
             self.playerSpeedY = self.generalSpeed
-###Delay between bullets###    
-        if self.timer > 10 and keystate[pygame.K_SPACE]:
+            
+        if self.timer > 5 and keystate[pygame.K_SPACE]:
             self.timer = 0
-###3 bullets of same bullet image next to eachother###
             self.bulletlist.append(Bullet(self.playerX + 2, self.playerY - 10))
             self.bulletlist.append(Bullet(self.playerX + 10, self.playerY - 10))
             self.bulletlist.append(Bullet(self.playerX + -6, self.playerY - 10))
-###Exits our game###        
+
         if keystate[pygame.K_ESCAPE]:
             sys.exit()
 
         self.timer +=1
 
-
-'''
-    def playerKey(self, event):
-        if event.type == pygame.KEYDOWN:
-            self.moving = True
-            if event.key == pygame.K_LEFT: 
-                self.playerSpeedX = -self.generalSpeed
-            if event.key == pygame.K_RIGHT: 
-                self.playerSpeedX = self.generalSpeed
-            if event.key == pygame.K_UP:
-                self.playerSpeedY = -self.generalSpeed
-            if event.key == pygame.K_DOWN:
-                self.playerSpeedY = self.generalSpeed
-            if event.key == pygame.K_ESCAPE:
-                sys.exit()
-            if event.key == pygame.K_SPACE:
-                self.bulletlist.append(Bullet(self.playerX + 2, self.playerY - 10))
-                self.bulletlist.append(Bullet(self.playerX + 10, self.playerY - 10))
-                self.bulletlist.append(Bullet(self.playerX + -6, self.playerY - 10))
-
-                print("pew pew")
-        
-        if event.type == pygame.KEYUP:
-            if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT: 
-                self.playerSpeedX = 0
-            if event.key == pygame.K_UP or event.key == pygame.K_DOWN:
-                self.playerSpeedY = 0
-                '''
                 

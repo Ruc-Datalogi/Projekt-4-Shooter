@@ -3,7 +3,7 @@ from Enemy import Enemy
 
 
 class Bullet:
-
+    
     def __init__(self, xPos, yPos):
         self.img = pygame.image.load("Game/sprites/bullets/red_bullet.png")
         self.bulletX = xPos 
@@ -11,23 +11,28 @@ class Bullet:
         self.bulletSpeedX = 0
         self.bulletSpeedY = 12
         self.bulletRect = self.img.get_rect()
-        self.bullet_hit = False
-
+        self.bulletDamage = 10
+    
+    ## For collision ##
     @property
     def getBulletRect(self):
-        
         return self.bulletRect
+    
+    ## For damaging enemy ##
+    @property
+    def getBulletDamage(self):
+        return self.bulletDamage
 
+    ## For removing the bullet ##
     @property  
     def getBulletY(self):
         return self.bulletY
-    
-    def is_collided_with(self, img):
-        return self.rect.colliderect(img.rect)
 
+    ## Draw at specific location ##
     def bulletDraw(self , screen):        
         screen.blit(self.img,(self.bulletX,self.bulletY))
 
+    ## Update bullet pos and the rect ##
     def bulletMove(self):
         self.bulletX -= self.bulletSpeedX
         self.bulletY -= self.bulletSpeedY

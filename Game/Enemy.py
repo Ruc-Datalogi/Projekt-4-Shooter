@@ -2,6 +2,7 @@ import sys, pygame, random
 
 class Enemy:
 
+    ## Choose enemy sprite ##
     def __init__(self, enemyXPos, enemyYPos, enemyID):
         self.img = pygame.image.load("Game/sprites/enemy1.png")
         if enemyID == 0: 
@@ -15,6 +16,7 @@ class Enemy:
         self.enemyY = enemyYPos
         self.enemySpeedX = 1.5
         self.enemySpeedY = 0
+        self.enemyHealth = 2 
         self.enemyRect = self.img.get_rect()
     
         
@@ -23,12 +25,24 @@ class Enemy:
     def getEnemyRect(self):
         return self.enemyRect
     
+
+    ## Damage the enemy
+    def setHealth(self, x):
+        print(self.enemyHealth)
+        self.enemyHealth += x
+
+    @property
+    def getEnemyHealth(self):
+        return self.enemyHealth
+
     def enemyDraw(self, screen):
         screen.blit(self.img, (self.enemyX, self.enemyY))
 
+
+    ##Make sure the enemy stays in the screen
     def enemyMove(self):
         self.enemyX += self.enemySpeedX
-        if self.enemyX >= 300 or self.enemyX <= 12:
+        if self.enemyX >= 300 or self.enemyX <= 0:
             self.enemySpeedX *= -1
-            self.enemyY += 50
+            self.enemyY += 20
         self.enemyRect = self.img.get_rect(x=self.enemyX, y=self.enemyY)
