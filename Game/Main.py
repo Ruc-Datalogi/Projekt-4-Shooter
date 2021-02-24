@@ -2,6 +2,8 @@ import sys, pygame, random
 from Player import Player
 from Enemy import Enemy
 from Menu import Menu
+from Handler import Handler
+
 pygame.init()
 
 # Constant variables
@@ -25,12 +27,9 @@ icon = pygame.image.load('Game/sprites/playerLV1.png')
 pygame.display.set_icon(icon)
 
 # player
-p1 = Player(screen)
 enemyList = []
+handler = Handler(display)
 
-for i in range (-4, 4):
-    for j in range (0, 10):
-        enemyList.append(Enemy (j*20,i*-20,2))
 
 
 
@@ -60,19 +59,8 @@ while RUNNING:
             
         menu.drawBackgroundScrolling(display,DISPLAY_SIZE)
 
-        p1.player_input()
-        p1.playerDraw(display)
-        p1.playerMove()
-
-        for i in range(len(enemyList)):
-            enemyList[i].enemyMove()
-            enemyList[i].enemyDraw(display)
-            p1.bulletCollision(enemyList[i])
-        
-        for i in range(len(enemyList)):
-            if enemyList[i].getEnemyHealth <= 0:
-                enemyList.pop(i)
-                break
+        handler.draw()
+        handler.update()
 
 
         surf = pygame.transform.scale(display, SCREEN_SIZE)
