@@ -7,80 +7,80 @@ class Player:
     ## Constructor for player ## 
     def __init__(self, screen):
         self.img = pygame.image.load("Game/sprites/playerLV1.png")
-        self.playerX = 100 
-        self.playerY = 100
+        self.player_x = 100 
+        self.player_y = 100
 
-        self.playerSpeedX = 0
-        self.playerSpeedY = 0
-        self.generalSpeed = 3.5
+        self.player_speed_x = 0
+        self.player_speed_y = 0
+        self.general_speed = 3.5
         self.moving = False
         self.screen = screen
-        self.bulletlist = []
+        self.bullet_list = []
         self.timer = 0
 
 
     
     ## Draw player and bullets at given pos ##
     def playerDraw(self , screen):        
-        screen.blit(self.img,(self.playerX,self.playerY))
+        screen.blit(self.img,(self.player_x,self.player_y))
         
 
-        for i in range(len(self.bulletlist)):
-            self.bulletlist[i].bulletMove()
-            self.bulletlist[i].bulletDraw(screen)
+        for i in range(len(self.bullet_list)):
+            self.bullet_list[i].bulletMove()
+            self.bullet_list[i].bulletDraw(screen)
         
     ## check bullet collision and damage enemy
     def bulletCollision(self, enemy):
-        for i in range(len(self.bulletlist)):
-            if self.bulletlist[i].getBulletRect.colliderect(enemy.getEnemyRect):
+        for i in range(len(self.bullet_list)):
+            if self.bullet_list[i].getBulletRect.colliderect(enemy.getEnemyRect):
                 print(enemy.getEnemyRect)
                 enemy.setHealth(-10)
-                self.bulletlist.pop(i)
+                self.bullet_list.pop(i)
                 break
 
         ## remove bullets
-        for i in range(len(self.bulletlist)):
-            if self.bulletlist[i].getBulletY < -100:
-                self.bulletlist.pop(i)
+        for i in range(len(self.bullet_list)):
+            if self.bullet_list[i].getBulletY < -100:
+                self.bullet_list.pop(i)
                 break
 
     ## Character move and game boundaries ##
     def playerMove(self):
-        self.playerX += self.playerSpeedX
-        self.playerY += self.playerSpeedY
+        self.player_x += self.player_speed_x
+        self.player_y += self.player_speed_y
 
-        if self.playerX <= 0:
-            self.playerX = 0
-        if self.playerX >= 400 - 14:
-            self.playerX = 400 - 14
-        if self.playerY <= 0: 
-            self.playerY = 0
-        if self.playerY >= 540:
-            self.playerY = 540
+        if self.player_x <= 0:
+            self.player_x = 0
+        if self.player_x >= 400 - 14:
+            self.player_x = 400 - 14
+        if self.player_y <= 0: 
+            self.player_y = 0
+        if self.player_y >= 540:
+            self.player_y = 540
 
     ## Get keypressed and use it for movement ##
     def update(self):
-        self.playerSpeedX = 0
-        self.playerSpeedY = 0
+        self.player_speed_x = 0
+        self.player_speed_y = 0
         keystate = pygame.key.get_pressed()
 
         if keystate[pygame.K_LEFT]:
-            self.playerSpeedX -= self.generalSpeed
+            self.player_speed_x -= self.general_speed
 
         if keystate[pygame.K_RIGHT]:
-            self.playerSpeedX = self.generalSpeed
+            self.player_speed_x = self.general_speed
 
         if keystate[pygame.K_UP]:
-            self.playerSpeedY -= self.generalSpeed
+            self.player_speed_y -= self.general_speed
 
         if keystate[pygame.K_DOWN]:
-            self.playerSpeedY = self.generalSpeed
+            self.player_speed_y = self.general_speed
             
         if self.timer > 10 and keystate[pygame.K_SPACE]:
             self.timer = 0
-            self.bulletlist.append(Bullet(self.playerX + 2, self.playerY - 10))
-            self.bulletlist.append(Bullet(self.playerX + 10, self.playerY - 10))
-            self.bulletlist.append(Bullet(self.playerX + -6, self.playerY - 10))
+            self.bullet_list.append(Bullet(self.player_x + 2, self.player_y - 10))
+            self.bullet_list.append(Bullet(self.player_x + 10, self.player_y - 10))
+            self.bullet_list.append(Bullet(self.player_x + -6, self.player_y - 10))
 
         if keystate[pygame.K_ESCAPE]:
             sys.exit()

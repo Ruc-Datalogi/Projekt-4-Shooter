@@ -13,7 +13,7 @@ RUNNING = True
 FPS = 60 
 timer = 0
 
-fpsClock = pygame.time.Clock()
+fpsClock = pygame.time.Clock ()
 #The real screen
 screen = pygame.display.set_mode(SCREEN_SIZE)
 #To cast to 
