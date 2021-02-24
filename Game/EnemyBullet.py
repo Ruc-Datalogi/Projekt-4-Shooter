@@ -12,7 +12,6 @@ class EnemyBullet:
         self.enemy_bulletSpeedY = 12
         self.enemy_bulletRect = self.img.get_rect()
         self.enemy_bulletDamage = 10
-        handler = Handler()
     
     ## For collision ##
     @property
