@@ -49,9 +49,6 @@ class Enemy(GameObject):
         screen.blit(self.img, (self.enemyX, self.enemyY))
 
             
-
-
-
     ##Make sure the enemy stays in the screen
     def enemyMove(self):
         self.enemy_timer += 1
