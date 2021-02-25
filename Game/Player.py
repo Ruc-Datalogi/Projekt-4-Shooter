@@ -79,11 +79,6 @@ class Player(GameObject):
                 self.bullet_list.pop(i)
                 break
 
-        ## remove bullets
-        for i in range(len(self.bullet_list)):
-            if self.bullet_list[i].getBulletY < -100:
-                self.bullet_list.pop(i)
-                break
 
     ## Character move and game boundaries ##
     def playerMove(self):

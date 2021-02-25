@@ -66,7 +66,6 @@ while RUNNING:
         mediator.all_game_objects = [i for i in mediator.all_game_objects if i not in mediator.to_be_removed]
 
 
-        print(len(mediator.all_game_objects))
         
         surf = pygame.transform.scale(display, SCREEN_SIZE)
         screen.blit(surf, (0,0))
