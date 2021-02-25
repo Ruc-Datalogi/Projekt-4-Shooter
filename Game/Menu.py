@@ -66,8 +66,8 @@ class Menu:
         height = self.backGroundImg.get_height() 
 
     def draw_score(self, display):
-        text = self.score_font.render('Score: ' + str(score), 1, (255,255,255))
-        display.blit(text, (100, 100))
+        text = self.score_font.render('Score: ' + str(self.score), 1, (255,255,255))
+        display.blit(text, (20, 20))
         
     ## Draw menu, options, or upgrade menu ##
     def drawMenu(self, screen, SCREEN_SIZE):
