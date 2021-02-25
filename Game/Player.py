@@ -9,7 +9,6 @@ class Player:
         self.img = pygame.image.load("Game/sprites/playerLV1.png")
         self.player_x = 100 
         self.player_y = 100
-
         self.player_speed_x = 0
         self.player_speed_y = 0
         self.general_speed = 3.5
@@ -17,13 +16,37 @@ class Player:
         self.screen = screen
         self.bullet_list = []
         self.timer = 0
+      
+        self.playerHealth = 260
+        self.healthBar = 260
+        self.maxplayerHealth = 300
+        #self.healthRatio = self.maxplayerHealth / self.healthBar
 
-
+    def get_dmg (self, amount):
+        if self.playerHealth > 0:
+            self.playerHealth -= amount
+        if self.playerHealth <= 0:
+            self.playerHealth = 0
     
+    def get_health (self, amount):
+        if self.playerHealth < self.maxplayerHealth:
+            self.playerHealth += amount
+        if self.playerHealth >= self.maxplayerHealth:
+            self.playerHealth = self.maxplayerHealth
+
+    def healthRect (self, screen):
+        pass
+        #(screen, (255, 0, 0), (10,10,self.playerHealth / self.healthRatio,25))
+
+
+
     ## Draw player and bullets at given pos ##
     def playerDraw(self , screen):        
         screen.blit(self.img,(self.player_x,self.player_y))
+        pygame.draw.rect(screen,(0,0,0), pygame.Rect(20, 420, 260, 10))
+        pygame.draw.rect(screen,(90,186,74), pygame.Rect(20, 420, self.playerHealth, 10))
         
+             
 
         for i in range(len(self.bullet_list)):
             self.bullet_list[i].bulletMove()
@@ -57,7 +80,9 @@ class Player:
             self.player_y = 0
         if self.player_y >= 540:
             self.player_y = 540
-
+        self.playerHealth -= 1
+        if self.playerHealth <= 1:
+            self.playerHealth = 100
     ## Get keypressed and use it for movement ##
     def player_input(self):
         self.player_speed_x = 0
@@ -81,7 +106,7 @@ class Player:
             self.bullet_list.append(Friendly_Bullet(self.player_x + 2, self.player_y - 10))
             self.bullet_list.append(Friendly_Bullet(self.player_x + 10, self.player_y - 10))
             self.bullet_list.append(Friendly_Bullet(self.player_x + -6, self.player_y - 10))
-
+        
         if keystate[pygame.K_ESCAPE]:
             sys.exit()
 

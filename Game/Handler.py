@@ -22,6 +22,7 @@ class Handler:
         self.p1.playerDraw(self.screen)
         for i in range (0, len(self.enemy_list)):
             self.enemy_list[i].enemyDraw(self.screen)
+        
 
 
 

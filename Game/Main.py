@@ -7,7 +7,7 @@ from Handler import Handler
 pygame.init()
 
 # Constant variables
-SCREEN_SIZE = (600,880)
+SCREEN_SIZE = (300,440)
 DISPLAY_SIZE = (300,440)
 DARK_GREY = (50,50,50)
 menu = Menu()
