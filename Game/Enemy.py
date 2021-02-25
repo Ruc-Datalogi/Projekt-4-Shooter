@@ -1,10 +1,13 @@
 import sys, pygame, random
 from EnemyBullet import EnemyBullet
+from GameObject import *
+from Mediator import *
 
-class Enemy:
+
+class Enemy(GameObject):
 
     ## Choose enemy sprite ##
-    def __init__(self, enemyXPos, enemyYPos, enemyID):
+    def __init__(self, enemyXPos, enemyYPos, enemyID, objectID, mediator):
         self.img = pygame.image.load("Game/sprites/enemy1.png")
         if enemyID == 0: 
             self.img = pygame.image.load("Game/sprites/enemy1.png")
@@ -22,6 +25,9 @@ class Enemy:
         self.enemyHealth = 200 
         self.enemy_bullet_list = []
         self.enemyRect = self.img.get_rect()
+
+        self.objectID = objectID
+        self.mediator = mediator
     
         
 
@@ -42,8 +48,6 @@ class Enemy:
     def enemyDraw(self, screen):
         screen.blit(self.img, (self.enemyX, self.enemyY))
 
-        for i in range(len(self.enemy_bullet_list)):
-            self.enemy_bullet_list[i].bulletDraw(screen)
             
 
 
@@ -60,8 +64,13 @@ class Enemy:
         if self.enemy_timer > self.enemy_bullet_cooldown:
             self.enemy_timer = 0
             self.enemy_bullet_cooldown = random.randint(500,800)
-            self.enemy_bullet_list.append(EnemyBullet (self.enemyX,self.enemyY + 4))
+            self.mediator.all_game_objects.append(EnemyBullet (self.enemyX,self.enemyY + 4))
         
-        for i in range(len(self.enemy_bullet_list)):
-            self.enemy_bullet_list[i].bulletMove()
+        
+    
+    def loop(self):
+        self.enemyMove()
+
+    def draw(self):
+        self.enemyDraw()
             
