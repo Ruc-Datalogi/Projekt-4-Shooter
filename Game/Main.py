@@ -3,6 +3,7 @@ from Player import Player
 from Enemy import Enemy
 from Menu import Menu
 from Handler import Handler
+from Mediator import Mediator
 
 pygame.init()
 
@@ -11,6 +12,7 @@ SCREEN_SIZE = (300,440)
 DISPLAY_SIZE = (300,440)
 DARK_GREY = (50,50,50)
 menu = Menu()
+mediator = Mediator()
 RUNNING = True
 FPS = 60 
 timer = 0
