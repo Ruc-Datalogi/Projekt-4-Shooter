@@ -1,8 +1,10 @@
 from Player import Player
 from EnemyBullet import EnemyBullet
 from Enemy import Enemy
+from Menu import Menu
 
 class Handler:
+
 
     enemy_list = []
     enemy_bullet_list = []
@@ -15,6 +17,7 @@ class Handler:
         #for i in range (-4, 4):
             #for j in range (0, 10):
         self.enemy_list.append(Enemy (100,100,2))
+        
 
 
 
@@ -43,4 +46,5 @@ class Handler:
         for i in range(len(self.enemy_list)):
             if self.enemy_list[i].getEnemyHealth <= 0:
                 self.enemy_list.pop(i)
+                Menu.score += 1
                 break

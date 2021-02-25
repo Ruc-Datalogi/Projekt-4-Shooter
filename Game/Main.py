@@ -15,6 +15,7 @@ RUNNING = True
 FPS = 60 
 timer = 0
 
+
 fpsClock = pygame.time.Clock ()
 #The real screen
 screen = pygame.display.set_mode(SCREEN_SIZE)
@@ -58,6 +59,7 @@ while RUNNING:
                 RUNNING = False
             
         menu.drawBackgroundScrolling(display,DISPLAY_SIZE)
+        
 
         handler.draw()
         handler.update()
