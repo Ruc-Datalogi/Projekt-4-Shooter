@@ -4,6 +4,7 @@ import os
 
 class Menu:
     
+    score = 0
 
     ## Constructor ##
     def __init__(self):
@@ -16,12 +17,15 @@ class Menu:
         self.selectUpgrades = 0 
         self.scroller = 0
         self.movingBackground = 0
+        self.score_font = pygame.font.SysFont('comicsans', 30, True)
 
         self.backGroundImg = pygame.image.load("Game/sprites/background/preview.png")
         self.backGroundImg_1 = pygame.image.load("Game/sprites/background/background_1.png")
         self.backGroundImg_2 = pygame.image.load("Game/sprites/background/background_2.png")
         self.backGroundImg_3 = pygame.image.load("Game/sprites/background/background_3.png")
         self.backGroundImg_4 = pygame.image.load("Game/sprites/background/background_4.png")
+
+        
         
 
 
@@ -36,6 +40,7 @@ class Menu:
     def drawBackgroundScrolling(self, display, DISPLAY_SIZE):
         width = self.backGroundImg.get_width()
         height = self.backGroundImg.get_height()
+        
         for i in range(0,2):
             for j in range(-4,8):
                 display.blit(self.backGroundImg,(i*width,j*height + self.scroller))
@@ -44,6 +49,8 @@ class Menu:
         self.scroller += 1
         if self.scroller >= height:
             self.scroller = 0
+
+        self.draw_score(display)
 
     ## Normal background ##
     def drawBackground(self, display, DISPLAY_SIZE):
@@ -57,6 +64,10 @@ class Menu:
 
         width = self.backGroundImg.get_width()
         height = self.backGroundImg.get_height() 
+
+    def draw_score(self, display):
+        text = self.score_font.render('Score: ' + str(self.score), 1, (255,255,255))
+        display.blit(text, (20, 20))
         
     ## Draw menu, options, or upgrade menu ##
     def drawMenu(self, screen, SCREEN_SIZE):
@@ -164,4 +175,8 @@ class Menu:
         if input == 1:
             return 'options'
         if input == 2:
-            return 'quit'            
+            return 'quit'       
+
+    def set_score(self, x):
+        score += x
+        
