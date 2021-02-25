@@ -1,26 +1,30 @@
 import sys, pygame, random
 from Friendly_Bullet import Friendly_Bullet
 from Enemy import Enemy
+from GameObject import *
+from Mediator import *
 
-class Player:
+class Player(GameObject):
 
     ## Constructor for player ## 
-    def __init__(self, screen):
+    def __init__(self, screen, mediator, objectID):
         self.img = pygame.image.load("Game/sprites/playerLV1.png")
         self.player_x = 100 
         self.player_y = 100
         self.player_speed_x = 0
         self.player_speed_y = 0
         self.general_speed = 3.5
+
         self.moving = False
         self.screen = screen
         self.bullet_list = []
         self.timer = 0
-        #player health
         self.playerHealth = 100
         self.healthBar = 100
         self.maxplayerHealth = 300
-        #self.healthRatio = self.maxplayerHealth / self.healthBar
+
+        self.mediator = mediator
+        self.objectID = objectID
 
     def get_dmg (self, amount):
         if self.playerHealth > 0:
@@ -119,13 +123,17 @@ class Player:
             
         if self.timer > 10 and keystate[pygame.K_SPACE]:
             self.timer = 0
-            self.bullet_list.append(Friendly_Bullet(self.player_x + 2, self.player_y - 10))
-            self.bullet_list.append(Friendly_Bullet(self.player_x + 10, self.player_y - 10))
-            self.bullet_list.append(Friendly_Bullet(self.player_x + -6, self.player_y - 10))
+            self.mediator.all_game_objects.append(Friendly_Bullet(self.player_x + 2, self.player_y - 10))
         
         if keystate[pygame.K_ESCAPE]:
             sys.exit()
 
         self.timer +=1
 
+    def loop(self):
+        self.player_input()
+        self.playerMove()
+    
+    def draw(self):
+        self.playerDraw()
                 

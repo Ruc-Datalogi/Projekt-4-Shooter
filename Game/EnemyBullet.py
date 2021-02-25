@@ -1,10 +1,11 @@
 import sys, pygame, random
+from GameObject import *
+from Mediator import *
 
 
-
-class EnemyBullet:
+class EnemyBullet(GameObject):
     
-    def __init__(self, xPos, yPos):
+    def __init__(self, xPos, yPos, objectID, mediator):
         self.img = pygame.image.load("Game/sprites/bullets/enemy_bullets/green_bullet.png")
         self.enemy_bulletX = xPos 
         self.enemy_bulletY = yPos 
@@ -12,6 +13,8 @@ class EnemyBullet:
         self.enemy_bulletSpeedY = 6
         self.enemy_bulletRect = self.img.get_rect()
         self.enemy_bulletDamage = 10
+        self.objectID = objectID
+        self.mediator = mediator
     
     ## For collision ##
     @property
@@ -38,3 +41,9 @@ class EnemyBullet:
         self.enemy_bulletY += self.enemy_bulletSpeedY
         self.enemy_bulletRect = self.img.get_rect(x=self.enemy_bulletX, y=self.enemy_bulletY)
     
+
+    def loop(self):
+        self.bulletMove()
+
+    def draw(self):
+        self.bulletDraw()
