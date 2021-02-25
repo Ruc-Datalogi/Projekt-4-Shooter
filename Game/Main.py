@@ -29,11 +29,7 @@ pygame.display.set_caption("The Falcon")
 icon = pygame.image.load('Game/sprites/playerLV1.png')
 pygame.display.set_icon(icon)
 
-# player
-enemyList = []
-handler = Handler(display)
-
-
+mediator.all_game_objects.append(Player (display,mediator,'player'))
 
 
 # Enemy
@@ -62,11 +58,16 @@ while RUNNING:
             
         menu.drawBackgroundScrolling(display,DISPLAY_SIZE)
         
+        for object in mediator.all_game_objects:
+            object.loop()
+            object.draw()
 
-        handler.draw()
-        handler.update()
+                   
+        mediator.all_game_objects = [i for i in mediator.all_game_objects if i not in mediator.to_be_removed]
 
 
+        print(len(mediator.all_game_objects))
+        
         surf = pygame.transform.scale(display, SCREEN_SIZE)
         screen.blit(surf, (0,0))
         pygame.display.update()

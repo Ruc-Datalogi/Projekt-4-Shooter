@@ -123,7 +123,7 @@ class Player(GameObject):
             
         if self.timer > 10 and keystate[pygame.K_SPACE]:
             self.timer = 0
-            self.mediator.all_game_objects.append(Friendly_Bullet(self.player_x + 2, self.player_y - 10))
+            self.mediator.all_game_objects.append(Friendly_Bullet(self.screen, self.player_x + 2, self.player_y - 10,'f_bullet',self.mediator))
         
         if keystate[pygame.K_ESCAPE]:
             sys.exit()
@@ -135,5 +135,5 @@ class Player(GameObject):
         self.playerMove()
     
     def draw(self):
-        self.playerDraw()
+        self.playerDraw(self.screen)
                 
