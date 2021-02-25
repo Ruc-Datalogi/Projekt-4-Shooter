@@ -39,12 +39,11 @@ class Player:
         #(screen, (255, 0, 0), (10,10,self.playerHealth / self.healthRatio,25))
 
 
-
     ## Draw player and bullets at given pos ##
     def playerDraw(self , screen):        
         screen.blit(self.img,(self.player_x,self.player_y))
-        pygame.draw.rect(screen,(0,0,0), pygame.Rect(20, 420, 260, 10))
-        pygame.draw.rect(screen,(90,186,74), pygame.Rect(20, 420, self.playerHealth, 10))
+        pygame.draw.rect(screen,(68,77,85), pygame.Rect(20, 420, 260, 10))
+        pygame.draw.rect(screen,(90,186,74), pygame.Rect(20, 420, (self.playerHealth/self.healthBar)*self.playerHealth, 10))
         
              
 
@@ -80,9 +79,10 @@ class Player:
             self.player_y = 0
         if self.player_y >= 540:
             self.player_y = 540
+
         self.playerHealth -= 1
         if self.playerHealth <= 1:
-            self.playerHealth = 100
+            self.playerHealth = 260
     ## Get keypressed and use it for movement ##
     def player_input(self):
         self.player_speed_x = 0
