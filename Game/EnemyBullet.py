@@ -18,7 +18,7 @@ class EnemyBullet(GameObject):
         self.screen = screen
     
     ## For collision ##
-    def getBulletRect(self):
+    def get_rect(self):
         return self.enemy_bulletRect
     
     ## For damaging enemy ##

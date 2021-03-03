@@ -43,6 +43,8 @@ class Player(GameObject):
         pass
         #(screen, (255, 0, 0), (10,10,self.playerHealth / self.healthRatio,25))
     
+    def get_rect(self):
+        return self.player_rect    
 
 
     ## Draw player and bullets at given pos ##
@@ -64,20 +66,7 @@ class Player(GameObject):
         elif self.playerHealth > 0 and self.playerHealth < 25:
             pygame.draw.rect(screen,(250,115,54), pygame.Rect(20, 420, (self.playerHealth/self.healthBar)*260, 10))
 
-
-        
-
-
-        for i in range(len(self.bullet_list)):
-            self.bullet_list[i].bulletMove()
-            self.bullet_list[i].bulletDraw(screen)
-        
-    ## check bullet collision and damage enemy
-    def bulletCollision(self):
-        for enemy in self.mediator.all_game_objects:
-            if enemy.getObjectID() == 'e_bullet':
-                if self.player_rect.colliderect(enemy.getBulletRect()):
-                    pass       
+       
 
 
     ## Character move and game boundaries ##
@@ -130,7 +119,7 @@ class Player(GameObject):
     def loop(self):
         self.player_input()
         self.playerMove()
-        self.bulletCollision()
+        self.collision('e_bullet', self.player_rect)
     
     def draw(self):
         self.playerDraw(self.screen)

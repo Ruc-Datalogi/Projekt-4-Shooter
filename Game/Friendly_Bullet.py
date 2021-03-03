@@ -17,17 +17,17 @@ class Friendly_Bullet(GameObject):
         self.mediator = mediator
     
     ## For collision ##
-    @property
-    def getBulletRect(self):
+    
+    def get_rect(self):
         return self.bulletRect
     
     ## For damaging enemy ##
-    @property
+    
     def getBulletDamage(self):
         return self.bulletDamage
 
     ## For removing the bullet ##
-    @property  
+ 
     def getBulletY(self):
         return self.bulletY
 
