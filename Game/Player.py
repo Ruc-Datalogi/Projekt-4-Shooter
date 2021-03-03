@@ -76,10 +76,8 @@ class Player(GameObject):
     def bulletCollision(self):
         for enemy in self.mediator.all_game_objects:
             if enemy.getObjectID() == 'e_bullet':
-                print('i am bullet')
                 if self.player_rect.colliderect(enemy.getBulletRect()):
-                    print('hit me baby')
-            
+                    pass       
 
 
     ## Character move and game boundaries ##

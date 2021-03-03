@@ -25,14 +25,12 @@ class Enemy(GameObject):
         self.enemyHealth = 200 
         self.enemy_bullet_list = []
         self.enemyRect = self.img.get_rect()
-
         self.objectID = objectID
         self.mediator = mediator
         self.screen = screen
     
         
 
-    @property
     def getEnemyRect(self):
         return self.enemyRect
     
@@ -42,7 +40,6 @@ class Enemy(GameObject):
         print(self.enemyHealth)
         self.enemyHealth += x
 
-    @property
     def getEnemyHealth(self):
         return self.enemyHealth
 
