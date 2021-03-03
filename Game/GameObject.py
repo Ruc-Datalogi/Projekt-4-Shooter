@@ -25,5 +25,6 @@ class GameObject:
         for element in self.mediator.all_game_objects:
             if element.getObjectID() == ID:
                 if rect.colliderect(element.get_rect()):
+                    self.mediator.to_be_removed.append(element)
                     return True
         return False

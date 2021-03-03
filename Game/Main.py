@@ -33,7 +33,9 @@ pygame.display.set_icon(icon)
 
 
 mediator.all_game_objects.append(player)
-mediator.all_game_objects.append(Enemy (100, 100, 1,'enemy',mediator,display))
+
+for i in range(0, 10):
+    mediator.all_game_objects.append(Enemy (20*i, 100, 1,'enemy',mediator,display))
 
 
 # Enemy

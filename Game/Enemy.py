@@ -15,7 +15,9 @@ class Enemy(GameObject):
             self.img = pygame.image.load("Game/sprites/enemy2.png")
         if enemyID == 2:
             self.img = pygame.image.load("Game/sprites/enemy3.png")
-        self.enemy_bullet_cooldown = random.randint(300,600)
+
+        self.img.set_colorkey((255,255,255))
+        self.enemy_bullet_cooldown = random.randint(60,180)
         self.enemy_timer = 0
         
         self.enemyX = enemyXPos 
@@ -23,7 +25,9 @@ class Enemy(GameObject):
         self.enemySpeedX = 1.5
         self.enemySpeedY = 0
         self.enemyHealth = 200 
-        self.enemy_bullet_list = []
+        
+        self.enemy_damage_cooldown = 0
+
         self.enemyRect = self.img.get_rect()
         self.objectID = objectID
         self.mediator = mediator
@@ -50,15 +54,18 @@ class Enemy(GameObject):
     ##Make sure the enemy stays in the screen
     def enemyMove(self):
         self.enemy_timer += 1
+        self.enemy_damage_cooldown += 1
+        
         self.enemyX += self.enemySpeedX
-        if self.enemyX >= 300 or self.enemyX <= 0:
+        if self.enemyX >= 300 - 14 or self.enemyX <= 0:
             self.enemySpeedX *= -1
             self.enemyY += 20
+
         self.enemyRect = self.img.get_rect(x=self.enemyX, y=self.enemyY)
 
-        if self.enemy_timer > 100:
+        if self.enemy_timer > self.enemy_bullet_cooldown:
             self.enemy_timer = 0
-            self.enemy_bullet_cooldown = random.randint(500,800)
+            self.enemy_bullet_cooldown = random.randint(60,180)
             self.mediator.all_game_objects.append(EnemyBullet (self.enemyX,self.enemyY +4, 'e_bullet', self.mediator, self.screen))
 
  
@@ -67,6 +74,12 @@ class Enemy(GameObject):
     
     def loop(self):
         self.enemyMove()
+
+        if self.collision('f_bullet',self.enemyRect) and self.enemy_damage_cooldown > 10:
+            self.enemyHealth -= 10
+        
+        if self.enemyHealth < 0:
+            self.mediator.to_be_removed.append(self)
 
     def draw(self):
         self.enemyDraw()

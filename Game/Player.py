@@ -20,6 +20,7 @@ class Player(GameObject):
         self.bullet_list = []
         self.timer = 0
         self.playerHealth = 100
+        self.player_damage_cooldown = 0
 
 
         self.mediator = mediator
@@ -61,16 +62,18 @@ class Player(GameObject):
 
         if self.player_x <= 0:
             self.player_x = 0
-        if self.player_x >= 400 - 14:
-            self.player_x = 400 - 14
+        if self.player_x >= 300 - 14:
+            self.player_x = 300 - 14
         if self.player_y <= 0: 
             self.player_y = 0
-        if self.player_y >= 540:
-            self.player_y = 540
+        if self.player_y >= 400*0.855:
+            self.player_y = 400*0.855
 
-        self.playerHealth -= 0.25
-        if self.playerHealth <= 1:
-            self.playerHealth = 100
+        
+        if self.playerHealth <= 0:
+            sys.exit()
+
+        self.player_damage_cooldown += 1
 
         self.player_rect = pygame.Rect(self.player_x, self.player_y, self.img.get_width(), self.img.get_height())
             
@@ -104,7 +107,10 @@ class Player(GameObject):
     def loop(self):
         self.player_input()
         self.playerMove()
-        self.collision('e_bullet', self.player_rect)
+        if self.collision('e_bullet', self.player_rect) and self.player_damage_cooldown > 8:
+            self.player_damage_cooldown = 0
+            self.playerHealth -= 10
+
     
     def draw(self):
         self.playerDraw(self.screen)
