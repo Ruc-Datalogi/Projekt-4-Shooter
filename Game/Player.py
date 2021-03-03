@@ -33,11 +33,8 @@ class Player(GameObject):
         if self.playerHealth <= 0:
             self.playerHealth = 0
     
-    def get_health (self, amount):
-        if self.playerHealth < self.maxplayerHealth:
-            self.playerHealth += amount
-        if self.playerHealth >= self.maxplayerHealth:
-            self.playerHealth = self.maxplayerHealth
+    def get_health (self):
+        return self.playerHealth
 
     def healthRect (self, screen):
         pass
@@ -53,18 +50,7 @@ class Player(GameObject):
     ## This makes it easier to see how much health our character has lost and how much it has left
     def playerDraw(self , screen):        
         screen.blit(self.img,(self.player_x,self.player_y))
-        pygame.draw.rect(screen,(68,77,85), pygame.Rect(20, 420, 260, 10))
         
-    ## Health bar with 3 different colors.
-    ## Green healthbar, if self.healthbar is greater than 50: 
-    ## Yellow healthbar, if self.healthbar is greater than 25 and less than 50:
-    ## Orange healthbar, if self.healthbar is greater than 0 and less than 25:
-        if self.playerHealth > 50:
-            pygame.draw.rect(screen,(90,186,74), pygame.Rect(20, 420, (self.playerHealth/self.healthBar)*260, 10))
-        elif self.playerHealth > 25 and self.playerHealth < 50:
-            pygame.draw.rect(screen,(247,204,59), pygame.Rect(20, 420, (self.playerHealth/self.healthBar)*260, 10))
-        elif self.playerHealth > 0 and self.playerHealth < 25:
-            pygame.draw.rect(screen,(250,115,54), pygame.Rect(20, 420, (self.playerHealth/self.healthBar)*260, 10))
 
        
 

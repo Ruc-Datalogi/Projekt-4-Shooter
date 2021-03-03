@@ -3,11 +3,12 @@ from Player import Player
 from Enemy import Enemy
 from Menu import Menu
 from Mediator import Mediator
+from HUD import *
 
 pygame.init()
 
 # Constant variables
-SCREEN_SIZE = (300,400)
+SCREEN_SIZE = (600,800)
 DISPLAY_SIZE = (300,400)
 DARK_GREY = (50,50,50)
 menu = Menu()
@@ -23,12 +24,14 @@ screen = pygame.display.set_mode(SCREEN_SIZE)
 #To cast to 
 display = pygame.Surface((DISPLAY_SIZE))
 
+player = Player(display,mediator,'player')
+hud = HUD(display, player, DISPLAY_SIZE)
 # Title and Icon
 pygame.display.set_caption("The Falcon")
 icon = pygame.image.load('Game/sprites/playerLV1.png')
 pygame.display.set_icon(icon)
 
-mediator.all_game_objects.append(Player (display,mediator,'player'))
+mediator.all_game_objects.append(player)
 mediator.all_game_objects.append(Enemy (100, 100, 1,'enemy',mediator,display))
 
 
@@ -62,7 +65,7 @@ while RUNNING:
             object.loop()
             object.draw()
 
-                   
+        hud.draw_overlay_HUD()
         mediator.all_game_objects = [i for i in mediator.all_game_objects if i not in mediator.to_be_removed]
 
 
