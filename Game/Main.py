@@ -8,8 +8,8 @@ from Mediator import Mediator
 pygame.init()
 
 # Constant variables
-SCREEN_SIZE = (300,440)
-DISPLAY_SIZE = (300,440)
+SCREEN_SIZE = (300,400)
+DISPLAY_SIZE = (300,400)
 DARK_GREY = (50,50,50)
 menu = Menu()
 mediator = Mediator()
