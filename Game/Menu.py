@@ -50,7 +50,7 @@ class Menu:
         if self.scroller >= height:
             self.scroller = 0
 
-        self.draw_score(display)
+
 
     ## Normal background ##
     def drawBackground(self, display, DISPLAY_SIZE):
@@ -65,9 +65,7 @@ class Menu:
         width = self.backGroundImg.get_width()
         height = self.backGroundImg.get_height() 
 
-    def draw_score(self, display):
-        text = self.score_font.render('Score: ' + str(self.score), 1, (255,255,255))
-        display.blit(text, (20, 20))
+    
         
     ## Draw menu, options, or upgrade menu ##
     def drawMenu(self, screen, SCREEN_SIZE):
