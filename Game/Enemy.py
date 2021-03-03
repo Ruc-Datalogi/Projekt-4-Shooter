@@ -61,7 +61,7 @@ class Enemy(GameObject):
         if self.enemy_timer > self.enemy_bullet_cooldown:
             self.enemy_timer = 0
             self.enemy_bullet_cooldown = random.randint(500,800)
-            self.mediator.all_game_objects.append(EnemyBullet (self.enemyX,self.enemyY + 4))
+            self.mediator.all_game_objects.append(EnemyBullet (self.enemyX,self.enemyY +4, 'e_bullet', self.mediator))
         
         
     

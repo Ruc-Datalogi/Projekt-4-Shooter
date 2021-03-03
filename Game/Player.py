@@ -25,6 +25,7 @@ class Player(GameObject):
 
         self.mediator = mediator
         self.objectID = objectID
+        self.player_rect = pygame.Rect(0,0,0,0)
 
     def get_dmg (self, amount):
         if self.playerHealth > 0:
@@ -41,6 +42,7 @@ class Player(GameObject):
     def healthRect (self, screen):
         pass
         #(screen, (255, 0, 0), (10,10,self.playerHealth / self.healthRatio,25))
+    
 
 
     ## Draw player and bullets at given pos ##
@@ -79,6 +81,11 @@ class Player(GameObject):
                 self.bullet_list.pop(i)
                 break
 
+    def bulletCollision(self):
+        for enemy in self.mediator.all_game_objects:
+            if enemy.getObjectID() == 'e_bullet' and self.player_rect.colliderect(enemy.getBulletRect()):
+                print('hit me baby')
+
 
     ## Character move and game boundaries ##
     def playerMove(self):
@@ -97,6 +104,8 @@ class Player(GameObject):
         self.playerHealth -= 0.25
         if self.playerHealth <= 1:
             self.playerHealth = 100
+
+        self.player_rect = pygame.Rect(self.player_x, self.player_y, self.img.get_width(), self.img.get_height())
             
     ## Get keypressed and use it for movement ##
     def player_input(self):
