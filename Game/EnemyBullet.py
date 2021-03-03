@@ -9,8 +9,8 @@ class EnemyBullet(GameObject):
         self.img = pygame.image.load("Game/sprites/bullets/enemy_bullets/green_bullet.png")
         self.enemy_bulletX = xPos 
         self.enemy_bulletY = yPos 
-        self.enemy_bulletSpeedX = 0
-        self.enemy_bulletSpeedY = 6
+        self.enemy_bulletSpeedX = random.uniform(-1,1)
+        self.enemy_bulletSpeedY = 4
         self.enemy_bulletRect = self.img.get_rect()
         self.enemy_bulletDamage = 10
         self.objectID = objectID
