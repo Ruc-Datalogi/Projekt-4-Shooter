@@ -2,7 +2,6 @@ import sys, pygame, random
 from Player import Player
 from Enemy import Enemy
 from Menu import Menu
-from Handler import Handler
 from Mediator import Mediator
 
 pygame.init()
