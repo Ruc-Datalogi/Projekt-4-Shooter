@@ -31,6 +31,7 @@ pygame.display.set_caption("The Falcon")
 icon = pygame.image.load('Game/sprites/playerLV1.png')
 pygame.display.set_icon(icon)
 
+
 mediator.all_game_objects.append(player)
 mediator.all_game_objects.append(Enemy (100, 100, 1,'enemy',mediator,display))
 
@@ -65,7 +66,7 @@ while RUNNING:
             object.loop()
             object.draw()
 
-        hud.draw_overlay_HUD()
+        hud.draw_HUD()
         mediator.all_game_objects = [i for i in mediator.all_game_objects if i not in mediator.to_be_removed]
 
 
