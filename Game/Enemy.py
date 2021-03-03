@@ -7,7 +7,7 @@ from Mediator import *
 class Enemy(GameObject):
 
     ## Choose enemy sprite ##
-    def __init__(self, enemyXPos, enemyYPos, enemyID, objectID, mediator):
+    def __init__(self, enemyXPos, enemyYPos, enemyID, objectID, mediator, screen):
         self.img = pygame.image.load("Game/sprites/enemy1.png")
         if enemyID == 0: 
             self.img = pygame.image.load("Game/sprites/enemy1.png")
@@ -28,6 +28,7 @@ class Enemy(GameObject):
 
         self.objectID = objectID
         self.mediator = mediator
+        self.screen = screen
     
         
 
@@ -45,8 +46,8 @@ class Enemy(GameObject):
     def getEnemyHealth(self):
         return self.enemyHealth
 
-    def enemyDraw(self, screen):
-        screen.blit(self.img, (self.enemyX, self.enemyY))
+    def enemyDraw(self):
+        self.screen.blit(self.img, (self.enemyX, self.enemyY))
 
             
     ##Make sure the enemy stays in the screen
@@ -58,10 +59,10 @@ class Enemy(GameObject):
             self.enemyY += 20
         self.enemyRect = self.img.get_rect(x=self.enemyX, y=self.enemyY)
 
-        if self.enemy_timer > self.enemy_bullet_cooldown:
+        if self.enemy_timer > 10:
             self.enemy_timer = 0
             self.enemy_bullet_cooldown = random.randint(500,800)
-            self.mediator.all_game_objects.append(EnemyBullet (self.enemyX,self.enemyY +4, 'e_bullet', self.mediator))
+            self.mediator.all_game_objects.append(EnemyBullet (self.enemyX,self.enemyY +4, 'e_bullet', self.mediator, self.screen))
         
         
     

@@ -29,6 +29,7 @@ icon = pygame.image.load('Game/sprites/playerLV1.png')
 pygame.display.set_icon(icon)
 
 mediator.all_game_objects.append(Player (display,mediator,'player'))
+mediator.all_game_objects.append(Enemy (100, 100, 1,'enemy',mediator,display))
 
 
 # Enemy

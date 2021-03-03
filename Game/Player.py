@@ -73,18 +73,13 @@ class Player(GameObject):
             self.bullet_list[i].bulletDraw(screen)
         
     ## check bullet collision and damage enemy
-    def bulletCollision(self, enemy):
-        for i in range(len(self.bullet_list)):
-            if self.bullet_list[i].getBulletRect.colliderect(enemy.getEnemyRect):
-                print(enemy.getEnemyRect)
-                enemy.setHealth(-10)
-                self.bullet_list.pop(i)
-                break
-
     def bulletCollision(self):
         for enemy in self.mediator.all_game_objects:
-            if enemy.getObjectID() == 'e_bullet' and self.player_rect.colliderect(enemy.getBulletRect()):
-                print('hit me baby')
+            if enemy.getObjectID() == 'e_bullet':
+                print('i am bullet')
+                if self.player_rect.colliderect(enemy.getBulletRect()):
+                    print('hit me baby')
+            
 
 
     ## Character move and game boundaries ##
@@ -137,6 +132,7 @@ class Player(GameObject):
     def loop(self):
         self.player_input()
         self.playerMove()
+        self.bulletCollision()
     
     def draw(self):
         self.playerDraw(self.screen)
