@@ -20,8 +20,7 @@ class Player(GameObject):
         self.bullet_list = []
         self.timer = 0
         self.playerHealth = 100
-        self.healthBar = 100
-        self.maxplayerHealth = 300
+
 
         self.mediator = mediator
         self.objectID = objectID
