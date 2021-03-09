@@ -70,8 +70,8 @@ class Player(GameObject):
             self.player_x = 0
         if self.player_x >= 300 - 14:
             self.player_x = 300 - 14
-        if self.player_y <= 0: 
-            self.player_y = 0
+        if self.player_y <= 16: 
+            self.player_y = 16
         if self.player_y >= 400*0.855:
             self.player_y = 400*0.855
 

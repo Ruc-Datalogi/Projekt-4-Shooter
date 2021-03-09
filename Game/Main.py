@@ -1,8 +1,8 @@
 import sys, pygame, random
-from Player import Player
-from Enemy import Enemy
-from Menu import Menu
-from Mediator import Mediator
+from Player import *
+from Enemy import *
+from Menu import *
+from Mediator import *
 from HUD import *
 
 pygame.init()

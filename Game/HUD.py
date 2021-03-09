@@ -8,8 +8,9 @@ class HUD:
         self.player = player
         self.screen_size = screen_size
         self.mediator = mediator 
-        self.font = pygame.font.Font('Game/font/ARCADECLASSIC.ttf',18)
+        self.font = pygame.font.Font('Game/font/kongtext.ttf',8)
         self.score = 0
+        self.wave = 10
 
 
     def draw_overlay_HUD(self):
@@ -20,9 +21,9 @@ class HUD:
         pygame.draw.rect(self.screen,(52, 61, 82), pygame.Rect(self.screen_size[0]*0.77,self.screen_size[1]*0.9, self.screen_size[0]-1, (self.screen_size[1]-1)*0.1),width=2)
         
         #overlay top background 
-        pygame.draw.rect(self.screen,(93, 100, 117), pygame.Rect(0,0, self.screen_size[0], self.screen_size[1]*0.05))
+        pygame.draw.rect(self.screen,(93, 100, 117), pygame.Rect(0,0, self.screen_size[0], self.screen_size[1]*0.04))
         #overlay top background border
-        pygame.draw.rect(self.screen,(52, 61, 82), pygame.Rect(0,0, self.screen_size[0], self.screen_size[1]*0.05), width=2)
+        pygame.draw.rect(self.screen,(52, 61, 82), pygame.Rect(0,0, self.screen_size[0], self.screen_size[1]*0.04), width=2)
 
 
         #special ability square
@@ -69,8 +70,11 @@ class HUD:
 
     def draw_score(self):
         
-        text = self.font.render('Score  ' + str(self.score) ,1,(255,255,255))
-        self.screen.blit(text, (6, 2))
+        score = self.font.render('Score ' + str(self.score) ,0,(255,255,255))
+        wave = self.font.render('Wave ' + str(self.wave),0,(255,255,255))
+        self.screen.blit(score, (6, 4))
+        self.screen.blit(wave,(self.screen_size[0] - 65 ,4))
+
 
 
     def draw_HUD(self):

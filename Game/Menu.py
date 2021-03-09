@@ -23,11 +23,6 @@ class Menu:
         self.backGroundImg_4 = pygame.image.load("Game/sprites/background/background_4.png")
 
         
-        
-
-
-
-
     ## Getter to escape menu ##
     @property
     def get_menu(self):
