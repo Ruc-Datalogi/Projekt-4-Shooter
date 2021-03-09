@@ -25,7 +25,7 @@ screen = pygame.display.set_mode(SCREEN_SIZE)
 display = pygame.Surface((DISPLAY_SIZE))
 
 player = Player(display,mediator,'player')
-hud = HUD(display, player, DISPLAY_SIZE)
+hud = HUD(display, player, DISPLAY_SIZE, mediator)
 # Title and Icon
 pygame.display.set_caption("The Falcon")
 icon = pygame.image.load('Game/sprites/playerLV1.png')
@@ -64,15 +64,17 @@ while RUNNING:
             
         menu.drawBackgroundScrolling(display,DISPLAY_SIZE)
         
+
         for object in mediator.all_game_objects:
             object.loop()
             object.draw()
 
-        hud.draw_HUD()
         mediator.all_game_objects = [i for i in mediator.all_game_objects if i not in mediator.to_be_removed]
+        hud.draw_HUD()
 
 
-        
+        mediator.to_be_removed.clear()
+
         surf = pygame.transform.scale(display, SCREEN_SIZE)
         screen.blit(surf, (0,0))
         pygame.display.update()

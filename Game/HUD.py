@@ -3,11 +3,13 @@ from Player import *
 
 class HUD:
 
-    def __init__(self, screen, player, screen_size):
+    def __init__(self, screen, player, screen_size, mediator):
         self.screen = screen
         self.player = player
         self.screen_size = screen_size
-        self.font = pygame.font.SysFont('chalkduster.ttf',18)
+        self.mediator = mediator 
+        self.font = pygame.font.Font('Game/font/ARCADECLASSIC.ttf',18)
+        self.score = 0
 
 
     def draw_overlay_HUD(self):
@@ -67,11 +69,15 @@ class HUD:
 
     def draw_score(self):
         
-        text = self.font.render('Score: ',1,(200,200,200))
-        self.screen.blit(text, (6, 5))
+        text = self.font.render('Score  ' + str(self.score) ,1,(255,255,255))
+        self.screen.blit(text, (6, 2))
 
 
     def draw_HUD(self):
+        for object in self.mediator.to_be_removed:
+            if object.getObjectID() == 'enemy':
+                self.score += 1
+
         self.draw_overlay_HUD()
         self.draw_energy_HUD()
         self.draw_health_HUD()

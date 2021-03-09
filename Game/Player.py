@@ -21,6 +21,8 @@ class Player(GameObject):
         self.timer = 0
         self.playerHealth = 100
         self.player_damage_cooldown = 0
+        self.player_score = 0
+
 
 
         self.mediator = mediator
@@ -33,6 +35,10 @@ class Player(GameObject):
         if self.playerHealth <= 0:
             self.playerHealth = 0
     
+    def get_score(self):
+        return self.player_score
+
+
     def get_health (self):
         return self.playerHealth
 
@@ -107,9 +113,14 @@ class Player(GameObject):
     def loop(self):
         self.player_input()
         self.playerMove()
-        if self.collision('e_bullet', self.player_rect) and self.player_damage_cooldown > 8:
+        hit_count = self.collision('e_bullet', self.player_rect)
+        if  hit_count > 0 and self.player_damage_cooldown > 8:
             self.player_damage_cooldown = 0
-            self.playerHealth -= 10
+            self.playerHealth += -10*hit_count
+        
+        for object in self.mediator.to_be_removed:
+            if object.getObjectID() == 'enemy':
+                self.player_score += 1
 
     
     def draw(self):

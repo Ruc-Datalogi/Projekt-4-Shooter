@@ -22,9 +22,11 @@ class GameObject:
     
     ## check bullet collision and damage enemy  
     def collision(self, ID, rect):
+        hit_count = 0
         for element in self.mediator.all_game_objects:
             if element.getObjectID() == ID:
                 if rect.colliderect(element.get_rect()):
                     self.mediator.to_be_removed.append(element)
-                    return True
-        return False
+                    hit_count += 1
+                    
+        return hit_count

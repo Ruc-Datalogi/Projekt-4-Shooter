@@ -3,9 +3,6 @@ from pygame.locals import *
 import os
 
 class Menu:
-    
-    score = 0
-
     ## Constructor ##
     def __init__(self):
         pygame.font.init()

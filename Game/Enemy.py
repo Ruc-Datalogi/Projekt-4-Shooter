@@ -24,7 +24,7 @@ class Enemy(GameObject):
         self.enemyY = enemyYPos
         self.enemySpeedX = 1
         self.enemySpeedY = 0
-        self.enemyHealth = 100 
+        self.enemyHealth = 20 
         
         self.enemy_damage_cooldown = 0
 
