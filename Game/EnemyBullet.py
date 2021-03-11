@@ -1,7 +1,7 @@
 import sys, pygame, random
 from GameObject import *
 from Mediator import *
-from SpriteSheet import *
+from Spritesheet import *
 
 
 class EnemyBullet(GameObject):

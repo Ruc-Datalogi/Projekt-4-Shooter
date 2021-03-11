@@ -24,7 +24,7 @@ class Generator:
     def generate (self):
         if self.level == 0:
             self.timer += 1
-            if self.timer > 720:
+            if self.timer > 180:
                 self.generate_wave_1()
                 self.timer = 0
 
