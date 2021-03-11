@@ -1,14 +1,14 @@
 import sys, pygame, random
 from GameObject import *
 from Mediator import *
-from Spritesheet import *
+from SpriteSheet import *
 
 
 class EnemyBullet(GameObject):
     
     def __init__(self, xpos, ypos, objectID, mediator, screen):
-        self.ss = Spritesheet("Game/sprites/bullets/enemy_bullet/allTheBullets.png")
-        self.img = pygame.image.load("Game/sprites/bullets/enemy_bullets/green_bullet.png")
+        self.ss = SpriteSheet('Game/sprites/bullets/allTheBullets.png')
+        self.img = self.ss.image_at(pygame.Rect(146, 8, 16, 16))
         self.img = pygame.transform.scale(self.img,(8,8))
         self.enemy_bullet_x = xpos 
         self.enemy_bullet_y = ypos 
