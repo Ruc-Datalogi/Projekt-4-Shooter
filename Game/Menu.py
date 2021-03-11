@@ -6,36 +6,34 @@ class Menu:
     ## Constructor ##
     def __init__(self):
         pygame.font.init()
-        self.menuOn = True
+        self.menu_on = True
         self.selected = 0
-        self.optionsOn = False
-        self.selectOptions = 0
-        self.upgradesOn = False
-        self.selectUpgrades = 0 
+        self.options_on = False
+        self.select_options = 0 
         self.scroller = 0
-        self.movingBackground = 0
+        self.moving_background = 0
         self.score_font = pygame.font.SysFont('comicsans', 30, True)
 
-        self.backGroundImg = pygame.image.load("Game/sprites/background/preview.png")
-        self.backGroundImg_1 = pygame.image.load("Game/sprites/background/background_1.png")
-        self.backGroundImg_2 = pygame.image.load("Game/sprites/background/background_2.png")
-        self.backGroundImg_3 = pygame.image.load("Game/sprites/background/background_3.png")
-        self.backGroundImg_4 = pygame.image.load("Game/sprites/background/background_4.png")
+        self.background_Img = pygame.image.load("Game/sprites/background/preview.png")
+        self.background_Img1 = pygame.image.load("Game/sprites/background/background_1.png")
+        self.background_Img2 = pygame.image.load("Game/sprites/background/background_2.png")
+        self.background_Img3 = pygame.image.load("Game/sprites/background/background_3.png")
+        self.background_Img4 = pygame.image.load("Game/sprites/background/background_4.png")
 
         
     ## Getter to escape menu ##
     @property
     def get_menu(self):
-        return self.menuOn
+        return self.menu_on
 
     ## Scrolling background ##
-    def drawBackgroundScrolling(self, display, DISPLAY_SIZE):
-        width = self.backGroundImg.get_width()
-        height = self.backGroundImg.get_height()
+    def draw_background_scrolling(self, display, DISPLAY_SIZE):
+        width = self.background_Img.get_width()
+        height = self.background_Img.get_height()
         
         for i in range(0,2):
             for j in range(-4,8):
-                display.blit(self.backGroundImg,(i*width,j*height + self.scroller))
+                display.blit(self.background_Img,(i*width,j*height + self.scroller))
         
 
         self.scroller += 1
@@ -45,22 +43,22 @@ class Menu:
 
 
     ## Normal background ##
-    def drawBackground(self, display, DISPLAY_SIZE):
-        width = self.backGroundImg.get_width()
-        height = self.backGroundImg.get_height()
+    def draw_background(self, display, DISPLAY_SIZE):
+        width = self.background_Img.get_width()
+        height = self.background_Img.get_height()
         
         ## Draw the pictures side by side to fill the screen ##
         for i in range(-1, int(DISPLAY_SIZE[0]/width)+1):
             for j in range(-1, int(DISPLAY_SIZE[1]/height +1)):
-                display.blit(self.backGroundImg,(i*width, j*height))
+                display.blit(self.background_Img,(i*width, j*height))
 
-        width = self.backGroundImg.get_width()
-        height = self.backGroundImg.get_height() 
+        width = self.background_Img.get_width()
+        height = self.background_Img.get_height() 
 
     
         
     ## Draw menu, options, or upgrade menu ##
-    def drawMenu(self, screen, SCREEN_SIZE):
+    def draw_menu(self, screen, SCREEN_SIZE):
         screen.fill((0,0,0))
 
         font = pygame.font.SysFont('chalkduster.ttf',48)
@@ -69,7 +67,7 @@ class Menu:
 
         title = font.render('The Falcon', True, (120,120,120))
         ## Drawing Menu
-        if self.menuOn == True:
+        if self.menu_on == True:
             if self.selected == 0:
                 start = font.render('Start', True, (100,100,100))
             else:
@@ -98,7 +96,7 @@ class Menu:
             screen.blit(quit, (SCREEN_SIZE[0]/6, (SCREEN_SIZE[1]/6)*5))
         
         ### Drawing Options ###
-        if self.optionsOn == True:
+        if self.options_on == True:
             pass
             
             
@@ -106,8 +104,8 @@ class Menu:
     
 
     ## Handling input in the menu ##      
-    def menuInput(self, event):
-        if self.menuOn:
+    def menu_input(self, event):
+        if self.menu_on:
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_DOWN:
                     self.selected += 1 
@@ -116,13 +114,13 @@ class Menu:
                 if event.key == pygame.K_RETURN:
                     ## Start Game ##
                     if self.selected == 0:
-                        self.menuOn = False
+                        self.menu_on = False
                     ##Options ##    
                     if self.selected == 1:
                         pass
                     if self.selected == 2:
-                        self.menuOn = False
-                        self.optionsOn = True
+                        self.menu_on = False
+                        self.options_on = True
                     if self.selected == 3:
                         sys.exit()
             
@@ -134,32 +132,32 @@ class Menu:
                 self.selected = 3
 
         ## Options screen input ##
-        elif self.optionsOn:
+        elif self.options_on:
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_DOWN:
-                    self.selectOptions += 1 
+                    self.select_options += 1 
                 if event.key == pygame.K_UP:
-                    self.selectOptions -= 1
+                    self.select_options -= 1
                 if event.key == pygame.K_RETURN:
-                    if self.selectOptions == 0:
-                        self.movingBackground += 1
+                    if self.select_options == 0:
+                        self.moving_background += 1
                         
-                    if self.selectOptions == 1:
-                        self.optionsOn = False
-                        self.menuOn = True
+                    if self.select_options == 1:
+                        self.options_on = False
+                        self.menu_on = True
 
-        if self.movingBackground > 1:
-            self.movingBackground = 0
+        if self.moving_background > 1:
+            self.moving_background = 0
 
         ## For scrolling in the options ##
-        if self.selectOptions > 1:
-            self.selectOptions = 0
+        if self.select_options > 1:
+            self.select_options = 0
         
-        if self.selectOptions < 0:
-            self.selectOptions = 1
+        if self.select_options < 0:
+            self.select_options = 1
 
         
-    def menuSelecter(self, input):
+    def menu_selecter(self, input):
         if input == 0:
             return 'start'
         if input == 1:

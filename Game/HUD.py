@@ -50,7 +50,8 @@ class HUD:
         
         pygame.draw.rect(self.screen,(52,61,70), pygame.Rect(self.screen_size[0]*0.02,self.screen_size[1]*0.915, self.screen_size[0]*0.735, self.screen_size[1]*0.03), width=1)
 
-        
+        ## The green bar represents our health
+        ## When the healthbar turns gray it means that user has been hit and has lost health
         
 
         
@@ -79,7 +80,7 @@ class HUD:
 
     def draw_HUD(self):
         for object in self.mediator.to_be_removed:
-            if object.getObjectID() == 'enemy':
+            if object.get_objectID() == 'enemy':
                 self.score += 1
 
         self.draw_overlay_HUD()

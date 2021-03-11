@@ -14,7 +14,7 @@ class GameObject:
     def draw(self):
         pass
     
-    def getObjectID(self):
+    def get_objectID(self):
         return self.objectID
 
     def get_rect(self):
@@ -24,7 +24,7 @@ class GameObject:
     def collision(self, ID, rect):
         hit_count = 0
         for element in self.mediator.all_game_objects:
-            if element.getObjectID() == ID:
+            if element.get_objectID() == ID:
                 if rect.colliderect(element.get_rect()):
                     self.mediator.to_be_removed.append(element)
                     hit_count += 1
