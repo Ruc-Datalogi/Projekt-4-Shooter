@@ -3,7 +3,7 @@ import pygame
 
 class SpriteSheet(object):
 
-    def init(self,  filename):
+    def __init__(self,  filename):
         try:
             self.sheet = pygame.image.load(filename)
         except pygame.error:
