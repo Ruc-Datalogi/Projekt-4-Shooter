@@ -23,7 +23,7 @@ fpsClock = pygame.time.Clock ()
 screen = pygame.display.set_mode(SCREEN_SIZE)
 #To cast to 
 display = pygame.Surface((DISPLAY_SIZE))
-
+#git flow contiounous integration remember playtests with same questions start playtest 
 player = Player(display,mediator,'player')
 hud = HUD(display, player, DISPLAY_SIZE, mediator)
 # Title and Icon
