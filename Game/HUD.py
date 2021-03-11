@@ -3,14 +3,14 @@ from Player import *
 
 class HUD:
 
-    def __init__(self, screen, player, screen_size, mediator):
+    def __init__(self, screen, player, screen_size, mediator, generator):
         self.screen = screen
         self.player = player
         self.screen_size = screen_size
         self.mediator = mediator 
+        self.generator = generator
         self.font = pygame.font.Font('Game/font/kongtext.ttf',8)
         self.score = 0
-        self.wave = 10
 
 
     def draw_overlay_HUD(self):
@@ -72,9 +72,9 @@ class HUD:
     def draw_score(self):
         
         score = self.font.render('Score ' + str(self.score) ,0,(255,255,255))
-        wave = self.font.render('Wave ' + str(self.wave),0,(255,255,255))
+        level = self.font.render('Level ' + str(self.generator.get_level()),0,(255,255,255))
         self.screen.blit(score, (6, 4))
-        self.screen.blit(wave,(self.screen_size[0] - 65 ,4))
+        self.screen.blit(level,(self.screen_size[0] - 70 ,4))
 
 
 

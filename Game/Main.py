@@ -26,8 +26,9 @@ screen = pygame.display.set_mode(SCREEN_SIZE)
 display = pygame.Surface((DISPLAY_SIZE))
 #git flow contiounous integration remember playtests with same questions start playtest 
 player = Player(display,mediator,'player')
-hud = HUD(display, player, DISPLAY_SIZE, mediator)
 generator = Generator(display, mediator)
+
+hud = HUD(display, player, DISPLAY_SIZE, mediator, generator)
 # Title and Icon
 pygame.display.set_caption("The Falcon")
 icon = pygame.image.load('Game/sprites/playerLV1.png')
@@ -61,6 +62,7 @@ while RUNNING:
         for event in pygame.event.get():
             if event.type == pygame.QUIT: 
                 RUNNING = False
+            
             
         menu.draw_background_scrolling(display,DISPLAY_SIZE)
         
