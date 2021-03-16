@@ -8,7 +8,7 @@
 import pygame 
 
 
-class SpriteSheet(object):
+class Spritesheet(object):
 
     def __init__(self,  filename):
         try:

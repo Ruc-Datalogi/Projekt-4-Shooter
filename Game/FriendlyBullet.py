@@ -4,7 +4,7 @@ from Mediator import *
 
 class FriendlyBullet(GameObject):
     
-    def __init__(self, screen, xpos, ypos, objectID, mediator):
+    def __init__(self, screen, xpos, ypos, object_ID, mediator):
         self.img = pygame.image.load("Game/sprites/bullets/red_bullet.png")
         self.bullet_x = xpos 
         self.bullet_y = ypos 
@@ -13,7 +13,7 @@ class FriendlyBullet(GameObject):
         self.bulletspeed_y = 12
         self.bullet_rect = self.img.get_rect()
         self.bullet_damage = 10
-        self.objectID = objectID
+        self.object_ID = object_ID
         self.mediator = mediator
     
     ## For collision ##

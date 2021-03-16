@@ -25,23 +25,20 @@ class Generator:
                 spawn_list.append(random_int)
         return spawn_list
 
-    def generate_wave_1(self, amount):
+    def generate_wave_1(self, amount, enemy_ID):
         enemy_list = self.get_spawn_points(amount)
         for i in range(len(enemy_list)):
-            self.mediator.all_game_objects.append(Enemy(enemy_list[i]*20, (random.randint(10, 30)), 1, 'enemy', self.mediator, self.screen))
+            self.mediator.all_game_objects.append(Enemy(enemy_list[i]*20, (random.randint(10, 30)), enemy_ID, 'enemy', self.mediator, self.screen))
 
     def generate_wave_2(self):
-        
-        for i in range (0, 4):
-            self.mediator.all_game_objects.append(Enemy(spawn_list[i]*20, (random.randint(10, 30)), 2, 'enemy', self.mediator, self.screen))
-
+        pass
 
     def generate_wave_3(self):
         pass
 
     def check_for_enemy(self):
         for enemy in self.mediator.all_game_objects:
-            if enemy.get_objectID() == 'enemy':
+            if enemy.get_object_ID() == 'enemy':
                 return True
         
         return False
@@ -72,12 +69,12 @@ class Generator:
 
             if self.next_wave():
                 
-                self.generate_wave_1(6)
+                self.generate_wave_1(6,2)
         
             self.next_level()
                 
         
         if self.level == 2:
             if self.next_wave():
-                self.generate_wave_1(8)
+                self.generate_wave_1(8,1)
             self.next_level()      

@@ -2,21 +2,22 @@ import sys, pygame, random
 from EnemyBullet import EnemyBullet
 from GameObject import *
 from Mediator import *
+from Spritesheet import *
 
 
 class Enemy(GameObject):
 
     ## Choose enemy sprite ##
-    def __init__(self, enemy_xpos, enemy_ypos, enemyID, objectID, mediator, screen):
-        self.img = pygame.image.load("Game/sprites/enemy1.png")
-        if enemyID == 0: 
-            self.img = pygame.image.load("Game/sprites/enemy1.png")
-        if enemyID == 1:
-            self.img = pygame.image.load("Game/sprites/enemy2.png")
-        if enemyID == 2:
-            self.img = pygame.image.load("Game/sprites/enemy3.png")
+    def __init__(self, enemy_xpos, enemy_ypos, enemy_ID, object_ID, mediator, screen):
+        self.ss = Spritesheet('Game/sprites/SpaceShipAsset.png')
+        self.img = self.ss.image_at(pygame.Rect(2, 41, 12, 12))
+        if enemy_ID == 0:
+            self.img = self.ss.image_at(pygame.Rect(2, 41, 12, 12))
+        elif enemy_ID == 1:
+            self.img = self.ss.image_at(pygame.Rect(19, 44, 14, 9))
+        elif enemy_ID == 2:
+            self.img = self.ss.image_at(pygame.Rect(39, 44, 9, 10))
 
-        self.img.set_colorkey((255,255,255))
         self.enemy_bullet_cooldown = random.randint(60,180)
         self.enemy_timer = 0
         
@@ -29,7 +30,7 @@ class Enemy(GameObject):
         self.enemy_damage_cooldown = 0
 
         self.enemy_rect = self.img.get_rect()
-        self.objectID = objectID
+        self.object_ID = object_ID
         self.mediator = mediator
         self.screen = screen
     

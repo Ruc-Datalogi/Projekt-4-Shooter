@@ -6,8 +6,8 @@ from Spritesheet import *
 
 class EnemyBullet(GameObject):
     
-    def __init__(self, xpos, ypos, objectID, mediator, screen):
-        self.ss = SpriteSheet('Game/sprites/bullets/allTheBullets.png')
+    def __init__(self, xpos, ypos, object_ID, mediator, screen):
+        self.ss = Spritesheet('Game/sprites/bullets/allTheBullets.png')
         self.img = self.ss.image_at(pygame.Rect(146, 8, 16, 16))
         self.img = pygame.transform.scale(self.img,(8,8))
         self.enemy_bullet_x = xpos 
@@ -16,7 +16,7 @@ class EnemyBullet(GameObject):
         self.enemy_bulletspeed_y = 1.5
         self.enemy_bullet_Rect = self.img.get_rect()
         self.enemy_bullet_damage = 10
-        self.objectID = objectID
+        self.object_ID = object_ID
         self.mediator = mediator
         self.screen = screen
     

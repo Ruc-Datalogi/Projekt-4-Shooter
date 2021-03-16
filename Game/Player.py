@@ -7,7 +7,7 @@ from Mediator import *
 class Player(GameObject):
 
     ## Constructor for player ## 
-    def __init__(self, screen, mediator, objectID):
+    def __init__(self, screen, mediator, object_ID):
         self.img = pygame.image.load("Game/sprites/playerLV1.png")
         self.player_x = 100 
         self.player_y = 100
@@ -26,7 +26,7 @@ class Player(GameObject):
 
 
         self.mediator = mediator
-        self.objectID = objectID
+        self.object_ID = object_ID
         self.player_rect = pygame.Rect(0,0,0,0)
 
     def get_dmg (self, amount):

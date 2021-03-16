@@ -80,7 +80,7 @@ class HUD:
 
     def draw_HUD(self):
         for object in self.mediator.to_be_removed:
-            if object.get_objectID() == 'enemy':
+            if object.get_object_ID() == 'enemy':
                 self.score += 1
 
         self.draw_overlay_HUD()
