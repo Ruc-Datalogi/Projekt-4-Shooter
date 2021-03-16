@@ -65,10 +65,22 @@ class Generator:
                 self.timer = 0
         
             if self.current_wave == self.max_amount_of_waves and not self.check_for_enemy():
+                self.current_wave = 0
+                self.max_amount_of_waves += 1
                 self.level += 1
+                self.timer = 0
         
         if self.level == 2:
-            pass
+            self.timer += 1
+
+            if self.timer > 180 and self.current_wave < self.max_amount_of_waves:
+                
+                self.current_wave += 1
+                self.generate_wave_1()
+                self.timer = 0
+        
+            if self.current_wave == self.max_amount_of_waves and not self.check_for_enemy():
+                self.level += 1
 
     
 

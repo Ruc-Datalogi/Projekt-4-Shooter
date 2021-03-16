@@ -9,7 +9,7 @@ from Generator import *
 pygame.init()
 
 # Constant variables
-SCREEN_SIZE = (300,400)
+SCREEN_SIZE = (600,800)
 DISPLAY_SIZE = (300,400)
 DARK_GREY = (50,50,50)
 menu = Menu()
@@ -44,6 +44,7 @@ mediator.all_game_objects.append(player)
 
 
 while RUNNING:
+    
     ## Draw Menu ##
     if menu.get_menu: 
         menu.draw_background(display,(DISPLAY_SIZE))
