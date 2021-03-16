@@ -27,7 +27,7 @@ class Generator:
 
     def generate_wave_1(self, amount):
         enemy_list = self.get_spawn_points(amount)
-        for i in range(len(self.enemy_list)):
+        for i in range(len(enemy_list)):
             self.mediator.all_game_objects.append(Enemy(enemy_list[i]*20, (random.randint(10, 30)), 1, 'enemy', self.mediator, self.screen))
 
     def generate_wave_2(self):
