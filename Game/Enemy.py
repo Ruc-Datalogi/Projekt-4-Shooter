@@ -9,6 +9,7 @@ class Enemy(GameObject):
 
     ## Choose enemy sprite ##
     def __init__(self, enemy_xpos, enemy_ypos, enemy_ID, object_ID, mediator, screen):
+        
         self.ss = Spritesheet('Game/sprites/SpaceShipAsset.png')
         self.ss2 = Spritesheet('Game/sprites/bullets/allTheBullets.png')
         self.img = self.ss.image_at(pygame.Rect(2, 41, 12, 12))
@@ -39,7 +40,7 @@ class Enemy(GameObject):
         self.enemy_y = enemy_ypos
         self.enemy_speed_x = 0.6
         self.enemy_speed_y = 0.1
-        self.enemy_health = 20 
+        self.enemy_health = 110 
         
         self.enemy_damage_cooldown = 0
 
@@ -47,6 +48,7 @@ class Enemy(GameObject):
         self.object_ID = object_ID
         self.mediator = mediator
         self.screen = screen
+        self.showing_image = self.img
     
         
 
@@ -63,7 +65,7 @@ class Enemy(GameObject):
         return self.enemy_health
 
     def enemy_draw(self):
-        self.screen.blit(self.img, (self.enemy_x, self.enemy_y))
+        self.screen.blit(self.showing_image, (self.enemy_x, self.enemy_y))
 
             
     ##Make sure the enemy stays in the screen
@@ -93,9 +95,19 @@ class Enemy(GameObject):
     
     def loop(self):
         self.enemy_move()
-
+        #self.showing_image = self.img
         if self.collision('f_bullet',self.enemy_rect) and self.enemy_damage_cooldown > 10:
+            self.temp_image = self.img.copy()
+            self.temp_image.set_alpha(128)
+            self.temp_rect = pygame.Rect(self.enemy_x, self.enemy_y, self.img.get_width(), self.img.get_height())
+            #virk
+            # zero out RGB values
+            #self.temp_image.fill((0, 0, 0, 255), None, pygame.BLEND_RGBA_MULT)
+            # add in new RGB values
+            #self.temp_image.fill((254, 254, 254), None, pygame.BLEND_RGBA_ADD)
+
             self.enemy_health -= 10
+            self.showing_image = self.temp_image
         
         if self.enemy_health < 0:
             self.mediator.to_be_removed.append(self)
