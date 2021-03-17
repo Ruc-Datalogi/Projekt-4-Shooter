@@ -10,15 +10,29 @@ class Enemy(GameObject):
     ## Choose enemy sprite ##
     def __init__(self, enemy_xpos, enemy_ypos, enemy_ID, object_ID, mediator, screen):
         self.ss = Spritesheet('Game/sprites/SpaceShipAsset.png')
+        self.ss2 = Spritesheet('Game/sprites/bullets/allTheBullets.png')
         self.img = self.ss.image_at(pygame.Rect(2, 41, 12, 12))
+        self.img_bullet = self.ss2.image_at(pygame.Rect(1, 1, 1, 1))
+        # Gul enemy
         if enemy_ID == 0:
             self.img = self.ss.image_at(pygame.Rect(2, 41, 12, 12))
+            self.img_bullet = self.ss2.image_at(pygame.Rect(166, 8, 16, 16))
+            self.bullet_speed = 1
+            self.bullet_interval = 60
+        # Grøn enemy
         elif enemy_ID == 1:
             self.img = self.ss.image_at(pygame.Rect(19, 44, 14, 9))
+            self.img_bullet = self.ss2.image_at(pygame.Rect(225, 8, 16, 16))
+            self.bullet_speed = 2
+            self.bullet_interval = 75
+        #Blå enemy
         elif enemy_ID == 2:
             self.img = self.ss.image_at(pygame.Rect(39, 44, 9, 10))
+            self.img_bullet = self.ss2.image_at(pygame.Rect(187, 8, 16, 16))
+            self.bullet_speed = 2.5
+            self.bullet_interval = 90
 
-        self.enemy_bullet_cooldown = random.randint(60,180)
+        self.enemy_bullet_cooldown = random.randint(0,60)
         self.enemy_timer = 0
         
         self.enemy_x = enemy_xpos
@@ -68,10 +82,10 @@ class Enemy(GameObject):
 
         self.enemy_rect = self.img.get_rect(x=self.enemy_x, y=self.enemy_y)
 
-        if self.enemy_timer > self.enemy_bullet_cooldown:
+        if self.enemy_timer > self.bullet_interval + self.enemy_bullet_cooldown:
+            self.enemy_bullet_cooldown = random.randint(0,60)
             self.enemy_timer = 0
-            self.enemy_bullet_cooldown = random.randint(60,180)
-            self.mediator.all_game_objects.append(EnemyBullet (self.enemy_x,self.enemy_y +4, 'e_bullet', self.mediator, self.screen))
+            self.mediator.all_game_objects.append(EnemyBullet (self.enemy_x,self.enemy_y +4, self.bullet_speed, self.img_bullet, 'e_bullet', self.mediator, self.screen))
 
  
         

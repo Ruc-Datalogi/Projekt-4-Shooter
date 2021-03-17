@@ -28,12 +28,12 @@ class Menu:
 
     ## Scrolling background ##
     def draw_background_scrolling(self, display, DISPLAY_SIZE):
-        width = self.background_Img.get_width()
-        height = self.background_Img.get_height()
+        width = self.background_Img1.get_width()
+        height = self.background_Img1.get_height()
         
         for i in range(0,2):
             for j in range(-4,8):
-                display.blit(self.background_Img,(i*width,j*height + self.scroller))
+                display.blit(self.background_Img1,(i*width,j*height + self.scroller))
         
 
         self.scroller += 1
@@ -44,16 +44,16 @@ class Menu:
 
     ## Normal background ##
     def draw_background(self, display, DISPLAY_SIZE):
-        width = self.background_Img.get_width()
-        height = self.background_Img.get_height()
+        width = self.background_Img1.get_width()
+        height = self.background_Img1.get_height()
         
         ## Draw the pictures side by side to fill the screen ##
         for i in range(-1, int(DISPLAY_SIZE[0]/width)+1):
             for j in range(-1, int(DISPLAY_SIZE[1]/height +1)):
-                display.blit(self.background_Img,(i*width, j*height))
+                display.blit(self.background_Img1,(i*width, j*height))
 
-        width = self.background_Img.get_width()
-        height = self.background_Img.get_height() 
+        width = self.background_Img1.get_width()
+        height = self.background_Img1.get_height() 
 
     
         
@@ -164,7 +164,4 @@ class Menu:
             return 'options'
         if input == 2:
             return 'quit'       
-
-    def set_score(self, x):
-        score += x
         

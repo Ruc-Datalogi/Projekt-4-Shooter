@@ -69,12 +69,12 @@ class Generator:
 
             if self.next_wave():
                 
-                self.generate_wave_1(6,1)
+                self.generate_wave_1(10,0)
         
             self.next_level()
                 
         
         if self.level == 2:
             if self.next_wave():
-                self.generate_wave_1(8,2)
+                self.generate_wave_1(8,0)
             self.next_level()      
