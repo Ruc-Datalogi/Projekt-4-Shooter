@@ -1,7 +1,7 @@
 import sys, pygame, random
 from Mediator import *
 from Enemy import *
-
+from Boss import *
 
 class Generator:
 
@@ -36,9 +36,10 @@ class Generator:
     def generate_wave_3(self):
         pass
 
+        
     def check_for_enemy(self):
         for enemy in self.mediator.all_game_objects:
-            if enemy.get_object_ID() == 'enemy':
+            if enemy.get_object_ID() == 'enemy' or enemy.get_object_ID() == 'boss':
                 return True
         
         return False
@@ -53,6 +54,13 @@ class Generator:
             return True
         return False
 
+    
+    def next_level_boss(self):
+        if not self.check_for_enemy():
+            self.level += 1
+            self.timer = 0
+            self.current_wave = 0
+
     def next_level(self):
         if self.current_wave == self.max_amount_of_waves and not self.check_for_enemy():
             self.current_wave = 0
@@ -64,12 +72,11 @@ class Generator:
 
     def generate(self):
         self.timer += 1
+        
         if self.level == 1:
             
-
             if self.next_wave():
-                
-                self.generate_wave_1(10,0)
+                self.generate_wave_1(6,0)
         
             self.next_level()
                 
@@ -77,4 +84,20 @@ class Generator:
         if self.level == 2:
             if self.next_wave():
                 self.generate_wave_1(8,0)
-            self.next_level()      
+
+            self.next_level()    
+
+        if self.level == 3:
+            if self.next_wave():
+                self.generate_wave_1(4,1)
+                self.generate_wave_1(4,2)
+
+            self.next_level() 
+
+        if self.level == 4:
+ 
+            if not self.check_for_enemy():
+                self.mediator.all_game_objects.append(Boss(100,16,0,'boss',self.mediator,self.screen))
+
+        if self.level == 5:
+            sys.exit()
