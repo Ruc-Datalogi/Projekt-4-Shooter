@@ -10,7 +10,7 @@ from Generator import *
 pygame.init()
 
 # Constant variables
-SCREEN_SIZE = (600,800)
+SCREEN_SIZE = (300,400)
 DISPLAY_SIZE = (300,400)
 DARK_GREY = (50,50,50)
 menu = Menu()
