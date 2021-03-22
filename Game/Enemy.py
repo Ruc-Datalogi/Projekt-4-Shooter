@@ -5,6 +5,7 @@ from EnemyBullet import EnemyBullet
 from GameObject import *
 from Mediator import *
 from Spritesheet import *
+from Soundplayer import *
 
 
 class Enemy(GameObject):
@@ -13,6 +14,7 @@ class Enemy(GameObject):
     def __init__(self, enemy_xpos, enemy_ypos, enemy_ID, object_ID, mediator, screen):
         
         self.ss = Spritesheet('Game/sprites/SpaceShipAsset.png')
+        self.sound = Soundplayer()
         self.ss2 = Spritesheet('Game/sprites/bullets/allTheBullets.png')
         self.img = self.ss.image_at(pygame.Rect(2, 41, 12, 12))
         self.img_bullet = self.ss2.image_at(pygame.Rect(1, 1, 1, 1))
@@ -115,7 +117,7 @@ class Enemy(GameObject):
         #self.showing_image = self.img
         if self.collision('f_bullet',self.enemy_rect) and self.enemy_damage_cooldown > 6:
             self.enemy_damage_cooldown = 0
-            
+            self.sound.enemy_hit_sound()
 
             self.enemy_health -= 10
             self.showing_image = self.temp_image
