@@ -3,7 +3,7 @@ from EnemyBullet import EnemyBullet
 from GameObject import *
 from Mediator import *
 from Spritesheet import *
-
+import random
 
 class Boss(GameObject):
 
@@ -21,7 +21,10 @@ class Boss(GameObject):
         self.boss_ypos = ypos
         self.boss_x_speed = 0.2
         self.boss_y_speed = 0
+        
         self.boss_health = 2000
+        self.boss_health_max = self.boss_health
+
         self.boss_rect = pygame.Rect(0,0,0,0)
         
         self.boss_damage_cooldown = 0
@@ -67,8 +70,9 @@ class Boss(GameObject):
             if self.timer > 10:
                 self.timer = 0
                 self.boss_bullet_pattern_1()
+
         elif self.boss_health > 900:
-            if self.timer > 60:
+            if self.timer > 30:
                 self.timer = 0
                 self.boss_bullet_pattern_2()
 
@@ -76,7 +80,7 @@ class Boss(GameObject):
 
     
     def loop(self):
-        
+
         self.boss_move()
 
         if self.collision('f_bullet',self.boss_rect) and self.boss_damage_cooldown > 6:
@@ -88,6 +92,7 @@ class Boss(GameObject):
             self.mediator.to_be_removed.append(self)
 
     def draw(self):
+        self.draw_boss_rect()
         self.boss_draw()
 
 
@@ -100,13 +105,24 @@ class Boss(GameObject):
 
     ## Burst of bullets ##
     def boss_bullet_pattern_2(self):
-        bullet_list = 
+        bullet_list = [i for i in range(-5,5)]
+        random_number = random.randint(0,len(bullet_list)-2)
+        bullet_list[random_number] = -200
+        bullet_list[random_number-1] = -200
+        bullet_list[random_number+1] = -200
 
-        for i in range(-7,7):
-            self.mediator.all_game_objects.append(EnemyBullet(self.boss_xpos + 30 + int((i*0.4)), self.boss_ypos + 22, (i*0.2),4, True, self.img_bullet_red, 'e_bullet', self.mediator, self.screen))
+
+        for i in bullet_list:
+            if i == -200:
+                pass
+            else:
+                self.mediator.all_game_objects.append(EnemyBullet(self.boss_xpos + 40 + int((i*0.5)), self.boss_ypos + 22, (i*0.2),4, True, self.img_bullet_red, 'e_bullet', self.mediator, self.screen))
 
 
 
     def boss_bullet_pattern_3(self, timer):
         pass
             
+    def draw_boss_rect(self):
+        pygame.draw.rect(self.screen, (90,90,90), (pygame.Rect(40, 30, 240, 8)))
+        pygame.draw.rect(self.screen, (220,20,60), (pygame.Rect(40, 30, 240*(self.boss_health/self.boss_health_max), 8)))
