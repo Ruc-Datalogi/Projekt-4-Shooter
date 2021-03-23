@@ -5,7 +5,7 @@ from Menu import *
 from Mediator import *
 from HUD import *
 from Generator import *
-
+from Soundplayer import *
 pygame.init()
 
 # Constant variables
@@ -27,7 +27,7 @@ display = pygame.Surface((DISPLAY_SIZE))
 #git flow contiounous integration remember playtests with same questions start playtest 
 player = Player(display,mediator,'player')
 generator = Generator(display, mediator)
-
+music_sound = Soundplayer()
 hud = HUD(display, player, DISPLAY_SIZE, mediator, generator)
 # Title and Icon
 pygame.display.set_caption("The Falcon")
@@ -39,10 +39,9 @@ mediator.all_game_objects.append(player)
 
 
 
-# Enemy
 
 
-
+music_sound.play_music()
 while RUNNING:
     
     ## Draw Menu ##
