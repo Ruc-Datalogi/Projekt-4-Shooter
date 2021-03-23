@@ -9,7 +9,7 @@ from Soundplayer import *
 pygame.init()
 
 # Constant variables
-SCREEN_SIZE = (300,400)
+SCREEN_SIZE = (600,800)
 DISPLAY_SIZE = (300,400)
 DARK_GREY = (50,50,50)
 menu = Menu()
@@ -27,8 +27,13 @@ display = pygame.Surface((DISPLAY_SIZE))
 #git flow contiounous integration remember playtests with same questions start playtest 
 player = Player(display,mediator,'player')
 generator = Generator(display, mediator)
+
 music_sound = Soundplayer()
+music_sound.load_music()
+music_sound.play_music()
+
 hud = HUD(display, player, DISPLAY_SIZE, mediator, generator)
+
 # Title and Icon
 pygame.display.set_caption("The Falcon")
 icon = pygame.image.load('Game/sprites/playerLV1.png')
@@ -41,7 +46,6 @@ mediator.all_game_objects.append(player)
 
 
 
-music_sound.play_music()
 while RUNNING:
     
     ## Draw Menu ##

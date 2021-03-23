@@ -3,6 +3,7 @@ from FriendlyBullet import *
 from Enemy import Enemy
 from GameObject import *
 from Mediator import *
+from Soundplayer import *
 
 class Player(GameObject):
 
@@ -28,6 +29,7 @@ class Player(GameObject):
         self.mediator = mediator
         self.object_ID = object_ID
         self.player_rect = pygame.Rect(0,0,0,0)
+        self.soundplayer = Soundplayer()
 
     def get_dmg (self, amount):
         if self.player_health > 0:
@@ -107,6 +109,7 @@ class Player(GameObject):
         self.player_move()
         hit_count = self.collision('e_bullet', self.player_rect)
         if  hit_count > 0 and self.player_damage_cooldown > 8:
+            self.soundplayer.player_damage_sound()
             self.player_damage_cooldown = 0
             self.player_health += -10*hit_count
         
