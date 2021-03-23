@@ -14,13 +14,14 @@ class Boss(GameObject):
         self.ss2 = Spritesheet('Game/sprites/bullets/allTheBullets.png')
         self.img = self.ss.image_at(pygame.Rect(4, 56, 45, 22))
         self.img = pygame.transform.scale(self.img,(90,44))
-        self.img_bullet_blue = self.ss2.image_at(pygame.Rect(111, 108, 11, 36))
+        self.img_bullet_blue_rect = self.ss2.image_at(pygame.Rect(111, 108, 11, 36))
+        self.img_bullet_red = self.ss2.image_at(pygame.Rect(27,106,17,16))
 
         self.boss_xpos = xpos
         self.boss_ypos = ypos
         self.boss_x_speed = 0.2
         self.boss_y_speed = 0
-        self.boss_health = 100
+        self.boss_health = 2000
         self.boss_rect = pygame.Rect(0,0,0,0)
         
         self.boss_damage_cooldown = 0
@@ -62,24 +63,50 @@ class Boss(GameObject):
 
         self.boss_rect = pygame.Rect(self.boss_xpos,self.boss_ypos,self.img.get_width(),self.img.get_height())
 
-        if self.timer > 5:
-            self.timer = 0
-            self.mediator.all_game_objects.append(EnemyBullet(self.boss_xpos + 6, self.boss_ypos + 22, 6, False, self.img_bullet_blue, 'e_bullet', self.mediator, self.screen))
-            self.mediator.all_game_objects.append(EnemyBullet(self.boss_xpos + 70, self.boss_ypos + 22, 6, False, self.img_bullet_blue, 'e_bullet', self.mediator, self.screen))
+        if self.boss_health > 1400:
+            if self.timer > 10:
+                self.timer = 0
+                self.boss_bullet_pattern_1()
+        elif self.boss_health > 900:
+            if self.timer > 60:
+                self.timer = 0
+                self.boss_bullet_pattern_2()
+
+            
 
     
     def loop(self):
+        
         self.boss_move()
 
         if self.collision('f_bullet',self.boss_rect) and self.boss_damage_cooldown > 6:
            
-            
-
             self.boss_health -= 10
         
         if self.boss_health < 0:
+
             self.mediator.to_be_removed.append(self)
 
     def draw(self):
         self.boss_draw()
+
+
+    ## Shower of bullets ##
+    def boss_bullet_pattern_1(self):
+
+        self.mediator.all_game_objects.append(EnemyBullet(self.boss_xpos + 6, self.boss_ypos + 22, 0,6, False, self.img_bullet_blue_rect, 'e_bullet', self.mediator, self.screen))
+        self.mediator.all_game_objects.append(EnemyBullet(self.boss_xpos + 70, self.boss_ypos + 22, 0,6, False, self.img_bullet_blue_rect, 'e_bullet', self.mediator, self.screen))
+
+
+    ## Burst of bullets ##
+    def boss_bullet_pattern_2(self):
+        bullet_list = 
+
+        for i in range(-7,7):
+            self.mediator.all_game_objects.append(EnemyBullet(self.boss_xpos + 30 + int((i*0.4)), self.boss_ypos + 22, (i*0.2),4, True, self.img_bullet_red, 'e_bullet', self.mediator, self.screen))
+
+
+
+    def boss_bullet_pattern_3(self, timer):
+        pass
             

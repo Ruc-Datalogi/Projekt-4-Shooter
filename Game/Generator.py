@@ -44,6 +44,12 @@ class Generator:
         
         return False
 
+    def check_for_boss(self):
+        for enemy in self.mediator.to_be_removed:
+            if enemy.get_object_ID() == 'boss':
+                return True
+        return False
+
     def get_level(self):
         return self.level
 
@@ -54,7 +60,11 @@ class Generator:
             return True
         return False
 
-    
+    def skip_level(self):
+        self.level += 1
+        self.timer = 0
+        self.current_wave = 0
+
     def next_level_boss(self):
         if not self.check_for_enemy():
             self.level += 1
@@ -74,10 +84,15 @@ class Generator:
         self.timer += 1
         
         if self.level == 1:
-            
-            if self.next_wave():
-                self.generate_wave_1(6,0)
-        
+
+            if not self.check_for_enemy():
+                self.mediator.all_game_objects.append(Boss(100,16,0,'boss',self.mediator,self.screen))
+
+            ##if self.next_wave():
+                #self.generate_wave_1(6,0)
+            if self.check_for_boss():
+                self.skip_level()
+
             self.next_level()
                 
         

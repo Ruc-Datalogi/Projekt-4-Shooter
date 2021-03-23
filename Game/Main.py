@@ -70,10 +70,12 @@ while RUNNING:
             
         menu.draw_background_scrolling(display,DISPLAY_SIZE)
         
-        generator.generate()
         for object in mediator.all_game_objects:
             object.loop()
             object.draw()
+ 
+
+        generator.generate()
 
         mediator.all_game_objects = [i for i in mediator.all_game_objects if i not in mediator.to_be_removed]
         hud.draw_HUD()

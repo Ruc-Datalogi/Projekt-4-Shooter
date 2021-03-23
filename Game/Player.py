@@ -108,6 +108,7 @@ class Player(GameObject):
         self.player_input()
         self.player_move()
         hit_count = self.collision('e_bullet', self.player_rect)
+        
         if  hit_count > 0 and self.player_damage_cooldown > 8:
             self.soundplayer.player_damage_sound()
             self.player_damage_cooldown = 0

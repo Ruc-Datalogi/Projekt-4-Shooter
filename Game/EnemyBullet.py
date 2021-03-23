@@ -5,17 +5,19 @@ from Mediator import *
 
 class EnemyBullet(GameObject):
     
-    def __init__(self, xpos, ypos, bullet_speed, bullet_bend , img_bullet, object_ID, mediator, screen):
+    def __init__(self, xpos, ypos, bullet_speed_x ,bullet_speed_y, bullet_bend , img_bullet, object_ID, mediator, screen):
         self.img = img_bullet
 
         self.enemy_bullet_x = xpos 
         self.enemy_bullet_y = ypos 
+        self.enemy_bulletspeed_x = bullet_speed_x
+        self.enemy_bulletspeed_y = bullet_speed_y
+
         if bullet_bend:
-            self.enemy_bulletspeed_x = random.uniform(-1*(bullet_speed/4),1*(bullet_speed/4))
+            self.enemy_bulletspeed_x += random.uniform(-1*(bullet_speed_y/4),1*(bullet_speed_y/4))
         else:
             self.enemy_bulletspeed_x = 0
 
-        self.enemy_bulletspeed_y = bullet_speed
         self.enemy_bullet_Rect = self.img.get_rect()
         self.enemy_bullet_damage = 10
         self.object_ID = object_ID
