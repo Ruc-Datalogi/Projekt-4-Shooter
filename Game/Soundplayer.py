@@ -2,6 +2,7 @@ import pygame
 
 class Soundplayer:
 
+###Template sound: make the 'pew.wav' sound when our bullets collide with enemies###
     def __init__(self):
         pygame.mixer.init()
         self.enemy_hit = pygame.mixer.Sound('Game/sound/pew.wav')
