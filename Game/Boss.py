@@ -106,12 +106,11 @@ class Boss(GameObject):
     ## Burst of bullets ##
     def boss_bullet_pattern_2(self):
         bullet_list = [i for i in range(-8,8)]
-        random_number = random.randint(4,len(bullet_list)-6)
+        random_number = random.randint(5,len(bullet_list)-7)
         bullet_list[random_number] = -200
         bullet_list[random_number-1] = -200
         bullet_list[random_number+1] = -200
 
-        print(bullet_list)
 
         for i in bullet_list:
             if i == -200:
