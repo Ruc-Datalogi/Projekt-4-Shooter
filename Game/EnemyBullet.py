@@ -13,10 +13,13 @@ class EnemyBullet(GameObject):
         self.enemy_bulletspeed_x = bullet_speed_x
         self.enemy_bulletspeed_y = bullet_speed_y
 
-        if bullet_bend:
-            self.enemy_bulletspeed_x += random.uniform(-1*(bullet_speed_y/4),1*(bullet_speed_y/4))
-        else:
-            self.enemy_bulletspeed_x = 0
+        
+        if self.enemy_bulletspeed_x > 2:
+            self.enemy_bulletspeed_x = 2
+
+        if self.enemy_bulletspeed_x < -2:
+            self.enemy_bulletspeed_x = -2
+        
 
         self.enemy_bullet_Rect = self.img.get_rect()
         self.enemy_bullet_damage = 10
@@ -46,6 +49,17 @@ class EnemyBullet(GameObject):
         self.enemy_bullet_x += self.enemy_bulletspeed_x
         self.enemy_bullet_y += self.enemy_bulletspeed_y
         self.enemy_bullet_Rect = self.img.get_rect(x=self.enemy_bullet_x, y=self.enemy_bullet_y)
+
+        if self.enemy_bullet_x > 400:
+            self.mediator.to_be_removed.append(self)
+        if self.enemy_bullet_x < -40:
+            self.mediator.to_be_removed.append(self)
+
+        if self.enemy_bullet_y < -30:
+            self.mediator.to_be_removed.append(self)
+        
+        if self.enemy_bullet_y > 400:
+            self.mediator.to_be_removed.append(self)
     
 
     def loop(self):

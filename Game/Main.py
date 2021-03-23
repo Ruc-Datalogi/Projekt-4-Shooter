@@ -73,7 +73,8 @@ while RUNNING:
         for object in mediator.all_game_objects:
             object.loop()
             object.draw()
- 
+
+        print(len(mediator.all_game_objects))
 
         generator.generate()
 

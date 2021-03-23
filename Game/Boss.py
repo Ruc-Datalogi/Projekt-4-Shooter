@@ -72,7 +72,7 @@ class Boss(GameObject):
                 self.boss_bullet_pattern_1()
 
         elif self.boss_health > 900:
-            if self.timer > 30:
+            if self.timer > 40:
                 self.timer = 0
                 self.boss_bullet_pattern_2()
 
@@ -99,24 +99,25 @@ class Boss(GameObject):
     ## Shower of bullets ##
     def boss_bullet_pattern_1(self):
 
-        self.mediator.all_game_objects.append(EnemyBullet(self.boss_xpos + 6, self.boss_ypos + 22, 0,6, False, self.img_bullet_blue_rect, 'e_bullet', self.mediator, self.screen))
-        self.mediator.all_game_objects.append(EnemyBullet(self.boss_xpos + 70, self.boss_ypos + 22, 0,6, False, self.img_bullet_blue_rect, 'e_bullet', self.mediator, self.screen))
+        self.mediator.all_game_objects.append(EnemyBullet(self.boss_xpos + 6, self.boss_ypos + 26, 0,6, False, self.img_bullet_blue_rect, 'e_bullet', self.mediator, self.screen))
+        self.mediator.all_game_objects.append(EnemyBullet(self.boss_xpos + 70, self.boss_ypos + 26, 0,6, False, self.img_bullet_blue_rect, 'e_bullet', self.mediator, self.screen))
 
 
     ## Burst of bullets ##
     def boss_bullet_pattern_2(self):
-        bullet_list = [i for i in range(-5,5)]
-        random_number = random.randint(0,len(bullet_list)-2)
+        bullet_list = [i for i in range(-8,8)]
+        random_number = random.randint(4,len(bullet_list)-6)
         bullet_list[random_number] = -200
         bullet_list[random_number-1] = -200
         bullet_list[random_number+1] = -200
 
+        print(bullet_list)
 
         for i in bullet_list:
             if i == -200:
                 pass
             else:
-                self.mediator.all_game_objects.append(EnemyBullet(self.boss_xpos + 40 + int((i*0.5)), self.boss_ypos + 22, (i*0.2),4, True, self.img_bullet_red, 'e_bullet', self.mediator, self.screen))
+                self.mediator.all_game_objects.append(EnemyBullet(self.boss_xpos + 45, self.boss_ypos + 26, (i*0.4) , 3.5, True, self.img_bullet_red, 'e_bullet', self.mediator, self.screen))
 
 
 
