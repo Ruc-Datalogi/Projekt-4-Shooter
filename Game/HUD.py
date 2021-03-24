@@ -87,4 +87,4 @@ class HUD:
         self.draw_energy_HUD()
         self.draw_health_HUD()
         self.draw_score()
-
+    

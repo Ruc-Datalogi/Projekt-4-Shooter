@@ -24,7 +24,6 @@ fpsClock = pygame.time.Clock ()
 screen = pygame.display.set_mode(SCREEN_SIZE)
 #To cast to 
 display = pygame.Surface((DISPLAY_SIZE))
-#git flow contiounous integration remember playtests with same questions start playtest 
 player = Player(display,mediator,'player')
 generator = Generator(display, mediator)
 
@@ -40,7 +39,6 @@ icon = pygame.image.load('Game/sprites/playerLV1.png')
 pygame.display.set_icon(icon)
 
 
-mediator.all_game_objects.append(player)
 
 
 
@@ -58,6 +56,9 @@ while RUNNING:
                 pygame.quit()
                 sys.exit()
             menu.menu_input(event)
+        if not menu.get_menu:
+            mediator.all_game_objects.append(player)
+
         surf = pygame.transform.scale(display, SCREEN_SIZE)
         screen.blit(surf, (0,0))
         pygame.display.update()
@@ -74,7 +75,6 @@ while RUNNING:
             object.loop()
             object.draw()
 
-        print(len(mediator.all_game_objects))
 
         generator.generate()
 
@@ -83,6 +83,12 @@ while RUNNING:
 
 
         mediator.to_be_removed.clear()
+
+        if player.player_dead():
+            generator = Generator(display, mediator)
+            hud = HUD(display, player, DISPLAY_SIZE, mediator, generator)
+            mediator.all_game_objects.clear()
+            menu.player_dead()
 
         surf = pygame.transform.scale(display, SCREEN_SIZE)
         screen.blit(surf, (0,0))

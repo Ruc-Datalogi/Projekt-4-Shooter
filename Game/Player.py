@@ -10,8 +10,8 @@ class Player(GameObject):
     ## Constructor for player ## 
     def __init__(self, screen, mediator, object_ID):
         self.img = pygame.image.load("Game/sprites/playerLV1.png")
-        self.player_x = 100 
-        self.player_y = 100
+        self.player_x = 125 
+        self.player_y = 300
         self.player_speed_x = 0
         self.player_speed_y = 0
         self.general_speed = 3.5
@@ -71,9 +71,6 @@ class Player(GameObject):
         if self.player_y >= 400*0.855:
             self.player_y = 400*0.855
 
-        
-        if self.player_health <= 0:
-            sys.exit()
 
         self.player_damage_cooldown += 1
 
@@ -120,4 +117,11 @@ class Player(GameObject):
     
     def draw(self):
         self.player_draw()
-                
+    
+
+    def player_dead(self):
+        if self.player_health <= 0:
+            self.player_x = 125
+            self.player_y = 300
+            self.player_health = 100
+            return True 

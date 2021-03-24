@@ -2,6 +2,7 @@ import sys, pygame, random
 from Mediator import *
 from Enemy import *
 from Boss import *
+from Player import *
 
 class Generator:
 
@@ -12,8 +13,9 @@ class Generator:
         self.level = 1
         self.max_amount_of_waves = 3
         self.current_wave = 0
-
+        
         self.timer = 0
+
     def get_spawn_points(self, enemy_amount):
         spawn_list = []
         random_int = 0
@@ -24,6 +26,13 @@ class Generator:
             if random_int not in spawn_list:
                 spawn_list.append(random_int)
         return spawn_list
+
+    def reset_generator(self):
+        self.level = 1
+        self.max_amount_of_waves = 3
+        self.current_wave = 0
+        
+        self.timer = 0
 
     def generate_wave_1(self, amount, enemy_ID):
         enemy_list = self.get_spawn_points(amount)

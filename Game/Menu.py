@@ -157,11 +157,6 @@ class Menu:
             self.select_options = 1
 
         
-    def menu_selecter(self, input):
-        if input == 0:
-            return 'start'
-        if input == 1:
-            return 'options'
-        if input == 2:
-            return 'quit'       
+    def player_dead(self):
+        self.menu_on = True       
         
