@@ -15,6 +15,7 @@ class Generator:
         self.current_wave = 0
         
         self.timer = 0
+        self.game_completed = False
 
     def get_spawn_points(self, enemy_amount):
         spawn_list = []
@@ -123,4 +124,9 @@ class Generator:
                     self.skip_level()
 
         if self.level == 5:
-            sys.exit()
+            self.game_completed = True
+
+
+
+    def get_game_complete(self):
+        return self.game_completed

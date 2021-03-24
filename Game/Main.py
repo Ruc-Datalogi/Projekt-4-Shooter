@@ -35,7 +35,7 @@ hud = HUD(display, player, DISPLAY_SIZE, mediator, generator)
 
 # Title and Icon
 pygame.display.set_caption("The Falcon")
-icon = pygame.image.load('Game/sprites/playerLV1.png')
+icon = pygame.image.load(menu.resource_path('Game/sprites/playerLV1.png'))
 pygame.display.set_icon(icon)
 
 
@@ -84,7 +84,8 @@ while RUNNING:
 
         mediator.to_be_removed.clear()
 
-        if player.player_dead():
+        ## Check if player is dead or game is completed
+        if player.player_dead() or generator.get_game_complete():
             generator = Generator(display, mediator)
             hud = HUD(display, player, DISPLAY_SIZE, mediator, generator)
             mediator.all_game_objects.clear()

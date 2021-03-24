@@ -1,4 +1,4 @@
-import sys, pygame, random
+import sys, pygame, random, os
 from Player import *
 
 class HUD:
@@ -9,7 +9,7 @@ class HUD:
         self.screen_size = screen_size
         self.mediator = mediator 
         self.generator = generator
-        self.font = pygame.font.Font('Game/font/kongtext.ttf',8)
+        self.font = pygame.font.Font(self.resource_path('Game/font/kongtext.ttf'),8)
         self.score = 0
 
 
@@ -87,4 +87,13 @@ class HUD:
         self.draw_energy_HUD()
         self.draw_health_HUD()
         self.draw_score()
+
+    def resource_path(self, relative_path):
+        try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+            base_path = sys._MEIPASS
+        except Exception:
+            base_path = os.path.abspath(".")
+
+        return os.path.join(base_path, relative_path)
     

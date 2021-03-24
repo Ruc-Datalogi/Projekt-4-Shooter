@@ -159,7 +159,7 @@ class Menu:
     def player_dead(self):
         self.menu_on = True       
     
-    def resource_path(relative_path):
+    def resource_path(self, relative_path):
         try:
         # PyInstaller creates a temp folder and stores path in _MEIPASS
             base_path = sys._MEIPASS
