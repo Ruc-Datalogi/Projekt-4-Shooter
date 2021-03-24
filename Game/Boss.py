@@ -85,7 +85,7 @@ class Boss(GameObject):
                     self.timer = 0
                     self.boss_bullet_pattern_2()
             else:
-                if self.timer > 40:
+                if self.timer > 20:
                     self.timer = 0
                     self.boss_bullet_pattern_3()
 
@@ -137,12 +137,12 @@ class Boss(GameObject):
 
     def boss_bullet_pattern_3(self):
         
-        for i in range(-5, 5):
-            self.mediator.all_game_objects.append(EnemyBullet(self.boss_xpos + 45, self.boss_ypos + 26, (i*0.2) , (i*0.2) + 1, True, self.img_bullet_red, 'e_bullet', self.mediator, self.screen))
+        for i in range(-6, 9):
+            self.mediator.all_game_objects.append(EnemyBullet(self.boss_xpos + 45, self.boss_ypos + 26, (i*0.5) , 3, True, self.img_bullet_red, 'e_bullet', self.mediator, self.screen))
 
-        for i in range(-5, 5):
-            i *= -1
-            self.mediator.all_game_objects.append(EnemyBullet(self.boss_xpos + 45, self.boss_ypos + 26, (i*0.2) , (i*0.2) + 1, True, self.img_bullet_red, 'e_bullet', self.mediator, self.screen))
+
+
+       
             
     def draw_boss_rect(self):
         if self.boss_ready:
