@@ -12,7 +12,6 @@ class Menu:
         self.select_options = 0 
         self.scroller = 0
         self.moving_background = 0
-        self.score_font = pygame.font.SysFont('comicsans', 30, True)
 
         self.background_Img = pygame.image.load("Game/sprites/background/preview.png")
         self.background_Img1 = pygame.image.load("Game/sprites/background/background_1.png")
