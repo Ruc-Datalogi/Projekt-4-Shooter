@@ -93,9 +93,6 @@ class Generator:
         self.timer += 1
         
         if self.level == 1:
-            
-            if not self.check_for_enemy():
-                self.mediator.all_game_objects.append(Boss(100,-20,0,'boss',self.mediator,self.screen))
 
             if self.next_wave():
                 self.generate_wave_1(6,0)

@@ -13,9 +13,9 @@ class Enemy(GameObject):
     ## Choose enemy sprite ##
     def __init__(self, enemy_xpos, enemy_ypos, enemy_ID, object_ID, mediator, screen):
         
-        self.ss = Spritesheet('Game/sprites/SpaceShipAsset.png')
+        self.ss = Spritesheet(self.resource_path('Game/sprites/SpaceShipAsset.png'))
         self.sound = Soundplayer()
-        self.ss2 = Spritesheet('Game/sprites/bullets/allTheBullets.png')
+        self.ss2 = Spritesheet(self.resource_path('Game/sprites/bullets/allTheBullets.png'))
         self.img = self.ss.image_at(pygame.Rect(2, 41, 12, 12))
         self.img_bullet = self.ss2.image_at(pygame.Rect(1, 1, 1, 1))
         # Gul enemy
