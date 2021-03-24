@@ -60,12 +60,12 @@ class Menu:
     ## Draw menu, options, or upgrade menu ##
     def draw_menu(self, screen, SCREEN_SIZE):
         screen.fill((0,0,0))
+        
 
-        font = pygame.font.SysFont('chalkduster.ttf',48)
-        font1 = pygame.font.SysFont('chalkduster.ttf',48)
-        fontSmall = pygame.font.SysFont('chalkduster.ttf',24)
+        font = pygame.font.Font('Game/font/kongtext.ttf',16)
+        font1 = pygame.font.Font('Game/font/kongtext.ttf',16)
 
-        title = font.render('The Falcon', True, (120,120,120))
+        title = font.render('The Falcon', True, (110,110,110))
         ## Drawing Menu
         if self.menu_on == True:
             if self.selected == 0:
