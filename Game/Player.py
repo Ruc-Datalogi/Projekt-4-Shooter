@@ -9,7 +9,7 @@ class Player(GameObject):
 
     ## Constructor for player ## 
     def __init__(self, screen, mediator, object_ID):
-        self.img = pygame.image.load("Game/sprites/playerLV1.png")
+        self.img = pygame.image.load(self.resource_path("Game/sprites/playerLV1.png"))
         self.player_x = 125 
         self.player_y = 300
         self.player_speed_x = 0

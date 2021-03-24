@@ -11,8 +11,8 @@ class Boss(GameObject):
     ## Choose enemy sprite ##
     def __init__(self, xpos, ypos, ID, object_ID, mediator, screen):
         
-        self.ss = Spritesheet('Game/sprites/SpaceShipAsset.png')
-        self.ss2 = Spritesheet('Game/sprites/bullets/allTheBullets.png')
+        self.ss = Spritesheet(self.resource_path('Game/sprites/SpaceShipAsset.png'))
+        self.ss2 = Spritesheet(self.resource_path('Game/sprites/bullets/allTheBullets.png'))
         self.soundplayer = Soundplayer()
 
         self.img = self.ss.image_at(pygame.Rect(4, 56, 45, 22))

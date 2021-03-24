@@ -13,11 +13,11 @@ class Menu:
         self.scroller = 0
         self.moving_background = 0
 
-        self.background_Img = pygame.image.load("Game/sprites/background/preview.png")
-        self.background_Img1 = pygame.image.load("Game/sprites/background/background_1.png")
-        self.background_Img2 = pygame.image.load("Game/sprites/background/background_2.png")
-        self.background_Img3 = pygame.image.load("Game/sprites/background/background_3.png")
-        self.background_Img4 = pygame.image.load("Game/sprites/background/background_4.png")
+        self.background_Img = pygame.image.load(self.resource_path("Game/sprites/background/preview.png"))
+        self.background_Img1 = pygame.image.load(self.resource_path("Game/sprites/background/background_1.png"))
+        self.background_Img2 = pygame.image.load(self.resource_path("Game/sprites/background/background_2.png"))
+        self.background_Img3 = pygame.image.load(self.resource_path("Game/sprites/background/background_3.png"))
+        self.background_Img4 = pygame.image.load(self.resource_path("Game/sprites/background/background_4.png"))
 
         
     ## Getter to escape menu ##
@@ -158,4 +158,12 @@ class Menu:
         
     def player_dead(self):
         self.menu_on = True       
-        
+    
+    def resource_path(relative_path):
+        try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+            base_path = sys._MEIPASS
+        except Exception:
+            base_path = os.path.abspath(".")
+
+        return os.path.join(base_path, relative_path)
