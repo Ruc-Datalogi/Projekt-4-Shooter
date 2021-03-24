@@ -3,6 +3,7 @@ from EnemyBullet import EnemyBullet
 from GameObject import *
 from Mediator import *
 from Spritesheet import *
+from Soundplayer import *
 import random
 
 class Boss(GameObject):
@@ -12,10 +13,13 @@ class Boss(GameObject):
         
         self.ss = Spritesheet('Game/sprites/SpaceShipAsset.png')
         self.ss2 = Spritesheet('Game/sprites/bullets/allTheBullets.png')
+        self.soundplayer = Soundplayer()
+
         self.img = self.ss.image_at(pygame.Rect(4, 56, 45, 22))
         self.img = pygame.transform.scale(self.img,(90,44))
         self.img_bullet_blue_rect = self.ss2.image_at(pygame.Rect(111, 108, 11, 36))
         self.img_bullet_red = self.ss2.image_at(pygame.Rect(27,106,17,16))
+        self.img_bullet_blue = self.ss2.image_at(pygame.Rect(8,129,17,16))
 
         self.boss_xpos = xpos
         self.boss_ypos = ypos
@@ -99,7 +103,8 @@ class Boss(GameObject):
 
         if self.boss_ready:
             if self.collision('f_bullet',self.boss_rect) and self.boss_damage_cooldown > 6:
-            
+                
+                Soundplayer.enemy_hit_sound(Soundplayer())
                 self.boss_health -= 10
         
         if self.boss_health < 0:
@@ -138,7 +143,7 @@ class Boss(GameObject):
     def boss_bullet_pattern_3(self):
         
         for i in range(-6, 9):
-            self.mediator.all_game_objects.append(EnemyBullet(self.boss_xpos + 45, self.boss_ypos + 26, (i*0.5) , 3, True, self.img_bullet_red, 'e_bullet', self.mediator, self.screen))
+            self.mediator.all_game_objects.append(EnemyBullet(self.boss_xpos + 45, self.boss_ypos + 26, (i*0.5) , 3, True, self.img_bullet_blue, 'e_bullet', self.mediator, self.screen))
 
 
 

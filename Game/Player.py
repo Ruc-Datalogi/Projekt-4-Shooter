@@ -109,7 +109,7 @@ class Player(GameObject):
         hit_count = self.collision('e_bullet', self.player_rect)
         
         if  hit_count > 0 and self.player_damage_cooldown > 8:
-            self.soundplayer.player_damage_sound()
+            Soundplayer.player_damage_sound(Soundplayer())
             self.player_damage_cooldown = 0
             self.player_health += -10*hit_count
         

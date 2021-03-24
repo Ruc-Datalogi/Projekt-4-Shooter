@@ -117,7 +117,7 @@ class Enemy(GameObject):
         #self.showing_image = self.img
         if self.collision('f_bullet',self.enemy_rect) and self.enemy_damage_cooldown > 6:
             self.enemy_damage_cooldown = 0
-            self.sound.enemy_hit_sound()
+            Soundplayer.enemy_hit_sound(Soundplayer())
 
             self.enemy_health -= 10
             self.showing_image = self.temp_image

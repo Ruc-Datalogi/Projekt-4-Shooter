@@ -27,9 +27,9 @@ display = pygame.Surface((DISPLAY_SIZE))
 player = Player(display,mediator,'player')
 generator = Generator(display, mediator)
 
-music_sound = Soundplayer()
-music_sound.load_music()
-music_sound.play_music()
+
+Soundplayer.load_music(Soundplayer())
+Soundplayer.play_music(Soundplayer())
 
 hud = HUD(display, player, DISPLAY_SIZE, mediator, generator)
 
@@ -59,7 +59,7 @@ while RUNNING:
         if not menu.get_menu:
             mediator.all_game_objects.append(player)
 
-        surf = pygame.transform.scale(display, SCREEN_SIZE)
+        surf = pygame.transform.scale(display, SCREEN_SIZE)             
         screen.blit(surf, (0,0))
         pygame.display.update()
     else:
