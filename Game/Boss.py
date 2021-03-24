@@ -19,8 +19,9 @@ class Boss(GameObject):
 
         self.boss_xpos = xpos
         self.boss_ypos = ypos
-        self.boss_x_speed = 0.2
-        self.boss_y_speed = 0
+        self.boss_x_speed = 0
+        self.boss_y_speed = 0.5
+        self.boss_ready = False
         
         self.boss_health = 2000
         self.boss_health_max = self.boss_health
@@ -58,6 +59,12 @@ class Boss(GameObject):
         self.boss_damage_cooldown += 1
 
         self.boss_xpos += self.boss_x_speed
+        self.boss_ypos += self.boss_y_speed
+
+        if self.boss_ypos > 50 and not self.boss_ready:
+            self.boss_ready = True
+            self.boss_y_speed = 0
+            self.boss_x_speed = 0.2
 
         if self.boss_xpos + self.img.get_width() > self.screen.get_width():
             self.boss_x_speed *= -1
@@ -66,15 +73,21 @@ class Boss(GameObject):
 
         self.boss_rect = pygame.Rect(self.boss_xpos,self.boss_ypos,self.img.get_width(),self.img.get_height())
 
-        if self.boss_health > 1400:
-            if self.timer > 10:
-                self.timer = 0
-                self.boss_bullet_pattern_1()
 
-        elif self.boss_health > 900:
-            if self.timer > 40:
-                self.timer = 0
-                self.boss_bullet_pattern_2()
+        if self.boss_ready:
+            if self.boss_health > 1400:
+                if self.timer > 10:
+                    self.timer = 0
+                    self.boss_bullet_pattern_1()
+
+            elif self.boss_health > 900:
+                if self.timer > 40:
+                    self.timer = 0
+                    self.boss_bullet_pattern_2()
+            else:
+                if self.timer > 40:
+                    self.timer = 0
+                    self.boss_bullet_pattern_3()
 
             
 
@@ -83,9 +96,11 @@ class Boss(GameObject):
 
         self.boss_move()
 
-        if self.collision('f_bullet',self.boss_rect) and self.boss_damage_cooldown > 6:
-           
-            self.boss_health -= 10
+
+        if self.boss_ready:
+            if self.collision('f_bullet',self.boss_rect) and self.boss_damage_cooldown > 6:
+            
+                self.boss_health -= 10
         
         if self.boss_health < 0:
 
@@ -120,9 +135,16 @@ class Boss(GameObject):
 
 
 
-    def boss_bullet_pattern_3(self, timer):
-        pass
+    def boss_bullet_pattern_3(self):
+        
+        for i in range(-5, 5):
+            self.mediator.all_game_objects.append(EnemyBullet(self.boss_xpos + 45, self.boss_ypos + 26, (i*0.2) , (i*0.2) + 1, True, self.img_bullet_red, 'e_bullet', self.mediator, self.screen))
+
+        for i in range(-5, 5):
+            i *= -1
+            self.mediator.all_game_objects.append(EnemyBullet(self.boss_xpos + 45, self.boss_ypos + 26, (i*0.2) , (i*0.2) + 1, True, self.img_bullet_red, 'e_bullet', self.mediator, self.screen))
             
     def draw_boss_rect(self):
-        pygame.draw.rect(self.screen, (90,90,90), (pygame.Rect(40, 30, 240, 8)))
-        pygame.draw.rect(self.screen, (220,20,60), (pygame.Rect(40, 30, 240*(self.boss_health/self.boss_health_max), 8)))
+        if self.boss_ready:
+            pygame.draw.rect(self.screen, (112,128,144), (pygame.Rect(40, 30, 220, 8)))
+            pygame.draw.rect(self.screen, (220,20,60), (pygame.Rect(40, 30, 220*(self.boss_health/self.boss_health_max), 8)))

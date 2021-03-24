@@ -85,13 +85,9 @@ class Generator:
         
         if self.level == 1:
 
-            if not self.check_for_enemy():
-                self.mediator.all_game_objects.append(Boss(100,50,0,'boss',self.mediator,self.screen))
-
-            ##if self.next_wave():
-                #self.generate_wave_1(6,0)
-            if self.check_for_boss():
-                self.skip_level()
+            if self.next_wave():
+                self.generate_wave_1(6,0)
+            
 
             self.next_level()
                 
@@ -112,7 +108,10 @@ class Generator:
         if self.level == 4:
  
             if not self.check_for_enemy():
-                self.mediator.all_game_objects.append(Boss(100,30,0,'boss',self.mediator,self.screen))
+                self.mediator.all_game_objects.append(Boss(100,-20,0,'boss',self.mediator,self.screen))
+            
+            if self.check_for_boss():
+                    self.skip_level()
 
         if self.level == 5:
             sys.exit()

@@ -48,8 +48,10 @@ class Player(GameObject):
         return self.player_rect    
 
     ## Draw player and bullets at given pos.
-    def player_draw(self , screen):        
-        screen.blit(self.img,(self.player_x,self.player_y))
+    def player_draw(self):        
+        self.screen.blit(self.img,(self.player_x,self.player_y))
+
+        pygame.draw.rect(self.screen, (20,240,10), (self.player_rect))
         
 
        
@@ -75,7 +77,7 @@ class Player(GameObject):
 
         self.player_damage_cooldown += 1
 
-        self.player_rect = pygame.Rect(self.player_x, self.player_y, self.img.get_width(), self.img.get_height())
+        self.player_rect = pygame.Rect(self.player_x + 5 , self.player_y + 5, 3, 6)
             
     ## Get keypressed and use it for movement ##
     def player_input(self):
@@ -117,5 +119,5 @@ class Player(GameObject):
 
     
     def draw(self):
-        self.player_draw(self.screen)
+        self.player_draw()
                 
