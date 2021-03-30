@@ -106,16 +106,37 @@ class Menu:
             volume_sounds = self.font.render('Sounds ', True, (50,50,50))
 
         if self.select_options == 2:
-            pass
+            display = self.font.render('Display', True, (100,100,100))
+        else:
+            display = self.font.render('Display', True, (50,50,50))
 
         if self.select_options == 3:
             back = self.font.render('Back', True, (100,100,100))
         else:
             back = self.font.render('Back', True, (50,50,50))
 
+        
+
+        volume_music_font = self.font.render(str(self.volume_music_int), False, (80,80,80))
+        volume_sounds_font = self.font.render(str(self.volume_sounds_int), False, (80,80,80))
+        display_size_font = self.font.render(str(self.SCREEN_SIZE[0]) + 'X' + str(self.SCREEN_SIZE[1]),False, (80,80,80))
+
         self.screen.blit(options_title, (self.SCREEN_SIZE[0]/6, (self.SCREEN_SIZE[1]/6)))
+        ## Volume for music
         self.screen.blit(volume_music, (self.SCREEN_SIZE[0]/6, (self.SCREEN_SIZE[1]/6)*2))
+        self.screen.blit(volume_music_font,((self.SCREEN_SIZE[0]/6)*4, (self.SCREEN_SIZE[1]/6)*2))
+
+        ## Volume for sounds
         self.screen.blit(volume_sounds, (self.SCREEN_SIZE[0]/6, (self.SCREEN_SIZE[1]/6)*3))
+        self.screen.blit(volume_sounds_font, ((self.SCREEN_SIZE[0]/6)*4, (self.SCREEN_SIZE[1]/6)*3))
+
+
+        ## Display size
+        self.screen.blit(display, (self.SCREEN_SIZE[0]/6, (self.SCREEN_SIZE[1]/6)*4))
+        self.screen.blit(display_size_font,((self.SCREEN_SIZE[0]/6)*4,(self.SCREEN_SIZE[1]/6)*4))
+
+
+        ## Escpae options
         self.screen.blit(back,(self.SCREEN_SIZE[0]/6, (self.SCREEN_SIZE[1]/6)*5))
 
     ## Draw menu, options, or upgrade menu ##
@@ -139,7 +160,7 @@ class Menu:
 
     ## Handling input in the menu ##      
     def menu_input(self, event):
-        if self.menu_on:
+        if self.front_screen:
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_DOWN:
                     self.selected += 1 
@@ -212,11 +233,11 @@ class Menu:
             self.moving_background = 0
 
         ## For scrolling in the options ##
-        if self.select_options > 1:
+        if self.select_options > 3:
             self.select_options = 0
         
         if self.select_options < 0:
-            self.select_options = 1
+            self.select_options = 3
 
         
     def player_dead(self):
