@@ -14,8 +14,7 @@ def main():
     SCREEN_SIZE = (600,800)
     DISPLAY_SIZE = (300,400)
     DARK_GREY = (50,50,50)
-    menu = Menu()
-    mediator = Mediator()
+    
     RUNNING = True
     FPS = 60 
     timer = 0
@@ -25,6 +24,8 @@ def main():
     #The real screen
     screen = pygame.display.set_mode(SCREEN_SIZE)
     #To cast to 
+    mediator = Mediator()
+
     display = pygame.Surface((DISPLAY_SIZE))
     player = Player(display,mediator,'player')
     generator = Generator(display, mediator)
@@ -34,7 +35,7 @@ def main():
     Soundplayer.play_music(Soundplayer())
 
     hud = HUD(display, player, DISPLAY_SIZE, mediator, generator)
-
+    menu = Menu(display, DISPLAY_SIZE)
     # Title and Icon
     pygame.display.set_caption("The Falcon")
     icon = pygame.image.load(menu.resource_path('Game/sprites/playerLV1.png'))
@@ -50,8 +51,8 @@ def main():
         
         ## Draw Menu ##
         if menu.get_menu: 
-            menu.draw_background(display,(DISPLAY_SIZE))
-            menu.draw_menu(display, (DISPLAY_SIZE))
+            menu.draw_background()
+            menu.draw_menu()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT: 
                     RUNNING = False

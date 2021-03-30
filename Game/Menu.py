@@ -4,14 +4,21 @@ import os
 
 class Menu:
     ## Constructor ##
-    def __init__(self):
+    def __init__(self , screen, SCREEN_SIZE):
         pygame.font.init()
         self.menu_on = True
+        self.front_screen = True
         self.selected = 0
         self.options_on = False
         self.select_options = 0 
         self.scroller = 0
         self.moving_background = 0
+        self.font = pygame.font.Font('Game/font/kongtext.ttf',16)
+        
+        self.volume_music_int = 100
+        self.volume_sounds_int = 100
+        self.screen = screen
+        self.SCREEN_SIZE = SCREEN_SIZE
 
         self.background_Img = pygame.image.load(self.resource_path("Game/sprites/background/preview.png"))
         self.background_Img1 = pygame.image.load(self.resource_path("Game/sprites/background/background_1.png"))
@@ -42,61 +49,89 @@ class Menu:
 
 
     ## Normal background ##
-    def draw_background(self, display, DISPLAY_SIZE):
+    def draw_background(self):
         width = self.background_Img1.get_width()
         height = self.background_Img1.get_height()
         
         ## Draw the pictures side by side to fill the screen ##
-        for i in range(-1, int(DISPLAY_SIZE[0]/width)+1):
-            for j in range(-1, int(DISPLAY_SIZE[1]/height +1)):
-                display.blit(self.background_Img1,(i*width, j*height))
+        for i in range(-1, int(self.SCREEN_SIZE[0]/width)+1):
+            for j in range(-1, int(self.SCREEN_SIZE[1]/height +1)):
+                self.screen.blit(self.background_Img1,(i*width, j*height))
 
         width = self.background_Img1.get_width()
         height = self.background_Img1.get_height() 
 
     
-        
-    ## Draw menu, options, or upgrade menu ##
-    def draw_menu(self, screen, SCREEN_SIZE):
-        screen.fill((0,0,0))
-        
 
-        font = pygame.font.Font('Game/font/kongtext.ttf',16)
-        font1 = pygame.font.Font('Game/font/kongtext.ttf',16)
+    def draw_front_screen(self):
+            title = self.font.render('The Falcon', True, (120,120,120))
 
-        title = font.render('The Falcon', True, (110,110,110))
-        ## Drawing Menu
-        if self.menu_on == True:
             if self.selected == 0:
-                start = font.render('Start', True, (100,100,100))
+                start = self.font.render('Start', True, (100,100,100))
             else:
-                start = font.render('Start', True, (50,50,50))
+                start = self.font.render('Start', True, (50,50,50))
 
             if self.selected == 1:
-                options = font.render('Options', True, (100,100,100))
+                options = self.font.render('Options', True, (100,100,100))
             else:
-                options = font.render('Options', True, (50,50,50))
+                options = self.font.render('Options', True, (50,50,50))
 
             if self.selected == 2:
-                upgrades = font1.render('Upgrades', True, (100,100,100))
+                upgrades = self.font.render('Upgrades', True, (100,100,100))
             else:
-                upgrades = font1.render('Upgrades', True, (50,50,50))
+                upgrades = self.font.render('Upgrades', True, (50,50,50))
 
             if self.selected == 3:
-                quit = font1.render('Quit', True, (100,100,100))
+                quit = self.font.render('Quit', True, (100,100,100))
             else: 
-                quit = font1.render('Quit', True, (50,50,50))
+                quit = self.font.render('Quit', True, (50,50,50))
 
+            self.screen.blit(title,(self.SCREEN_SIZE[0]/6, (self.SCREEN_SIZE[1]/6)))
+            self.screen.blit(start,(self.SCREEN_SIZE[0]/6, (self.SCREEN_SIZE[1]/6)*2))
+            self.screen.blit(options, (self.SCREEN_SIZE[0]/6, (self.SCREEN_SIZE[1]/6)*3))
+            self.screen.blit(upgrades, (self.SCREEN_SIZE[0]/6, (self.SCREEN_SIZE[1]/6)*4))
+            self.screen.blit(quit, (self.SCREEN_SIZE[0]/6, (self.SCREEN_SIZE[1]/6)*5))
 
-            screen.blit(title,(SCREEN_SIZE[0]/6, (SCREEN_SIZE[1]/6)))
-            screen.blit(start,(SCREEN_SIZE[0]/6, (SCREEN_SIZE[1]/6)*2))
-            screen.blit(options, (SCREEN_SIZE[0]/6, (SCREEN_SIZE[1]/6)*3))
-            screen.blit(upgrades, (SCREEN_SIZE[0]/6, (SCREEN_SIZE[1]/6)*4))
-            screen.blit(quit, (SCREEN_SIZE[0]/6, (SCREEN_SIZE[1]/6)*5))
+    def draw_options_screen(self):
+        options_title = self.font.render('Options', True, (120,120,120))
+
+        if self.select_options == 0:
+            volume_music = self.font.render('Music ', True, (100,100,100))
+        else:
+            volume_music = self.font.render('Music ', True, (50,50,50))
+
+        if self.select_options == 1:
+            volume_sounds = self.font.render('Sounds ', True, (100,100,100))
+        else:
+            volume_sounds = self.font.render('Sounds ', True, (50,50,50))
+
+        if self.select_options == 2:
+            pass
+
+        if self.select_options == 3:
+            back = self.font.render('Back', True, (100,100,100))
+        else:
+            back = self.font.render('Back', True, (50,50,50))
+
+        self.screen.blit(options_title, (self.SCREEN_SIZE[0]/6, (self.SCREEN_SIZE[1]/6)))
+        self.screen.blit(volume_music, (self.SCREEN_SIZE[0]/6, (self.SCREEN_SIZE[1]/6)*2))
+        self.screen.blit(volume_sounds, (self.SCREEN_SIZE[0]/6, (self.SCREEN_SIZE[1]/6)*3))
+        self.screen.blit(back,(self.SCREEN_SIZE[0]/6, (self.SCREEN_SIZE[1]/6)*5))
+
+    ## Draw menu, options, or upgrade menu ##
+    def draw_menu(self):
+        self.screen.fill((0,0,0))
+        
+
+        ## Drawing Menu
+        if self.front_screen == True:
+            self.draw_front_screen()
+            
+
         
         ### Drawing Options ###
-        if self.options_on == True:
-            pass
+        elif self.options_on == True:
+            self.draw_options_screen()
             
             
     
@@ -114,12 +149,16 @@ class Menu:
                     ## Start Game ##
                     if self.selected == 0:
                         self.menu_on = False
-                    ##Options ##    
+                    
+                    ## Options ##    
                     if self.selected == 1:
-                        pass
-                    if self.selected == 2:
-                        self.menu_on = False
+                        self.front_screen = False
                         self.options_on = True
+                    
+                    ## Upgrades ## 
+                    if self.selected == 2:
+                        self.options_on = True
+
                     if self.selected == 3:
                         sys.exit()
             
@@ -137,6 +176,30 @@ class Menu:
                     self.select_options += 1 
                 if event.key == pygame.K_UP:
                     self.select_options -= 1
+                
+                if event.key == pygame.K_LEFT:
+                    if self.select_options == 0:
+                        self.volume_music_int -= 1
+                        if self.volume_music_int < 0:
+                            self.volume_music_int = 0
+                    if self.select_options == 1:
+                        self.volume_sounds_int -= 1
+                        if self.volume_sounds_int < 0:
+                            self.volume_sounds_int = 0
+
+                if event.key == pygame.K_RIGHT: 
+                    if self.options_on == 0:
+                        self.volume_music_int += 1
+
+                        if self.volume_music_int > 100:
+                            self.volume_music_int = 100
+
+                    if self.options_on == 1:
+                        self.volume_sounds_int += 1
+
+                        if self.volume_sounds_int > 100:
+                            self.volume_sounds_int = 100
+
                 if event.key == pygame.K_RETURN:
                     if self.select_options == 0:
                         self.moving_background += 1
@@ -159,9 +222,9 @@ class Menu:
     def player_dead(self):
         self.menu_on = True       
     
+    # PyInstaller creates a temp folder and stores path in _MEIPASS
     def resource_path(self, relative_path):
         try:
-        # PyInstaller creates a temp folder and stores path in _MEIPASS
             base_path = sys._MEIPASS
         except Exception:
             base_path = os.path.abspath(".")
