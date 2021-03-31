@@ -16,6 +16,9 @@ class Player(GameObject):
         self.player_speed_y = 0
         self.general_speed = 3.5
 
+        self.speed_x = [0,0]
+        self.speed_y = [0,0]
+
         self.moving = False
         self.screen = screen
         self.bullet_list = []
@@ -29,7 +32,6 @@ class Player(GameObject):
         self.mediator = mediator
         self.object_ID = object_ID
         self.player_rect = pygame.Rect(0,0,0,0)
-        self.soundplayer = Soundplayer()
 
     def get_dmg (self, amount):
         if self.player_health > 0:
@@ -83,16 +85,47 @@ class Player(GameObject):
         keystate = pygame.key.get_pressed()
 
         if keystate[pygame.K_LEFT]:
-            self.player_speed_x -= self.general_speed
+            self.speed_x[0] -= 0.5
+
+            if self.speed_x[0] < -3.5:
+                self.speed_x[0] = -3.5
+
+            self.player_speed_x = self.speed_x[0]
+
+        else:
+            self.speed_x[0] = 0
 
         if keystate[pygame.K_RIGHT]:
-            self.player_speed_x = self.general_speed
+            self.speed_x[1] += 0.5
 
-        if keystate[pygame.K_UP]:
-            self.player_speed_y -= self.general_speed
+            if self.speed_x[1] > 3.5:
+                self.speed_x[1] = 3.5
+
+            self.player_speed_x = self.speed_x[1]
+        else: 
+            self.speed_x[1] = 0
+        
 
         if keystate[pygame.K_DOWN]:
-            self.player_speed_y = self.general_speed
+            self.speed_y[0] += 0.5
+
+            if self.speed_y[0] > 3.5:
+                self.speed_y[0] = 3.5
+
+            self.player_speed_y = self.speed_y[0]
+        
+        else:
+            self.speed_y[0] = 0
+
+        if keystate[pygame.K_UP]:
+            self.speed_y[1] -= 0.5
+
+            if self.speed_y[1] < -3.5:
+                self.speed_y[1] = -3.5
+
+            self.player_speed_y = self.speed_y[1]
+        else:
+            self.speed_y[1] = 0
             
         if self.timer > 10 and keystate[pygame.K_SPACE]:
             self.timer = 0
@@ -107,11 +140,16 @@ class Player(GameObject):
         self.player_input()
         self.player_move()
         hit_count = self.collision('e_bullet', self.player_rect)
-        
+        enemy_hit = self.collision('enemy', self.player_rect)
         if  hit_count > 0 and self.player_damage_cooldown > 8:
             Soundplayer.player_damage_sound(Soundplayer())
             self.player_damage_cooldown = 0
             self.player_health += -10*hit_count
+        if enemy_hit > 0 and self.player_damage_cooldown > 8:
+            Soundplayer.player_damage_sound(Soundplayer())
+            self.player_damage_cooldown = 0
+            self.player_health = 0
+
         
 
     

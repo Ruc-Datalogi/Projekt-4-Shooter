@@ -1,5 +1,6 @@
 import sys, pygame
 from pygame.locals import *
+from Soundplayer import *
 import os
 
 class Menu:
@@ -13,10 +14,12 @@ class Menu:
         self.select_options = 0 
         self.scroller = 0
         self.moving_background = 0
-        self.font = pygame.font.Font('Game/font/kongtext.ttf',16)
-        
+        self.font = pygame.font.Font('Game/font/kongtext.ttf', 16)
+        self.font_display = pygame.font.Font('Game/font/kongtext.ttf', 8)
         self.volume_music_int = 100
         self.volume_sounds_int = 100
+        self.volume_incrementer = 10
+
         self.screen = screen
         self.SCREEN_SIZE = SCREEN_SIZE
 
@@ -119,7 +122,7 @@ class Menu:
 
         volume_music_font = self.font.render(str(self.volume_music_int), False, (80,80,80))
         volume_sounds_font = self.font.render(str(self.volume_sounds_int), False, (80,80,80))
-        display_size_font = self.font.render(str(self.SCREEN_SIZE[0]) + 'X' + str(self.SCREEN_SIZE[1]),False, (80,80,80))
+        display_size_font = self.font_display.render(str(self.SCREEN_SIZE[0]) + 'X' + str(self.SCREEN_SIZE[1]),False, (80,80,80))
 
         self.screen.blit(options_title, (self.SCREEN_SIZE[0]/6, (self.SCREEN_SIZE[1]/6)))
         ## Volume for music
@@ -133,7 +136,7 @@ class Menu:
 
         ## Display size
         self.screen.blit(display, (self.SCREEN_SIZE[0]/6, (self.SCREEN_SIZE[1]/6)*4))
-        self.screen.blit(display_size_font,((self.SCREEN_SIZE[0]/6)*4,(self.SCREEN_SIZE[1]/6)*4))
+        self.screen.blit(display_size_font,((self.SCREEN_SIZE[0]/6)*4,(self.SCREEN_SIZE[1]/6)*4 + 6) )
 
 
         ## Escpae options
@@ -198,36 +201,56 @@ class Menu:
                 if event.key == pygame.K_UP:
                     self.select_options -= 1
                 
+                if event.key == pygame.K_RETURN:
+                    print('fuhdufhs')
+                    if self.select_options == 3:
+                        self.options_on = False
+                        self.front_screen = True
+
+
+
+
+                ## For music ##
                 if event.key == pygame.K_LEFT:
+                    ## Music
                     if self.select_options == 0:
-                        self.volume_music_int -= 1
+                        self.volume_music_int -= self.volume_incrementer
                         if self.volume_music_int < 0:
                             self.volume_music_int = 0
+
+                        Soundplayer.change_volume_music(Soundplayer(), self.volume_music_int)
+                    ## Sounds
                     if self.select_options == 1:
-                        self.volume_sounds_int -= 1
+                        self.volume_sounds_int -= self.volume_incrementer
                         if self.volume_sounds_int < 0:
                             self.volume_sounds_int = 0
+                    
+                        Soundplayer.change_volume_sounds(Soundplayer(), self.volume_sounds_int)
+                        Soundplayer.player_damage_sound(Soundplayer())
 
-                if event.key == pygame.K_RIGHT: 
-                    if self.options_on == 0:
-                        self.volume_music_int += 1
+
+                if event.key == pygame.K_RIGHT:
+                    ## Music
+                    if self.select_options == 0:
+                        self.volume_music_int += self.volume_incrementer
 
                         if self.volume_music_int > 100:
                             self.volume_music_int = 100
+                    
+                        Soundplayer.change_volume_music(Soundplayer(), self.volume_music_int)
 
-                    if self.options_on == 1:
-                        self.volume_sounds_int += 1
+
+                    ## Sounds 
+                    if self.select_options == 1:
+                        self.volume_sounds_int += self.volume_incrementer
 
                         if self.volume_sounds_int > 100:
                             self.volume_sounds_int = 100
 
-                if event.key == pygame.K_RETURN:
-                    if self.select_options == 0:
-                        self.moving_background += 1
-                        
-                    if self.select_options == 1:
-                        self.options_on = False
-                        self.menu_on = True
+                        Soundplayer.change_volume_sounds(Soundplayer(), self.volume_sounds_int)
+                        Soundplayer.player_damage_sound(Soundplayer())
+
+                  
 
         if self.moving_background > 1:
             self.moving_background = 0
