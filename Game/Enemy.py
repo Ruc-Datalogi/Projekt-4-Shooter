@@ -7,6 +7,7 @@ from Mediator import *
 from Spritesheet import *
 from Soundplayer import *
 from Collectables import *
+from JsonLoader import * 
 
 class Enemy(GameObject):
 
@@ -125,7 +126,7 @@ class Enemy(GameObject):
         if self.enemy_health < 0:
             self.mediator.all_game_objects.append(Collectables (self.enemy_x, self.enemy_y, self.screen, self.mediator, 'coin'))
             self.mediator.to_be_removed.append(self)
-            self.updateJsonFile('enemy')
+            JsonLoader.updateJsonFile(JsonLoader,'enemy')
 
     def draw(self):
         self.enemy_draw()
