@@ -32,7 +32,15 @@ class GameObject:
                     hit_count += 1
                     
         return hit_count
+    
+    def collision_test(self, rect):
+        hit_count = []
+        for element in self.mediator.all_game_objects:
+            if rect.colliderect(element.get_rect()):
+                hit_count.append(element.get_object_ID())
 
+        return hit_count
+        
     def resource_path(self, relative_path):
         try:
         # PyInstaller creates a temp folder and stores path in _MEIPASS

@@ -6,7 +6,7 @@ from GameObject import *
 from Mediator import *
 from Spritesheet import *
 from Soundplayer import *
-
+from Collectables import *
 
 class Enemy(GameObject):
 
@@ -123,6 +123,7 @@ class Enemy(GameObject):
             self.showing_image = self.temp_image
         
         if self.enemy_health < 0:
+            self.mediator.all_game_objects.append(Collectables (self.enemy_x, self.enemy_y, self.screen, self.mediator, 'coin'))
             self.mediator.to_be_removed.append(self)
 
     def draw(self):

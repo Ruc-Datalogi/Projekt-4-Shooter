@@ -85,7 +85,7 @@ class Player(GameObject):
         keystate = pygame.key.get_pressed()
 
         if keystate[pygame.K_LEFT]:
-            self.speed_x[0] -= 0.5
+            self.speed_x[0] -= 0.4
 
             if self.speed_x[0] < -3.5:
                 self.speed_x[0] = -3.5
@@ -96,7 +96,7 @@ class Player(GameObject):
             self.speed_x[0] = 0
 
         if keystate[pygame.K_RIGHT]:
-            self.speed_x[1] += 0.5
+            self.speed_x[1] += 0.4
 
             if self.speed_x[1] > 3.5:
                 self.speed_x[1] = 3.5
@@ -107,7 +107,7 @@ class Player(GameObject):
         
 
         if keystate[pygame.K_DOWN]:
-            self.speed_y[0] += 0.5
+            self.speed_y[0] += 0.4
 
             if self.speed_y[0] > 3.5:
                 self.speed_y[0] = 3.5
@@ -118,7 +118,7 @@ class Player(GameObject):
             self.speed_y[0] = 0
 
         if keystate[pygame.K_UP]:
-            self.speed_y[1] -= 0.5
+            self.speed_y[1] -= 0.4
 
             if self.speed_y[1] < -3.5:
                 self.speed_y[1] = -3.5
@@ -149,6 +149,12 @@ class Player(GameObject):
             Soundplayer.player_damage_sound(Soundplayer())
             self.player_damage_cooldown = 0
             self.player_health = 0
+        
+        test = self.collision_test(self.player_rect)
+        
+        for s in test:
+            if str(s) == 'e_bullet' and self.player_damage_cooldown > 6:
+                print("woooo")
 
         
 
