@@ -1,5 +1,7 @@
 import sys, pygame, random, os
 from Player import *
+from Spritesheet import *
+
 
 class HUD:
 
@@ -11,6 +13,8 @@ class HUD:
         self.generator = generator
         self.font = pygame.font.Font(self.resource_path('Game/font/kongtext.ttf'),8)
         self.score = 0
+        self.ss = Spritesheet(self.resource_path())
+        self.coin = 
 
 
     def draw_overlay_HUD(self):

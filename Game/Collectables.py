@@ -1,7 +1,7 @@
 from Spritesheet import *
 from GameObject import *
 
-import random
+import random, json
 
 class Collectables(GameObject):
 
@@ -39,6 +39,12 @@ class Collectables(GameObject):
             self.y_speed = 3
         
         self.rect = self.img.get_rect(x=self.x_pos, y=self.y_pos)
+
+        if self.collision('player', self.rect):
+            self.updateJsonFile('coin')
+            self.mediator.to_be_removed.append(self)
+
+        
 
 
     def draw(self):
