@@ -1,8 +1,12 @@
 import pygame, os
+import JsonLoader
+
 
 class Soundplayer:
 
 ###Template sound: make the 'pew.wav' sound when our bullets collide with enemies###
+
+
     def __init__(self):
         pygame.mixer.init()
 

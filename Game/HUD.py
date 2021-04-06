@@ -15,10 +15,10 @@ class HUD:
         self.score = 0
         self.ss = Spritesheet(self.resource_path('Game/sprites/coins.png'))
         self.coin = self.ss.image_at(pygame.Rect(79,5,5,5))
-        self.test = JsonLoader()
+        #self.test = JsonLoader()
         
 
-        self.coins = self.test.coins
+        #self.coins = self.test.coins
 
 
 
@@ -84,7 +84,8 @@ class HUD:
         level = self.font.render('Level ' + str(self.generator.get_level()),0,(255,255,255))
         x = self.font.render('x',0,(255,255,255))
 
-        amount_coins = self.font.render(self.coins,0,(255,255,255))
+        amount_coins = self.font.render(JsonLoader.get_coins(JsonLoader),0,(255,255,255))
+        
         self.screen.blit(self.coin,(90, 6))
         self.screen.blit(x,(98, 4))
         self.screen.blit(amount_coins,(108, 4))
@@ -97,10 +98,7 @@ class HUD:
         for object in self.mediator.to_be_removed:
             if object.get_object_ID() == 'enemy':
                 self.score += 1
-            if object.get_object_ID() == 'coin':
-                self.coins = int(self.coins) + 1
-                self.coins = str(self.coins) 
-
+            
 
         self.draw_overlay_HUD()
         self.draw_energy_HUD()

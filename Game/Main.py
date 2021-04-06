@@ -14,7 +14,7 @@ def main():
     SCREEN_SIZE = (600,800)
     DISPLAY_SIZE = (300,400)
     DARK_GREY = (50,50,50)
-    
+
     RUNNING = True
     FPS = 60 
     timer = 0
@@ -60,7 +60,6 @@ def main():
                     sys.exit()
                 menu.menu_input(event)
             if not menu.get_menu:
-
                 mediator.all_game_objects.append(player)
 
             surf = pygame.transform.scale(display, SCREEN_SIZE)             
