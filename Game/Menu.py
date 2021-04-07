@@ -1,6 +1,7 @@
 import sys, pygame
 from pygame.locals import *
 from Soundplayer import *
+from JsonLoader import *
 import os
 
 class Menu:
@@ -16,8 +17,8 @@ class Menu:
         self.moving_background = 0
         self.font = pygame.font.Font('Game/font/kongtext.ttf', 16)
         self.font_display = pygame.font.Font('Game/font/kongtext.ttf', 8)
-        self.volume_music_int = 100
-        self.volume_sounds_int = 100
+        self.volume_music_int = int(JsonLoader.get_music(JsonLoader))
+        self.volume_sounds_int = int(JsonLoader.get_sounds(JsonLoader))
         self.volume_incrementer = 10
 
         self.screen = screen
@@ -212,32 +213,38 @@ class Menu:
 
                 ## For music ##
                 if event.key == pygame.K_LEFT:
-                    ## Music
+
+                    ## For controlling the volume of the music
                     if self.select_options == 0:
                         self.volume_music_int -= self.volume_incrementer
                         if self.volume_music_int < 0:
                             self.volume_music_int = 0
 
+                        JsonLoader.updateJsonFile(JsonLoader,'music-')
                         Soundplayer.change_volume_music(Soundplayer(), self.volume_music_int)
-                    ## Sounds
+
+                    ## For the sounds
                     if self.select_options == 1:
                         self.volume_sounds_int -= self.volume_incrementer
                         if self.volume_sounds_int < 0:
                             self.volume_sounds_int = 0
                     
-                        Soundplayer.change_volume_sounds(Soundplayer(), self.volume_sounds_int)
+                        Soundplayer.change_volume_sounds(Soundplayer(), int(JsonLoader.get_music(JsonLoader)))
                         Soundplayer.player_damage_sound(Soundplayer())
 
 
                 if event.key == pygame.K_RIGHT:
-                    ## Music
+                    ## For controlling the volume of the music
                     if self.select_options == 0:
                         self.volume_music_int += self.volume_incrementer
 
                         if self.volume_music_int > 100:
                             self.volume_music_int = 100
-                    
-                        Soundplayer.change_volume_music(Soundplayer(), self.volume_music_int)
+
+                        JsonLoader.updateJsonFile(JsonLoader,'music+')
+
+                        Soundplayer.change_volume_music(Soundplayer(), int(JsonLoader.get_music(JsonLoader)))
+
 
 
                     ## Sounds 

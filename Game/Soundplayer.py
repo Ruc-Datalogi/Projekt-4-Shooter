@@ -1,5 +1,5 @@
 import pygame, os
-import JsonLoader
+from JsonLoader import *
 
 
 class Soundplayer:
@@ -10,8 +10,11 @@ class Soundplayer:
     def __init__(self):
         pygame.mixer.init()
 
-        self.volume_sounds = 0.2
-        self.volume_music = 0.2
+        self.start_volume = 0.2
+        
+        self.volume_sounds = int(JsonLoader.get_sounds(JsonLoader))
+        self.volume_music = int(JsonLoader.get_music(JsonLoader))
+        
 
         self.enemy_hit = pygame.mixer.Sound(self.resource_path('Game/sound/pew.wav'))
         self.enemy_hit.set_volume(0.2)
@@ -19,6 +22,11 @@ class Soundplayer:
         self.player_damage = pygame.mixer.Sound(self.resource_path('Game/sound/hit-01.wav'))
         self.player_damage.set_volume(0.2)
         self.channel = pygame.mixer.Channel(0)
+
+
+
+
+
 
 
 
@@ -36,6 +44,8 @@ class Soundplayer:
     def load_music(self):
         pygame.mixer.music.load(self.resource_path('Game/sound/music.mp3'))
         pygame.mixer.music.set_volume(0.2)
+        self.change_volume_music(self, self.volume_music)
+
     
     @staticmethod
     def play_music(self):
@@ -47,11 +57,11 @@ class Soundplayer:
     
     @staticmethod
     def change_volume_music(self, volume):
-        pygame.mixer.music.set_volume((self.volume_music * volume)/100)
+        print(volume)
+        pygame.mixer.music.set_volume((self.start_volume * volume)/100)
 
     @staticmethod
     def change_volume_sounds(self, volume):
-        print("jells")
         self.channel.set_volume((0.2 * volume)/100)
         #self.player_damage.set_volume((0.2 * volume)/100)
         #self.enemy_hit.set_volume((0.2 * volume)/100)

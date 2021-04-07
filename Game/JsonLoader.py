@@ -11,13 +11,15 @@ class JsonLoader(object):
     music = data["music"]
     sounds = data["sounds"]
     
-    
     def get_coins(self):
         return self.coins
 
-    @classmethod
-    def get_music(s):
-        return s.music
+    def get_music(self):
+        return self.music
+
+    def get_sounds(self):
+        return self.sounds
+
 
     @staticmethod
     def updateJsonFile(self , ID):
@@ -42,6 +44,46 @@ class JsonLoader(object):
             tmp = data['total_kills']
             tmp = int(tmp) + 1
             data['total_kills'] = str(tmp)
+
+        if ID == 'sounds+':
+            tmp = data['sounds']
+            tmp = int(tmp) + 10
+
+            if tmp > 100: 
+                tmp = 100
+
+            data['sounds'] = str(tmp)
+            JsonLoader.sounds = data['sounds']
+        
+        if ID == 'sounds-':
+            tmp = data['sounds']
+            tmp = int(tmp) - 10
+            
+            if tmp < 0:
+                tmp = 0
+            
+            data['sounds'] = str(tmp)
+            JsonLoader.sounds = data['sounds']
+
+        if ID == 'music+':
+            tmp = data['music']
+            tmp = int(tmp) + 10
+
+            if tmp > 100: 
+                tmp = 100
+
+            data['music'] = str(tmp)
+            JsonLoader.music = data['music']
+        
+        if ID == 'music-':
+            tmp = data['music']
+            tmp = int(tmp) - 10
+            
+            if tmp < 0:
+                tmp = 0
+
+            data['music'] = str(tmp)
+            JsonLoader.music = data['music']
 
         ## Save our changes to JSON file
         jsonFile = open("Game/save_file.json", "w+")

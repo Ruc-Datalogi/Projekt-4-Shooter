@@ -45,7 +45,7 @@ class Boss(GameObject):
         
 
     def get_rect(self):
-        return self.enemy_rect
+        return self.boss_rect
     
 
     ## Damage the enemy
@@ -123,7 +123,7 @@ class Boss(GameObject):
         self.mediator.all_game_objects.append(EnemyBullet(self.boss_xpos + 70, self.boss_ypos + 26, 0,6, False, self.img_bullet_blue_rect, 'e_bullet', self.mediator, self.screen))
 
 
-    ## Burst of bullets ##
+    ## Burst of bullets with space in ##
     def boss_bullet_pattern_2(self):
         bullet_list = [i for i in range(-8,8)]
         random_number = random.randint(5,len(bullet_list)-7)
@@ -139,7 +139,7 @@ class Boss(GameObject):
                 self.mediator.all_game_objects.append(EnemyBullet(self.boss_xpos + 45, self.boss_ypos + 26, (i*0.4) , 3.5, True, self.img_bullet_red, 'e_bullet', self.mediator, self.screen))
 
 
-
+    ## Blue burst of bullets constant ##
     def boss_bullet_pattern_3(self):
         
         for i in range(-6, 9):

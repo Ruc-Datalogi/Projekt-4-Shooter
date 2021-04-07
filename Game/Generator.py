@@ -94,7 +94,7 @@ class Generator:
         self.timer += 1
         
         if self.level == 1:
-
+            
             if self.next_wave():
                 self.generate_wave_1(6,0)
             

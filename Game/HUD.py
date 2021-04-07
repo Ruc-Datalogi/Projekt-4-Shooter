@@ -15,10 +15,7 @@ class HUD:
         self.score = 0
         self.ss = Spritesheet(self.resource_path('Game/sprites/coins.png'))
         self.coin = self.ss.image_at(pygame.Rect(79,5,5,5))
-        #self.test = JsonLoader()
-        
 
-        #self.coins = self.test.coins
 
 
 
