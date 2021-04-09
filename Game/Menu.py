@@ -10,15 +10,23 @@ class Menu:
         pygame.font.init()
         self.menu_on = True
         self.front_screen = True
+       
         self.selected = 0
         self.options_on = False
         self.select_options = 0 
+
+        self.select_upgrades = 0
+        self.upgrades_on = False
+
         self.scroller = 0
         self.moving_background = 0
         self.font = pygame.font.Font('Game/font/kongtext.ttf', 16)
         self.font_display = pygame.font.Font('Game/font/kongtext.ttf', 8)
+        self.font_upgrades = pygame.font.Font('Game/font/kongtext.ttf', 8)
+
         self.volume_music_int = int(JsonLoader.get_music(JsonLoader))
         self.volume_sounds_int = int(JsonLoader.get_sounds(JsonLoader))
+
         self.volume_incrementer = 10
 
         self.screen = screen
@@ -143,20 +151,77 @@ class Menu:
         ## Escpae options
         self.screen.blit(back,(self.SCREEN_SIZE[0]/6, (self.SCREEN_SIZE[1]/6)*5))
 
+    def draw_upgrades_screen(self):
+        upgrades_title = self.font.render('Upgrades', True, (120,120,120))
+        price = self.font_upgrades.render('Price', True, (255,180,40))
+        level = self.font_upgrades.render('Level', True, (120,120,120))
+
+
+        if self.select_upgrades == 0:
+            damage_upgrade = self.font_upgrades.render('Bullet damage', True, (120,120,120))
+        else:
+            damage_upgrade = self.font_upgrades.render('Bullet damage', True, (50,50,50))
+
+        if self.select_upgrades == 1:
+            bullet_amount = self.font_upgrades.render('Bullet amount', True, (120,120,120))
+        else:
+            bullet_amount = self.font_upgrades.render('Bullet amount', True, (50,50,50))
+
+
+        if self.select_upgrades == 2:
+            fire_speed = self.font_upgrades.render('Fire speed', True, (120,120,120))
+        else:
+            fire_speed = self.font_upgrades.render('Fire speed', True, (50,50,50))
+
+
+        if self.select_upgrades == 3:
+            shield = self.font_upgrades.render('Shield', True ,(120,120,120))
+        else:
+            shield = self.font_upgrades.render('Shield', True ,(50,50,50))
+
+        if self.select_upgrades == 4:
+            back = self.font_upgrades.render('Back', True, (120,120,120))
+        else:
+            back = self.font_upgrades.render('Back', True, (50,50,50))
+
+
+        damage_int = self.font_upgrades.render(JsonLoader.get_bullet_damage(JsonLoader), True, (50,50,50))
+        amount_int = self.font_upgrades.render(JsonLoader.get_bullet_amount(JsonLoader),True,(50,50,50))
+        fire_int = self.font_upgrades.render(JsonLoader.get_fire_speed(JsonLoader),True,(50,50,50))
+
+
+        self.screen.blit(upgrades_title, (self.SCREEN_SIZE[0]/8, (self.SCREEN_SIZE[1]/8)))
+        self.screen.blit(level,( (self.SCREEN_SIZE[0]/8)* 4.5 ,(self.SCREEN_SIZE[1]/8)*2 ))
+        self.screen.blit(price,( (self.SCREEN_SIZE[0]/8)* 6 ,(self.SCREEN_SIZE[1]/8)*2 ))
+
+
+
+        self.screen.blit(damage_upgrade,(self.SCREEN_SIZE[0]/8,(self.SCREEN_SIZE[1]/8)*3))
+        self.screen.blit(bullet_amount,(self.SCREEN_SIZE[0]/8,(self.SCREEN_SIZE[1]/8)*4))
+        self.screen.blit(fire_speed,(self.SCREEN_SIZE[0]/8,(self.SCREEN_SIZE[1]/8)*5))
+        self.screen.blit(shield,(self.SCREEN_SIZE[0]/8,(self.SCREEN_SIZE[1]/8)*6))
+        self.screen.blit(back,(self.SCREEN_SIZE[0]/8,(self.SCREEN_SIZE[1]/8)*7))
+
+
+
     ## Draw menu, options, or upgrade menu ##
     def draw_menu(self):
         self.screen.fill((0,0,0))
         
 
         ## Drawing Menu
-        if self.front_screen == True:
+        if self.front_screen:
             self.draw_front_screen()
             
 
         
         ### Drawing Options ###
-        elif self.options_on == True:
+        elif self.options_on:
             self.draw_options_screen()
+
+        ## Drawing Upgrades ##
+        elif self.upgrades_on:
+            self.draw_upgrades_screen()
             
             
     
@@ -182,7 +247,8 @@ class Menu:
                     
                     ## Upgrades ## 
                     if self.selected == 2:
-                        self.options_on = True
+                        self.front_screen = False
+                        self.upgrades_on = True
 
                     if self.selected == 3:
                         sys.exit()
@@ -211,7 +277,7 @@ class Menu:
 
 
 
-                ## For music ##
+                ## Decrement volume of music and sounds ##
                 if event.key == pygame.K_LEFT:
 
                     ## For controlling the volume of the music
@@ -221,18 +287,19 @@ class Menu:
                             self.volume_music_int = 0
 
                         JsonLoader.updateJsonFile(JsonLoader,'music-')
-                        Soundplayer.change_volume_music(Soundplayer(), self.volume_music_int)
+                        Soundplayer.change_volume_music(Soundplayer(), int(JsonLoader.get_music(JsonLoader)))
 
                     ## For the sounds
                     if self.select_options == 1:
                         self.volume_sounds_int -= self.volume_incrementer
                         if self.volume_sounds_int < 0:
                             self.volume_sounds_int = 0
-                    
-                        Soundplayer.change_volume_sounds(Soundplayer(), int(JsonLoader.get_music(JsonLoader)))
-                        Soundplayer.player_damage_sound(Soundplayer())
+
+                        JsonLoader.updateJsonFile(JsonLoader, 'sounds-')
+                        Soundplayer.change_volume_sounds(Soundplayer(), int(JsonLoader.get_sounds(JsonLoader)))
 
 
+                ## Increment the volume of the music ##
                 if event.key == pygame.K_RIGHT:
                     ## For controlling the volume of the music
                     if self.select_options == 0:
@@ -245,8 +312,6 @@ class Menu:
 
                         Soundplayer.change_volume_music(Soundplayer(), int(JsonLoader.get_music(JsonLoader)))
 
-
-
                     ## Sounds 
                     if self.select_options == 1:
                         self.volume_sounds_int += self.volume_incrementer
@@ -254,8 +319,32 @@ class Menu:
                         if self.volume_sounds_int > 100:
                             self.volume_sounds_int = 100
 
-                        Soundplayer.change_volume_sounds(Soundplayer(), self.volume_sounds_int)
-                        Soundplayer.player_damage_sound(Soundplayer())
+
+                        JsonLoader.updateJsonFile(JsonLoader,'sounds+')
+                        Soundplayer.change_volume_sounds(Soundplayer(), int(JsonLoader.get_sounds(JsonLoader)))
+
+        elif self.upgrades_on:
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_DOWN:
+                    self.select_upgrades += 1 
+                if event.key == pygame.K_UP:
+                    self.select_upgrades -= 1
+                
+                if self.select_upgrades > 4:
+                    self.select_upgrades = 0
+                
+                if self.select_upgrades < 0:
+                    self.select_upgrades = 4
+                
+                if event.key == pygame.K_RETURN:
+                    if self.select_upgrades == 4:
+                        self.upgrades_on = False
+                        self.front_screen = True
+                
+            
+
+                        
 
                   
 
