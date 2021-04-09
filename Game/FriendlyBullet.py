@@ -1,6 +1,8 @@
 import sys, pygame, random
 from GameObject import *
 from Mediator import *
+from JsonLoader import *
+
 
 class FriendlyBullet(GameObject):
     
@@ -12,7 +14,7 @@ class FriendlyBullet(GameObject):
         self.bulletspeed_x = 0
         self.bulletspeed_y = 12
         self.bullet_rect = self.img.get_rect()
-        self.bullet_damage = 10
+        self.bullet_damage = JsonLoader.get_bullet_damage(JsonLoader)
         self.object_ID = object_ID
         self.mediator = mediator
     

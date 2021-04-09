@@ -155,7 +155,7 @@ class Menu:
         upgrades_title = self.font.render('Upgrades', True, (120,120,120))
         price = self.font_upgrades.render('Price', True, (255,180,40))
         level = self.font_upgrades.render('Level', True, (120,120,120))
-
+        coins = self.font_upgrades.render('Coins:', True ,(255,180,40))
 
         if self.select_upgrades == 0:
             damage_upgrade = self.font_upgrades.render('Bullet damage', True, (120,120,120))
@@ -184,16 +184,24 @@ class Menu:
         else:
             back = self.font_upgrades.render('Back', True, (50,50,50))
 
+        coins_int = self.font_upgrades.render(JsonLoader.get_coins(JsonLoader),True, (255,247,122))
 
         damage_int = self.font_upgrades.render(JsonLoader.get_bullet_damage(JsonLoader), True, (50,50,50))
         amount_int = self.font_upgrades.render(JsonLoader.get_bullet_amount(JsonLoader),True,(50,50,50))
         fire_int = self.font_upgrades.render(JsonLoader.get_fire_speed(JsonLoader),True,(50,50,50))
-
+        shield_int = self.font_upgrades.render(JsonLoader.get_shield(JsonLoader),True,(50,50,50))
 
         self.screen.blit(upgrades_title, (self.SCREEN_SIZE[0]/8, (self.SCREEN_SIZE[1]/8)))
         self.screen.blit(level,( (self.SCREEN_SIZE[0]/8)* 4.5 ,(self.SCREEN_SIZE[1]/8)*2 ))
         self.screen.blit(price,( (self.SCREEN_SIZE[0]/8)* 6 ,(self.SCREEN_SIZE[1]/8)*2 ))
+        self.screen.blit(coins,(self.SCREEN_SIZE[0]/8,(self.SCREEN_SIZE[1]/8)*2 ))
 
+
+        self.screen.blit(coins_int,( (self.SCREEN_SIZE[0]/8)*2.7,(self.SCREEN_SIZE[1]/8)*2 ))
+        self.screen.blit(damage_int,( (self.SCREEN_SIZE[0]/8)* 4.5 ,(self.SCREEN_SIZE[1]/8)*3))
+        self.screen.blit(amount_int,( (self.SCREEN_SIZE[0]/8)* 4.5 ,(self.SCREEN_SIZE[1]/8)*4))
+        self.screen.blit(fire_int,( (self.SCREEN_SIZE[0]/8)* 4.5 ,(self.SCREEN_SIZE[1]/8)*5))
+        self.screen.blit(shield_int,( (self.SCREEN_SIZE[0]/8)* 4.5 ,(self.SCREEN_SIZE[1]/8)*6))
 
 
         self.screen.blit(damage_upgrade,(self.SCREEN_SIZE[0]/8,(self.SCREEN_SIZE[1]/8)*3))

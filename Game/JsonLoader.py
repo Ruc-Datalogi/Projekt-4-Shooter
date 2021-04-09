@@ -1,7 +1,7 @@
 import json
 
 class JsonLoader(object):
-
+    print("i construct")
     
     jsonFile = open("Game/save_file.json", "r")
     data = json.load(jsonFile)
@@ -38,7 +38,7 @@ class JsonLoader(object):
 
     @staticmethod
     def updateJsonFile(self , ID):
-    
+        print("i use")
         jsonFile = open("Game/save_file.json", "r") # Open the JSON file for reading
         data = json.load(jsonFile) # Read the JSON into the buffer
         jsonFile.close() # Close the JSON file
