@@ -10,6 +10,10 @@ class JsonLoader(object):
     total_kills = data["total_kills"]
     music = data["music"]
     sounds = data["sounds"]
+    bullet_damage = data["bullet_damage"]
+    bullet_amount = data["bullet_amount"]
+    fire_speed = data["fire_speed"]
+    shield = data["shield"]
     
     def get_coins(self):
         return self.coins
@@ -20,6 +24,17 @@ class JsonLoader(object):
     def get_sounds(self):
         return self.sounds
 
+    def get_bullet_damage(self):
+        return self.bullet_damage
+    
+    def get_bullet_amount(self):
+        return self.bullet_amount
+    
+    def get_fire_speed(self):
+        return self.fire_speed
+    
+    def get_shield(self):
+        return self.shield
 
     @staticmethod
     def updateJsonFile(self , ID):
