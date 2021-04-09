@@ -1,0 +1,45 @@
+Date : 2021-04-09 14:27:46
+Directory : c:\Users\marti\Desktop\Projekt-4-Shooter
+Total : 18 files,  1068 codes, 91 comments, 499 blanks, all 1658 lines
+
+Languages
++----------+------------+------------+------------+------------+------------+
+| language | files      | code       | comment    | blank      | total      |
++----------+------------+------------+------------+------------+------------+
+| Python   |         16 |      1,066 |         91 |        499 |      1,656 |
+| JSON     |          1 |          1 |          0 |          0 |          1 |
+| Markdown |          1 |          1 |          0 |          0 |          1 |
++----------+------------+------------+------------+------------+------------+
+
+Directories
++-----------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                            | files      | code       | comment    | blank      | total      |
++-----------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                               |         18 |      1,068 |         91 |        499 |      1,658 |
+| Game                                                            |         17 |      1,067 |         91 |        499 |      1,657 |
++-----------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-----------------------------------------------------------------+----------+------------+------------+------------+------------+
+| filename                                                        | language | code       | comment    | blank      | total      |
++-----------------------------------------------------------------+----------+------------+------------+------------+------------+
+| c:\Users\marti\Desktop\Projekt-4-Shooter\Game\Boss.py           | Python   |         97 |          6 |         53 |        156 |
+| c:\Users\marti\Desktop\Projekt-4-Shooter\Game\Collectables.py   | Python   |         32 |          0 |         23 |         55 |
+| c:\Users\marti\Desktop\Projekt-4-Shooter\Game\Enemy.py          | Python   |         90 |          7 |         37 |        134 |
+| c:\Users\marti\Desktop\Projekt-4-Shooter\Game\EnemyBullet.py    | Python   |         43 |          5 |         21 |         69 |
+| c:\Users\marti\Desktop\Projekt-4-Shooter\Game\FriendlyBullet.py | Python   |         34 |          5 |         17 |         56 |
+| c:\Users\marti\Desktop\Projekt-4-Shooter\Game\GameObject.py     | Python   |         34 |          2 |         20 |         56 |
+| c:\Users\marti\Desktop\Projekt-4-Shooter\Game\Generator.py      | Python   |         92 |          1 |         40 |        133 |
+| c:\Users\marti\Desktop\Projekt-4-Shooter\Game\HUD.py            | Python   |         64 |         15 |         35 |        114 |
+| c:\Users\marti\Desktop\Projekt-4-Shooter\Game\JsonLoader.py     | Python   |         83 |          2 |         30 |        115 |
+| c:\Users\marti\Desktop\Projekt-4-Shooter\Game\Main.py           | Python   |         68 |          7 |         32 |        107 |
+| c:\Users\marti\Desktop\Projekt-4-Shooter\Game\Mediator.py       | Python   |          3 |          0 |          1 |          4 |
+| c:\Users\marti\Desktop\Projekt-4-Shooter\Game\Menu.py           | Python   |        241 |         27 |        111 |        379 |
+| c:\Users\marti\Desktop\Projekt-4-Shooter\Game\Player.py         | Python   |        115 |          4 |         52 |        171 |
+| c:\Users\marti\Desktop\Projekt-4-Shooter\Game\Setup.py          | Python   |          3 |          0 |          1 |          4 |
+| c:\Users\marti\Desktop\Projekt-4-Shooter\Game\Soundplayer.py    | Python   |         50 |          3 |         19 |         72 |
+| c:\Users\marti\Desktop\Projekt-4-Shooter\Game\Spritesheet.py    | Python   |         17 |          7 |          7 |         31 |
+| c:\Users\marti\Desktop\Projekt-4-Shooter\Game\save_file.json    | JSON     |          1 |          0 |          0 |          1 |
+| c:\Users\marti\Desktop\Projekt-4-Shooter\README.md              | Markdown |          1 |          0 |          0 |          1 |
+| Total                                                           |          |      1,068 |         91 |        499 |      1,658 |
++-----------------------------------------------------------------+----------+------------+------------+------------+------------+

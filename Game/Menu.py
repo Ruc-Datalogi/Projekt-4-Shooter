@@ -349,10 +349,9 @@ class Menu:
                     if self.select_upgrades == 4:
                         self.upgrades_on = False
                         self.front_screen = True
-                
+        
             
 
-                        
 
                   
 

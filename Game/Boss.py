@@ -136,7 +136,8 @@ class Boss(GameObject):
             if i == -200:
                 pass
             else:
-                self.mediator.all_game_objects.append(EnemyBullet(self.boss_xpos + 45, self.boss_ypos + 26, (i*0.4) , 3.5, True, self.img_bullet_red, 'e_bullet', self.mediator, self.screen))
+                self.mediator.all_game_objects.append(EnemyBullet(self.boss_xpos + 45, self.boss_ypos + 26, (i*0.4)
+                , 3.5, True, self.img_bullet_red, 'e_bullet', self.mediator, self.screen))
 
 
     ## Blue burst of bullets constant ##
