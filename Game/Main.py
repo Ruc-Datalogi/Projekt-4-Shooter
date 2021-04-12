@@ -41,12 +41,6 @@ def main():
     icon = pygame.image.load(menu.resource_path('Game/sprites/playerLV1.png'))
     pygame.display.set_icon(icon)
 
-
-
-
-
-
-
     while RUNNING:
         
         ## Draw Menu ##
@@ -65,19 +59,18 @@ def main():
             surf = pygame.transform.scale(display, SCREEN_SIZE)             
             screen.blit(surf, (0,0))
             pygame.display.update()
+            
         else:
         ## Game loop ##
             for event in pygame.event.get():
                 if event.type == pygame.QUIT: 
                     RUNNING = False
-                
-                
+                     
             menu.draw_background_scrolling(display,DISPLAY_SIZE)
             
             for object in mediator.all_game_objects:
                 object.loop()
                 object.draw()
-
 
             generator.generate()
 
