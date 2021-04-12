@@ -14,7 +14,7 @@ class FriendlyBullet(GameObject):
         self.bulletspeed_x = 0
         self.bulletspeed_y = 12
         self.bullet_rect = self.img.get_rect()
-        self.bullet_damage = JsonLoader.get_bullet_damage(JsonLoader)
+        self.bullet_damage = JsonLoader.get_bullet_damage(JsonLoader)*10
         self.object_ID = object_ID
         self.mediator = mediator
     

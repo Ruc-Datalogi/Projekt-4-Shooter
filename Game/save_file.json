@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 {"coins": "318", "total_coins": "318", "hi_score": "0", "total_kills": "515", "display_settings": "(600,800)", "music": "0", "sounds": "20", "bullet_damage": "10", "bullet_amount": "1", "fire_speed": "1", "shield": "1"}
+=======
+{"coins": "323", "total_coins": "323", "hi_score": "0", "total_kills": "528", "display_settings": "(600,800)", "music": "10", "sounds": "20", "bullet_damage": "1", "bullet_amount": "1", "fire_speed": "1", "shield": "1"}
+>>>>>>> 3888d2a1ebd402e0248c88367dcc564b79fe0737

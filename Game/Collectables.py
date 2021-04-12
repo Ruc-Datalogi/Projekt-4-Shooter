@@ -44,11 +44,5 @@ class Collectables(GameObject):
             JsonLoader.updateJsonFile(JsonLoader,'coin')
             self.mediator.to_be_removed.append(self)
 
-        
-
-
     def draw(self):
         self.screen.blit(self.img,(self.x_pos,self.y_pos))
-
-    
-
