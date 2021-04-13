@@ -4,6 +4,8 @@ from Enemy import Enemy
 from GameObject import *
 from Mediator import *
 from Soundplayer import *
+from JsonLoader import *
+from Upgrades import *
 
 class Player(GameObject):
 
@@ -25,6 +27,10 @@ class Player(GameObject):
         self.timer = 0
         self.player_health = 100
         self.player_damage_cooldown = 0
+        self.shield_on = False
+        self.shield_timer = 0
+        self.shield_cooldown = 60
+        self.shield_rect = pygame.Rect(0,0,0,0)
 
 
 
@@ -54,6 +60,14 @@ class Player(GameObject):
         self.screen.blit(self.img,(self.player_x,self.player_y))
 
         pygame.draw.rect(self.screen, (20,240,10), (self.player_rect))
+
+        if self.shield_on:
+            pygame.draw.circle(self.screen,(115,220,255,0.5),(self.player_x+self.img.get_width()/2,self.player_y+1+self.img.get_height()/2),13,1)
+            #pygame.draw.rect(self.screen, (255,0,11),self.shield_rect)
+
+        
+            
+            
         
 
        
@@ -77,6 +91,8 @@ class Player(GameObject):
         self.player_damage_cooldown += 1
 
         self.player_rect = pygame.Rect(self.player_x + 5 , self.player_y + 5, 3, 6)
+        if self.shield_on:
+            self.shield_rect = pygame.Rect(self.player_x-4,self.player_y-2,20,20)
             
     ## Get keypressed and use it for movement ##
     def player_input(self):
@@ -127,9 +143,14 @@ class Player(GameObject):
         else:
             self.speed_y[1] = 0
             
-        if self.timer > 10 and keystate[pygame.K_SPACE]:
+        if self.timer > int(Upgrades.get_level_fire_speed(Upgrades,JsonLoader.get_fire_speed(JsonLoader))) and keystate[pygame.K_SPACE]:
             self.timer = 0
             self.mediator.all_game_objects.append(FriendlyBullet(self.screen, self.player_x + 2, self.player_y - 10,'f_bullet',self.mediator))
+
+        if keystate[pygame.K_s] and self.shield_cooldown < self.shield_timer:
+            self.shield_on = True
+            self.shield_timer = 0
+
         
         if keystate[pygame.K_ESCAPE]:
             sys.exit()
@@ -139,6 +160,8 @@ class Player(GameObject):
     def loop(self):
         self.player_input()
         self.player_move()
+        if self.shield_on:
+            self.collision('e_bullet', self.shield_rect)
         hit_count = self.collision('e_bullet', self.player_rect)
         enemy_hit = self.collision('enemy', self.player_rect)
         if  hit_count > 0 and self.player_damage_cooldown > 8:
@@ -155,9 +178,14 @@ class Player(GameObject):
         for s in test:
             if str(s) == 'e_bullet' and self.player_damage_cooldown > 6:
                 print("woooo")
+        
+        self.shield_timer += 1
+        
+        if self.shield_timer > 60:
+            self.shield_on = False
 
         
-
+    
     
     def draw(self):
         self.player_draw()
