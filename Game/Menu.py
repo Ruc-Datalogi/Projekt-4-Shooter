@@ -188,9 +188,9 @@ class Menu:
             shield = self.font_upgrades.render('Shield', True ,(50,50,50))
 
         if self.select_upgrades == 4:
-            back = self.font_upgrades.render('Back', True, (120,120,120))
+            back = self.font.render('Back', True, (120,120,120))
         else:
-            back = self.font_upgrades.render('Back', True, (50,50,50))
+            back = self.font.render('Back', True, (50,50,50))
 
         #coins_int = self.font_upgrades.render(JsonLoader.get_coins(JsonLoader),True, (255,247,122))
 
@@ -223,51 +223,53 @@ class Menu:
         #self.screen.blit(damage_price,((self.SCREEN_SIZE[0]/8)* 6,(self.SCREEN_SIZE[1]/8)*3))
 
 
-        self.screen.blit(damage_upgrade,(self.SCREEN_SIZE[0]/8,(self.SCREEN_SIZE[1]/8)*3))
-        self.screen.blit(bullet_amount,(self.SCREEN_SIZE[0]/8,(self.SCREEN_SIZE[1]/8)*4))
-        self.screen.blit(fire_speed,(self.SCREEN_SIZE[0]/8,(self.SCREEN_SIZE[1]/8)*5))
-        self.screen.blit(shield,(self.SCREEN_SIZE[0]/8,(self.SCREEN_SIZE[1]/8)*6))
-        self.screen.blit(back,(self.SCREEN_SIZE[0]/8,(self.SCREEN_SIZE[1]/8)*7))
+        self.screen.blit(damage_upgrade,(self.SCREEN_SIZE[0]/8,(self.SCREEN_SIZE[1]/8)*2))
+        self.screen.blit(bullet_amount,(self.SCREEN_SIZE[0]/8,(self.SCREEN_SIZE[1]/8)*3))
+        self.screen.blit(fire_speed,(self.SCREEN_SIZE[0]/8,(self.SCREEN_SIZE[1]/8)*4))
+        self.screen.blit(shield,(self.SCREEN_SIZE[0]/8,(self.SCREEN_SIZE[1]/8)*5))
+        self.screen.blit(back,(self.SCREEN_SIZE[0]/8,(self.SCREEN_SIZE[1]/8)*6))
 
     def draw_bullet_damage_screen(self):
         upgrades_title = self.font.render('Upgrades', True, (120,120,120))
         current_upgrade = self.font_upgrades.render('Bullet damage', True, (100,100,100))
         coins = self.font_upgrades.render('Coins:', True ,(255,180,40))
-        current_bullet_damage = self.font_upgrades.render('Current damage:', True ,(120,120,120))
-        upgraded_bullet_damage = self.font_upgrades.render('Upgraded bullet damage:', True ,(120,120,120))
+        current_bullet_damage = self.font_upgrades.render('Current:', True ,(100,100,100))
+        upgraded_bullet_damage = self.font_upgrades.render('Upgrade:', True ,(20,148,20))
         bullet_damage_increment = self.font_upgrades.render('+5', True ,(20,148,20))
         cost = self.font_upgrades.render('Cost:', True ,(255,180,40))
-        bullet_damage = self.font_upgrades.render(JsonLoader.get_bullet_damage(JsonLoader),True,(120,120,120))
-        Price = self.font_upgrades.render(Upgrades.get_price_bullet_damage(Upgrades,JsonLoader.get_bullet_damage(JsonLoader)), True,(120,120,120))
+        bullet_damage = self.font_upgrades.render(JsonLoader.get_bullet_damage(JsonLoader),True,(100,100,100))
+        price = self.font_upgrades.render(Upgrades.get_price_bullet_damage(Upgrades,JsonLoader.get_bullet_damage(JsonLoader)), True,(255,180,40))
+        current_coins = self.font_upgrades.render(JsonLoader.get_coins(JsonLoader),True,(255,180,40))
 
         if self.select_current_upgrade == 0:
-            upgrade = self.font_upgrades.render('Upgrade', True, (120,120,120))
+            upgrade = self.font.render('Upgrade', True, (20,148,20))
         else:
-            upgrade = self.font_upgrades.render('Upgrade', True, (50,50,50))
+            upgrade = self.font.render('Upgrade', True, (50,50,50))
 
         if self.select_current_upgrade == 1:
-            back = self.font_upgrades.render('Back', True, (120,120,120))
+            back = self.font.render('Back', True, (120,120,120))
         else:
-            back = self.font_upgrades.render('Back', True, (50,50,50))
+            back = self.font.render('Back', True, (50,50,50))
 
         self.screen.blit(upgrades_title, (self.SCREEN_SIZE[0]/8, (self.SCREEN_SIZE[1]/8)))
         self.screen.blit(current_upgrade,(self.SCREEN_SIZE[0]/8, (self.SCREEN_SIZE[1]/8*1.5)))
         self.screen.blit(coins,(self.SCREEN_SIZE[0]/8*5.2,(self.SCREEN_SIZE[1]/8*1.14) ))
         self.screen.blit(current_bullet_damage,(self.SCREEN_SIZE[0]/8,(self.SCREEN_SIZE[1]/8)*2.5 ))
-        self.screen.blit(upgraded_bullet_damage,(self.SCREEN_SIZE[0]/8,(self.SCREEN_SIZE[1]/8)*3 ))
-        self.screen.blit(bullet_damage_increment,(self.SCREEN_SIZE[0]/8*6.1,(self.SCREEN_SIZE[1]/8)*3 ))
+        self.screen.blit(upgraded_bullet_damage,(self.SCREEN_SIZE[0]/8,(self.SCREEN_SIZE[1]/8)*3.25 ))
+        self.screen.blit(bullet_damage_increment,(self.SCREEN_SIZE[0]/8*3,(self.SCREEN_SIZE[1]/8)*3.25 ))
         self.screen.blit(cost,(self.SCREEN_SIZE[0]/8,(self.SCREEN_SIZE[1]/8)*4 ))
-        self.screen.blit(upgrade,(self.SCREEN_SIZE[0]/8,(self.SCREEN_SIZE[1]/8)*5 ))
-        self.screen.blit(back,(self.SCREEN_SIZE[0]/8*4,(self.SCREEN_SIZE[1]/8)*5 ))
-        self.screen.blit(bullet_damage,(self.SCREEN_SIZE[0]/8*4.5,(self.SCREEN_SIZE[1]/8*2.5)))
-        self.screen.blit(Price,(self.SCREEN_SIZE[0]/8*6,(self.SCREEN_SIZE[1]/8*2.5)))
+        self.screen.blit(upgrade,(self.SCREEN_SIZE[0]/8,(self.SCREEN_SIZE[1]/8)*6 ))
+        self.screen.blit(back,(self.SCREEN_SIZE[0]/8*5,(self.SCREEN_SIZE[1]/8)*6 ))
+        self.screen.blit(bullet_damage,(self.SCREEN_SIZE[0]/8*3,(self.SCREEN_SIZE[1]/8*2.5)))
+        self.screen.blit(price,(self.SCREEN_SIZE[0]/8*3,(self.SCREEN_SIZE[1]/8*4)))
+        self.screen.blit(current_coins,(self.SCREEN_SIZE[0]/8*6.5,(self.SCREEN_SIZE[1]/8*1.14) ))
 
     def draw_bullet_amount_screen(self):
         upgrades_title = self.font.render('Upgrades', True, (120,120,120))
         current_upgrade = self.font_upgrades.render('Bullet amount', True, (100,100,100))
         coins = self.font_upgrades.render('Coins:', True ,(255,180,40))
-        current_bullet_amount = self.font_upgrades.render('Current bullet amount:', True ,(120,120,120))
-        upgraded_bullet_amount = self.font_upgrades.render('Upgraded bullet amount:', True ,(120,120,120))
+        current_bullet_amount = self.font_upgrades.render('Current:', True ,(120,120,120))
+        upgraded_bullet_amount = self.font_upgrades.render('Upgrade:', True ,(120,120,120))
         bullet_amount_increment = self.font_upgrades.render('+1', True ,(20,148,20))
         cost = self.font_upgrades.render('Cost:', True ,(255,180,40))
         bullet_amount = self.font_upgrades.render(JsonLoader.get_bullet_amount(JsonLoader),True,(120,120,120))
@@ -299,8 +301,8 @@ class Menu:
         upgrades_title = self.font.render('Upgrades', True, (120,120,120))
         current_upgrade = self.font_upgrades.render('Fire speed', True, (100,100,100))
         coins = self.font_upgrades.render('Coins:', True ,(255,180,40))
-        current_bullet_fire_speed = self.font_upgrades.render('Current bullet fire speed:', True ,(120,120,120))
-        upgraded_bullet_fire_speed = self.font_upgrades.render('Upgraded bullet fire speed:', True ,(120,120,120))
+        current_bullet_fire_speed = self.font_upgrades.render('Current:', True ,(120,120,120))
+        upgraded_bullet_fire_speed = self.font_upgrades.render('Upgrade:', True ,(120,120,120))
         bullet_fire_speed_increment = self.font_upgrades.render('+1', True ,(20,148,20))
         cost = self.font_upgrades.render('Cost:', True ,(255,180,40))
         fire_speed = self.font_upgrades.render(JsonLoader.get_fire_speed(JsonLoader),True,(120,120,120))
@@ -332,8 +334,8 @@ class Menu:
         upgrades_title = self.font.render('Upgrades', True, (120,120,120))
         current_upgrade = self.font_upgrades.render('Shield', True, (100,100,100))
         coins = self.font_upgrades.render('Coins:', True ,(255,180,40))
-        current_shield = self.font_upgrades.render('Current shield:', True ,(120,120,120))
-        upgraded_shield = self.font_upgrades.render('Upgraded shield:', True ,(120,120,120))
+        current_shield = self.font_upgrades.render('Current:', True ,(120,120,120))
+        upgraded_shield = self.font_upgrades.render('Upgrade:', True ,(120,120,120))
         shield_increment = self.font_upgrades.render('+1 s', True ,(20,148,20))
         cost = self.font_upgrades.render('Cost:', True ,(255,180,40))
         shield = self.font_upgrades.render(JsonLoader.get_shield(JsonLoader),True,(120,120,120))
