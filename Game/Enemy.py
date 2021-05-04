@@ -10,7 +10,7 @@ from Collectables import *
 from JsonLoader import * 
 
 class Enemy(GameObject):
-
+    
     ## Choose enemy sprite ##
     def __init__(self, enemy_xpos, enemy_ypos, enemy_ID, object_ID, mediator, screen):
         

@@ -7,6 +7,7 @@ class JsonLoader(object):
     data = json.load(jsonFile)
 
     coins = data["coins"]
+    total_coins = data["total_coins"]
     total_kills = data["total_kills"]
     music = data["music"]
     sounds = data["sounds"]
@@ -54,6 +55,7 @@ class JsonLoader(object):
             data['coins'] = str(tmp)
             data['total_coins'] = str(tmp2)
             JsonLoader.coins = data["coins"]
+            JsonLoader.total_coins = data["total_coins"]
 
         if ID == 'enemy':
             tmp = data['total_kills']
