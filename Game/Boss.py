@@ -93,8 +93,6 @@ class Boss(GameObject):
                     self.timer = 0
                     self.boss_bullet_pattern_3()
 
-            
-
     
     def loop(self):
 
@@ -102,10 +100,10 @@ class Boss(GameObject):
 
 
         if self.boss_ready:
-            if self.collision('f_bullet',self.boss_rect) and self.boss_damage_cooldown > 6:
-                
+            hit_count = self.collision('f_bullet', self.boss_rect)
+            if hit_count >= 1:
                 Soundplayer.enemy_hit_sound(Soundplayer())
-                self.boss_health -= 10
+                self.boss_health -= float(Upgrades.get_level_bullet_damage(Upgrades,JsonLoader.get_bullet_damage(JsonLoader)))*hit_count  
         
         if self.boss_health < 0:
 
