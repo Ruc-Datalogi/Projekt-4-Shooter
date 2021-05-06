@@ -116,12 +116,18 @@ class Enemy(GameObject):
     def loop(self):
         self.enemy_move()
         #self.showing_image = self.img
-        if self.collision('f_bullet',self.enemy_rect) and self.enemy_damage_cooldown > 6:
-            self.enemy_damage_cooldown = 0
+        hit_count = self.collision('f_bullet', self.enemy_rect)
+        if hit_count >= 1:
             Soundplayer.enemy_hit_sound(Soundplayer())
 
-            self.enemy_health -= 10
+            self.enemy_health -= 10*hit_count
             self.showing_image = self.temp_image
+        #if self.collision('f_bullet',self.enemy_rect): #and self.enemy_damage_cooldown > 6:
+            #self.enemy_damage_cooldown = 0
+            #Soundplayer.enemy_hit_sound(Soundplayer())
+
+            #self.enemy_health -= 10
+            #self.showing_image = self.temp_image
         
         if self.enemy_health < 0:
             self.mediator.all_game_objects.append(Collectables (self.enemy_x, self.enemy_y, self.screen, self.mediator, 'coin'))

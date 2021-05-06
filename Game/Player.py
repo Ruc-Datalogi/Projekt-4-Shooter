@@ -29,7 +29,7 @@ class Player(GameObject):
         self.player_damage_cooldown = 0
         self.shield_on = False
         self.shield_timer = 0
-        self.shield_cooldown = 60
+        self.shield_cooldown = 600
         self.shield_rect = pygame.Rect(0,0,0,0)
 
 
@@ -145,7 +145,17 @@ class Player(GameObject):
             
         if self.timer > int(Upgrades.get_level_fire_speed(Upgrades,JsonLoader.get_fire_speed(JsonLoader))) and keystate[pygame.K_SPACE]:
             self.timer = 0
-            self.mediator.all_game_objects.append(FriendlyBullet(self.screen, self.player_x + 2, self.player_y - 10,'f_bullet',self.mediator))
+            if int(Upgrades.get_level_bullet_amount(Upgrades, JsonLoader.get_bullet_amount(JsonLoader))) == 1:
+                self.mediator.all_game_objects.append(FriendlyBullet(self.screen, self.player_x + 2, self.player_y - 10,'f_bullet',self.mediator))
+            elif int(Upgrades.get_level_bullet_amount(Upgrades, JsonLoader.get_bullet_amount(JsonLoader))) == 2:
+                self.mediator.all_game_objects.append(FriendlyBullet(self.screen, self.player_x - 4, self.player_y - 10,'f_bullet',self.mediator))
+                self.mediator.all_game_objects.append(FriendlyBullet(self.screen, self.player_x + 8, self.player_y - 10,'f_bullet',self.mediator))
+            elif int(Upgrades.get_level_bullet_amount(Upgrades, JsonLoader.get_bullet_amount(JsonLoader))) == 3:
+                self.mediator.all_game_objects.append(FriendlyBullet(self.screen, self.player_x - 8, self.player_y - 10,'f_bullet',self.mediator))
+                self.mediator.all_game_objects.append(FriendlyBullet(self.screen, self.player_x + 2, self.player_y - 10,'f_bullet',self.mediator))
+                self.mediator.all_game_objects.append(FriendlyBullet(self.screen, self.player_x + 12, self.player_y - 10,'f_bullet',self.mediator))
+        
+        
 
         if keystate[pygame.K_s] and self.shield_cooldown < self.shield_timer:
             self.shield_on = True
@@ -181,7 +191,7 @@ class Player(GameObject):
         
         self.shield_timer += 1
         
-        if self.shield_timer > 60:
+        if self.shield_timer > int(Upgrades.get_level_shield(Upgrades,JsonLoader.get_shield(JsonLoader)))*60:
             self.shield_on = False
 
         

@@ -37,7 +37,7 @@ class JsonLoader(object):
         return self.shield
 
     @staticmethod
-    def updateJsonFile(self , ID):
+    def updateJsonFile(self, ID, coin_amount = 0):
         print("i use")
         jsonFile = open("Game/save_file.json", "r") # Open the JSON file for reading
         data = json.load(jsonFile) # Read the JSON into the buffer
@@ -99,6 +99,20 @@ class JsonLoader(object):
 
             data['music'] = str(tmp)
             JsonLoader.music = data['music']
+
+        if ID == 'subtract_coins':
+            tmp = data['coins']
+            tmp = int(tmp) - int(coin_amount)
+
+            data['coins'] = str(tmp)
+            JsonLoader.coins = data['coins']
+
+        if ID == 'upgrade_bullet_damage':
+            tmp = data['bullet_damage']
+            tmp = int(tmp) + 1
+
+            data['bullet_damage'] = str(tmp)
+            JsonLoader.bullet_damage = data['bullet_damage']
 
         ## Save our changes to JSON file
         jsonFile = open("Game/save_file.json", "w+")
