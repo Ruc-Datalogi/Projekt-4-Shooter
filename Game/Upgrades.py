@@ -35,7 +35,7 @@ class Upgrades:
 
     bullet_fire_speed_dictionary_price = {"1": "15", "2": "50", "3": "100","4": "200", "5": "350", "6": "500","7": "850", "8": "1200", "9": "1600"}
 
-    shield_dictionary_price = {"1": "15", "2": "50", "3": "100","4": "200", "5": "350", "6": "500","7": "850", "8": "1200", "9": "1600"}
+    shield_dictionary_price = {"1": "15", "2": "50", "3": "100","4": "200", "5": "350", "6": "500"}
 
     def get_price_bullet_damage(self, current_level):
         price = self.bullet_damage_dictionary_price[current_level]
@@ -61,9 +61,18 @@ class Upgrades:
                 JsonLoader.updateJsonFile(JsonLoader, 'upgrade_bullet_damage')
 
     def check_upgrade_bullet_amount(self):
-        pass   
+        if int(JsonLoader.bullet_amount) < 3:
+            if int(JsonLoader.get_coins(JsonLoader)) >= int(self.get_price_bullet_amount(self, JsonLoader.get_bullet_amount(JsonLoader))):
+                JsonLoader.updateJsonFile(JsonLoader, 'subtract_coins', self.get_price_bullet_amount(self, JsonLoader.get_bullet_amount(JsonLoader)))
+                JsonLoader.updateJsonFile(JsonLoader, 'upgrade_bullet_amount')   
 
     def check_upgrade_fire_speed(self):
-        pass
+        if int(JsonLoader.fire_speed) < 9:
+            if int(JsonLoader.get_coins(JsonLoader)) >= int(self.get_price_fire_speed(self, JsonLoader.get_fire_speed(JsonLoader))):
+                JsonLoader.updateJsonFile(JsonLoader, 'subtract_coins', self.get_price_fire_speed(self, JsonLoader.get_fire_speed(JsonLoader)))
+                JsonLoader.updateJsonFile(JsonLoader, 'upgrade_fire_speed')  
     def check_upgrade_shield(self):
-        pass
+        if int(JsonLoader.shield) < 6:
+            if int(JsonLoader.get_coins(JsonLoader)) >= int(self.get_price_shield(self, JsonLoader.get_shield(JsonLoader))):
+                JsonLoader.updateJsonFile(JsonLoader, 'subtract_coins', self.get_price_shield(self, JsonLoader.get_shield(JsonLoader)))
+                JsonLoader.updateJsonFile(JsonLoader, 'upgrade_shield')  

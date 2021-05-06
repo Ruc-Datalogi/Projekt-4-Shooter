@@ -116,6 +116,27 @@ class JsonLoader(object):
             data['bullet_damage'] = str(tmp)
             JsonLoader.bullet_damage = data['bullet_damage']
 
+        if ID == 'upgrade_bullet_amount':
+            tmp = data['bullet_amount']
+            tmp = int(tmp) + 1
+
+            data['bullet_amount'] = str(tmp)
+            JsonLoader.bullet_amount = data['bullet_amount']
+
+        if ID == 'upgrade_fire_speed':
+            tmp = data['fire_speed']
+            tmp = int(tmp) + 1
+
+            data['fire_speed'] = str(tmp)
+            JsonLoader.fire_speed = data['fire_speed']
+
+        if ID == 'upgrade_shield':
+            tmp = data['shield']
+            tmp = int(tmp) + 1
+
+            data['shield'] = str(tmp)
+            JsonLoader.shield = data['shield']
+
         ## Save our changes to JSON file
         jsonFile = open("Game/save_file.json", "w+")
         jsonFile.write(json.dumps(data))

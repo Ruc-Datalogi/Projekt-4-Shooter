@@ -31,6 +31,8 @@ class Player(GameObject):
         self.shield_timer = 0
         self.shield_cooldown = 600
         self.shield_rect = pygame.Rect(0,0,0,0)
+        self.shield_amount = 10
+        
 
 
 
@@ -52,6 +54,9 @@ class Player(GameObject):
     def get_health (self):
         return self.player_health
 
+    def get_energy (self):
+        return self.shield_amount
+
     def get_rect(self):
         return self.player_rect    
 
@@ -63,7 +68,7 @@ class Player(GameObject):
 
         if self.shield_on:
             pygame.draw.circle(self.screen,(115,220,255,0.5),(self.player_x+self.img.get_width()/2,self.player_y+1+self.img.get_height()/2),13,1)
-            #pygame.draw.rect(self.screen, (255,0,11),self.shield_rect)
+
 
         
             
@@ -157,9 +162,10 @@ class Player(GameObject):
         
         
 
-        if keystate[pygame.K_s] and self.shield_cooldown < self.shield_timer:
+        if keystate[pygame.K_s] and self.shield_cooldown < self.shield_timer and self.shield_amount >= 1:
             self.shield_on = True
             self.shield_timer = 0
+            self.shield_amount -= 1
 
         
         if keystate[pygame.K_ESCAPE]:
@@ -183,11 +189,6 @@ class Player(GameObject):
             self.player_damage_cooldown = 0
             self.player_health = 0
         
-        test = self.collision_test(self.player_rect)
-        
-        for s in test:
-            if str(s) == 'e_bullet' and self.player_damage_cooldown > 6:
-                print("woooo")
         
         self.shield_timer += 1
         
@@ -203,7 +204,10 @@ class Player(GameObject):
 
     def player_dead(self):
         if self.player_health <= 0:
-            self.player_x = 125
-            self.player_y = 300
-            self.player_health = 100
             return True 
+
+    def reset_player (self):
+        self.player_x = 125
+        self.player_y = 300
+        self.player_health = 100
+        self.shield_amount = 10

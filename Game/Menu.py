@@ -556,7 +556,6 @@ class Menu:
                 
                 if event.key == pygame.K_RETURN:
                     if self.select_current_upgrade == 0:
-                        print('nu plz')
                         Upgrades.check_upgrade_bullet_damage(Upgrades)
                     if self.select_current_upgrade == 1:
                         self.bullet_damage_on = False
@@ -578,7 +577,7 @@ class Menu:
                 
                 if event.key == pygame.K_RETURN:
                     if self.select_current_upgrade == 0:
-                        print("i upgrade :)")
+                        Upgrades.check_upgrade_bullet_amount(Upgrades)
                     if self.select_current_upgrade == 1:
                         self.bullet_amount_on = False
                         self.upgrades_on = True
@@ -599,7 +598,7 @@ class Menu:
                 
                 if event.key == pygame.K_RETURN:
                     if self.select_current_upgrade == 0:
-                        print("i upgrade :)")
+                        Upgrades.check_upgrade_fire_speed(Upgrades)
                     if self.select_current_upgrade == 1:
                         self.bullet_fire_speed_on = False
                         self.upgrades_on = True
@@ -620,7 +619,7 @@ class Menu:
                 
                 if event.key == pygame.K_RETURN:
                     if self.select_current_upgrade == 0:
-                        print("i upgrade :)")
+                        Upgrades.check_upgrade_shield(Upgrades)
                     if self.select_current_upgrade == 1:
                         self.shield_on = False
                         self.upgrades_on = True

@@ -8,6 +8,7 @@ from Spritesheet import *
 from Soundplayer import *
 from Collectables import *
 from JsonLoader import * 
+from Upgrades import *
 
 class Enemy(GameObject):
     
@@ -120,7 +121,7 @@ class Enemy(GameObject):
         if hit_count >= 1:
             Soundplayer.enemy_hit_sound(Soundplayer())
 
-            self.enemy_health -= 10*hit_count
+            self.enemy_health -= float(Upgrades.get_level_bullet_damage(Upgrades,JsonLoader.get_bullet_damage(JsonLoader)))*hit_count
             self.showing_image = self.temp_image
         #if self.collision('f_bullet',self.enemy_rect): #and self.enemy_damage_cooldown > 6:
             #self.enemy_damage_cooldown = 0
