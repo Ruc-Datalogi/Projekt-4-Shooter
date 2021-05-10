@@ -70,12 +70,6 @@ class Enemy(GameObject):
 
     def get_rect(self):
         return self.enemy_rect
-    
-
-    ## Damage the enemy
-    def set_health(self, x):
-        print(self.enemy_health)
-        self.enemy_health += x
 
     def get_enemy_health(self):
         return self.enemy_health
@@ -115,7 +109,7 @@ class Enemy(GameObject):
     
     def loop(self):
         self.enemy_move()
-        #self.showing_image = self.img
+
         if self.collision('f_bullet',self.enemy_rect) and self.enemy_damage_cooldown > 6:
             self.enemy_damage_cooldown = 0
             Soundplayer.enemy_hit_sound(Soundplayer())
