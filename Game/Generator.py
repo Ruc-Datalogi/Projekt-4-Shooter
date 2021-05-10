@@ -75,12 +75,6 @@ class Generator:
         self.timer = 0
         self.current_wave = 0
 
-    def next_level_boss(self):
-        if not self.check_for_enemy():
-            self.level += 1
-            self.timer = 0
-            self.current_wave = 0
-
     def next_level(self):
         if self.current_wave == self.max_amount_of_waves and not self.check_for_enemy():
             self.current_wave = 0
@@ -125,8 +119,6 @@ class Generator:
 
         if self.level == 5:
             self.game_completed = True
-
-
 
     def get_game_complete(self):
         return self.game_completed

@@ -3,15 +3,12 @@ import sys, os, json
 
 class GameObject:
     
-
     def __init__(self, object_ID, mediator):
         self.object_ID = object_ID
         self.mediator = mediator
         
-
     def loop(self):
         pass
-
 
     def draw(self):
         pass
