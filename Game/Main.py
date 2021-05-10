@@ -88,6 +88,7 @@ class Main:
                     hud = HUD(display, player, DISPLAY_SIZE, mediator, generator)
                     mediator.all_game_objects.clear()
                     menu.player_dead()
+                    player.reset_player()
 
                 surf = pygame.transform.scale(display, SCREEN_SIZE)
                 screen.blit(surf, (0,0))

@@ -84,7 +84,7 @@ class Menu:
     
 
     def draw_front_screen(self):
-            title = self.font.render('The Falcon', True, (120,120,120))
+            title = self.font.render('The Falcon', True, (255,129,0))
 
             if self.selected == 0:
                 start = self.font.render('Start', True, (100,100,100))
@@ -556,7 +556,7 @@ class Menu:
                 
                 if event.key == pygame.K_RETURN:
                     if self.select_current_upgrade == 0:
-                        print("i upgrade :)")
+                        Upgrades.check_upgrade_bullet_damage(Upgrades)
                     if self.select_current_upgrade == 1:
                         self.bullet_damage_on = False
                         self.upgrades_on = True
@@ -577,7 +577,7 @@ class Menu:
                 
                 if event.key == pygame.K_RETURN:
                     if self.select_current_upgrade == 0:
-                        print("i upgrade :)")
+                        Upgrades.check_upgrade_bullet_amount(Upgrades)
                     if self.select_current_upgrade == 1:
                         self.bullet_amount_on = False
                         self.upgrades_on = True
@@ -598,7 +598,7 @@ class Menu:
                 
                 if event.key == pygame.K_RETURN:
                     if self.select_current_upgrade == 0:
-                        print("i upgrade :)")
+                        Upgrades.check_upgrade_fire_speed(Upgrades)
                     if self.select_current_upgrade == 1:
                         self.bullet_fire_speed_on = False
                         self.upgrades_on = True
@@ -619,7 +619,7 @@ class Menu:
                 
                 if event.key == pygame.K_RETURN:
                     if self.select_current_upgrade == 0:
-                        print("i upgrade :)")
+                        Upgrades.check_upgrade_shield(Upgrades)
                     if self.select_current_upgrade == 1:
                         self.shield_on = False
                         self.upgrades_on = True
