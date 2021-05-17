@@ -4,6 +4,7 @@ from GameObject import *
 from Mediator import *
 from Spritesheet import *
 from Soundplayer import *
+from Upgrades import *
 import random
 
 class Boss(GameObject):
