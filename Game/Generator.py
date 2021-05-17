@@ -118,7 +118,46 @@ class Generator:
                     self.skip_level()
 
         if self.level == 5:
+            if self.next_wave():
+                self.generate_wave_1(10,1)
+            self.next_level()
+
+        if self.level == 6:
+            if self.next_wave():
+                self.generate_wave_1(8,0)
+                self.generate_wave_1(8,1)
+            self.next_level()
+
+        if self.level == 7:
+            if self.next_wave():
+                self.generate_wave_1(8,0)
+                self.generate_wave_1(8,1)
+                self.generate_wave_1(8,2)
+            self.next_level()
+
+        if self.level == 8:
+            if self.next_wave():
+                self.generate_wave_1(10,0)
+                self.generate_wave_1(10,1)
+                self.generate_wave_1(10,2)
+            self.next_level()
+
+        if self.level == 9:
+            if self.next_wave():
+                self.generate_wave_1(4,0)
+                self.generate_wave_1(4,1)
+                self.generate_wave_1(4,2)
+
+            if not self.check_for_enemy():
+                self.mediator.all_game_objects.append(Boss(100,-20,0,'boss',self.mediator,self.screen, 2))
+                  
+            if self.check_for_boss():
+                self.skip_level() 
+
+        if self.level == 10:
             self.game_completed = True
 
+    
+    
     def get_game_complete(self):
         return self.game_completed
