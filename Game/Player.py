@@ -10,7 +10,7 @@ from Upgrades import *
 class Player(GameObject):
 
     ## Constructor for player ## 
-    def __init__(self, screen, mediator, object_ID):
+    def __init__(self, screen, object_ID):
         self.img = pygame.image.load(self.resource_path("Game/sprites/playerLV1.png"))
         self.player_x = 125 
         self.player_y = 300
@@ -37,9 +37,9 @@ class Player(GameObject):
 
 
 
-        self.mediator = mediator
         self.object_ID = object_ID
         self.player_rect = pygame.Rect(0,0,0,0)
+        self.alive = True
 
     def get_dmg (self, amount):
         if self.player_health > 0:
@@ -151,14 +151,14 @@ class Player(GameObject):
         if self.timer > int(Upgrades.get_level_fire_speed(Upgrades,JsonLoader.get_fire_speed(JsonLoader))) and keystate[pygame.K_SPACE]:
             self.timer = 0
             if int(Upgrades.get_level_bullet_amount(Upgrades, JsonLoader.get_bullet_amount(JsonLoader))) == 1:
-                self.mediator.all_game_objects.append(FriendlyBullet(self.screen, self.player_x + 2, self.player_y - 10,'f_bullet',self.mediator))
+                Mediator.all_game_objects.append(FriendlyBullet(self.screen, self.player_x + 2, self.player_y - 10,'f_bullet'))
             elif int(Upgrades.get_level_bullet_amount(Upgrades, JsonLoader.get_bullet_amount(JsonLoader))) == 2:
-                self.mediator.all_game_objects.append(FriendlyBullet(self.screen, self.player_x - 4, self.player_y - 10,'f_bullet',self.mediator))
-                self.mediator.all_game_objects.append(FriendlyBullet(self.screen, self.player_x + 8, self.player_y - 10,'f_bullet',self.mediator))
+                Mediator.all_game_objects.append(FriendlyBullet(self.screen, self.player_x - 4, self.player_y - 10,'f_bullet'))
+                Mediator.all_game_objects.append(FriendlyBullet(self.screen, self.player_x + 8, self.player_y - 10,'f_bullet'))
             elif int(Upgrades.get_level_bullet_amount(Upgrades, JsonLoader.get_bullet_amount(JsonLoader))) == 3:
-                self.mediator.all_game_objects.append(FriendlyBullet(self.screen, self.player_x - 8, self.player_y - 10,'f_bullet',self.mediator))
-                self.mediator.all_game_objects.append(FriendlyBullet(self.screen, self.player_x + 2, self.player_y - 10,'f_bullet',self.mediator))
-                self.mediator.all_game_objects.append(FriendlyBullet(self.screen, self.player_x + 12, self.player_y - 10,'f_bullet',self.mediator))
+                Mediator.all_game_objects.append(FriendlyBullet(self.screen, self.player_x - 8, self.player_y - 10,'f_bullet'))
+                Mediator.all_game_objects.append(FriendlyBullet(self.screen, self.player_x + 2, self.player_y - 10,'f_bullet'))
+                Mediator.all_game_objects.append(FriendlyBullet(self.screen, self.player_x + 12, self.player_y - 10,'f_bullet'))
         
         
 

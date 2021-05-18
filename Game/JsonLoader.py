@@ -1,8 +1,6 @@
 import json
 
-class JsonLoader(object):
-    print("i construct")
-    
+class JsonLoader(object):    
     jsonFile = open("Game/save_file.json", "r")
     data = json.load(jsonFile)
 
@@ -16,6 +14,8 @@ class JsonLoader(object):
     fire_speed = data["fire_speed"]
     shield = data["shield"]
     
+    jsonFile.close()
+
     def get_coins(self):
         return self.coins
 
@@ -39,7 +39,6 @@ class JsonLoader(object):
 
     @staticmethod
     def updateJsonFile(self, ID, coin_amount = 0):
-        print("i use")
         jsonFile = open("Game/save_file.json", "r") # Open the JSON file for reading
         data = json.load(jsonFile) # Read the JSON into the buffer
         jsonFile.close() # Close the JSON file

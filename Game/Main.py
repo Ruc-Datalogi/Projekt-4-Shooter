@@ -26,17 +26,16 @@ class Main:
         #The real screen
         screen = pygame.display.set_mode(SCREEN_SIZE)
         #To cast to 
-        mediator = Mediator()
 
         display = pygame.Surface((DISPLAY_SIZE))
-        player = Player(display,mediator,'player')
-        generator = Generator(display, mediator)
+        player = Player(display,'player')
+        generator = Generator(display)
 
 
         Soundplayer.load_music(Soundplayer())
         Soundplayer.play_music(Soundplayer())
 
-        hud = HUD(display, player, DISPLAY_SIZE, mediator, generator)
+        hud = HUD(display, player, DISPLAY_SIZE,generator)
         menu = Menu(display, DISPLAY_SIZE)
         # Title and Icon
         pygame.display.set_caption("The Falcon")
@@ -56,7 +55,7 @@ class Main:
                         sys.exit()
                     menu.menu_input(event)
                 if not menu.get_menu:
-                    mediator.all_game_objects.append(player)
+                    Mediator.all_game_objects.append(player)
 
                 surf = pygame.transform.scale(display, SCREEN_SIZE)             
                 screen.blit(surf, (0,0))
@@ -70,23 +69,27 @@ class Main:
                         
                 menu.draw_background_scrolling(display,DISPLAY_SIZE)
                 
-                for object in mediator.all_game_objects:
+
+                for object in Mediator.all_game_objects:
                     object.loop()
                     object.draw()
+                    #print(object.get_object_ID())
 
                 generator.generate()
 
-                mediator.all_game_objects = [i for i in mediator.all_game_objects if i not in mediator.to_be_removed]
+                print(len(Mediator.all_game_objects), end=' ')
+                print(len(Mediator.to_be_removed))
+
+                Mediator.all_game_objects = [i for i in Mediator.all_game_objects if i not in Mediator.to_be_removed]
                 hud.draw_HUD()
 
-
-                mediator.to_be_removed.clear()
+                Mediator.to_be_removed.clear()
 
                 ## Check if player is dead or game is completed
                 if player.player_dead() or generator.get_game_complete():
-                    generator = Generator(display, mediator)
-                    hud = HUD(display, player, DISPLAY_SIZE, mediator, generator)
-                    mediator.all_game_objects.clear()
+                    generator = Generator(display)
+                    hud = HUD(display, player, DISPLAY_SIZE, generator)
+                    Mediator.all_game_objects.clear()
                     menu.player_dead()
                     player.reset_player()
 

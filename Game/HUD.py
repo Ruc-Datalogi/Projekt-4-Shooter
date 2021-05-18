@@ -5,11 +5,10 @@ from JsonLoader import *
 
 class HUD:
 
-    def __init__(self, screen, player, screen_size, mediator, generator):
+    def __init__(self, screen, player, screen_size, generator):
         self.screen = screen
         self.player = player
         self.screen_size = screen_size
-        self.mediator = mediator 
         self.generator = generator
         self.font = pygame.font.Font(self.resource_path('Game/font/kongtext.ttf'),8)
         self.score = 0
@@ -92,7 +91,7 @@ class HUD:
 
 
     def draw_HUD(self):
-        for object in self.mediator.to_be_removed:
+        for object in Mediator.to_be_removed:
             if object.get_object_ID() == 'enemy':
                 self.score += 1
             

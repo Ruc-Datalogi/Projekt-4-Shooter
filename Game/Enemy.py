@@ -13,7 +13,7 @@ from Upgrades import *
 class Enemy(GameObject):
     
     ## Choose enemy sprite ##
-    def __init__(self, enemy_xpos, enemy_ypos, enemy_ID, object_ID, mediator, screen):
+    def __init__(self, enemy_xpos, enemy_ypos, enemy_ID, object_ID, screen):
         
         self.ss = Spritesheet(self.resource_path('Game/sprites/SpaceShipAsset.png'))
         self.sound = Soundplayer()
@@ -59,9 +59,9 @@ class Enemy(GameObject):
 
         self.enemy_rect = self.img.get_rect()
         self.object_ID = object_ID
-        self.mediator = mediator
         self.screen = screen
 
+        self.alive = True
 
         self.temp_image = self.img.copy()
         self.temp_image.set_alpha(120)
@@ -95,14 +95,14 @@ class Enemy(GameObject):
         
         self.enemy_y += self.enemy_speed_y
         if self.enemy_y >= 400:
-            self.mediator.to_be_removed.append(self)
+            Mediator.to_be_removed.append(self)
 
         self.enemy_rect = self.img.get_rect(x=self.enemy_x, y=self.enemy_y)
 
         if self.enemy_timer > self.bullet_interval + self.enemy_bullet_cooldown:
             self.enemy_bullet_cooldown = random.randint(0,60)
             self.enemy_timer = 0
-            self.mediator.all_game_objects.append(EnemyBullet (self.enemy_x,self.enemy_y +4, random.uniform(-1*(self.bullet_speed/4),1*(self.bullet_speed/4)) , self.bullet_speed, True ,self.img_bullet, 'e_bullet', self.mediator, self.screen))
+            Mediator.all_game_objects.append(EnemyBullet (self.enemy_x,self.enemy_y +4, random.uniform(-1*(self.bullet_speed/4),1*(self.bullet_speed/4)) , self.bullet_speed, True ,self.img_bullet, 'e_bullet', self.screen))
 
  
         
@@ -118,9 +118,10 @@ class Enemy(GameObject):
             self.enemy_health -= float(Upgrades.get_level_bullet_damage(Upgrades,JsonLoader.get_bullet_damage(JsonLoader)))*hit_count
             self.showing_image = self.temp_image
 
-        if self.enemy_health < 0:
-            self.mediator.all_game_objects.append(Collectables (self.enemy_x, self.enemy_y, self.screen, self.mediator, 'coin'))
-            self.mediator.to_be_removed.append(self)
+        if self.enemy_health <= 0.0:
+            Mediator.to_be_removed.append(self)
+            self.alive = False
+            Mediator.all_game_objects.append(Collectables (self.enemy_x, self.enemy_y, self.screen,'coin'))
             JsonLoader.updateJsonFile(JsonLoader,'enemy')
 
     def draw(self):

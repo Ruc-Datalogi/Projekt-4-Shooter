@@ -5,7 +5,7 @@ import random, json
 
 class Collectables(GameObject):
 
-    def __init__(self, x_pos, y_pos ,screen, mediator, object_ID):
+    def __init__(self, x_pos, y_pos ,screen, object_ID):
         self.screen = screen
         self.x_pos = x_pos
         self.y_pos = y_pos
@@ -14,7 +14,6 @@ class Collectables(GameObject):
     
         self.y_speed = - 2
 
-        self.mediator = mediator
         self.object_ID = object_ID
         self.ss = Spritesheet(self.resource_path('Game/sprites/coins.png'))
         self.img = self.ss.image_at(pygame.Rect(1,2,1,2))
@@ -23,6 +22,8 @@ class Collectables(GameObject):
 
         if self.object_ID == 'coin':
             self.img = self.ss.image_at(pygame.Rect(3,2,10,11))
+        self.alive = True
+
             
 
 
@@ -42,7 +43,10 @@ class Collectables(GameObject):
 
         if self.collision('player', self.rect):
             JsonLoader.updateJsonFile(JsonLoader,'coin')
-            self.mediator.to_be_removed.append(self)
+            Mediator.to_be_removed.append(self)
+        
+        if self.y_pos > self.screen.get_height() + self.img.get_height():
+            Mediator.to_be_removed.append(self) 
 
     def draw(self):
         self.screen.blit(self.img,(self.x_pos,self.y_pos))

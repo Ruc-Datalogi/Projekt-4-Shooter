@@ -10,7 +10,7 @@ import random
 class Boss(GameObject):
 
     ## Choose enemy sprite ##
-    def __init__(self, xpos, ypos, ID, object_ID, mediator, screen, level = 1):
+    def __init__(self, xpos, ypos, ID, object_ID,screen, level = 1):
         
         self.ss = Spritesheet(self.resource_path('Game/sprites/SpaceShipAsset.png'))
         self.ss2 = Spritesheet(self.resource_path('Game/sprites/bullets/allTheBullets.png'))
@@ -42,12 +42,13 @@ class Boss(GameObject):
 
         self.boss_id = ID
         self.object_ID = object_ID
-        self.mediator = mediator
         self.screen = screen
 
         self.level = level
         self.update_boss()
         print(self.level)
+        self.alive = True
+
         
     
         
@@ -138,7 +139,7 @@ class Boss(GameObject):
         
         if self.boss_health < 0:
 
-            self.mediator.to_be_removed.append(self)
+            Mediator.to_be_removed.append(self)
 
     def draw(self):
         self.draw_boss_rect()
@@ -148,8 +149,8 @@ class Boss(GameObject):
     ## Shower of bullets ##
     def boss_bullet_pattern_1(self):
 
-        self.mediator.all_game_objects.append(EnemyBullet(self.boss_xpos + 6, self.boss_ypos + 26, 0,6, False, self.img_bullet_blue_rect, 'e_bullet', self.mediator, self.screen))
-        self.mediator.all_game_objects.append(EnemyBullet(self.boss_xpos + 70, self.boss_ypos + 26, 0,6, False, self.img_bullet_blue_rect, 'e_bullet', self.mediator, self.screen))
+        Mediator.all_game_objects.append(EnemyBullet(self.boss_xpos + 6, self.boss_ypos + 26, 0,6, False, self.img_bullet_blue_rect, 'e_bullet', self.mediator, self.screen))
+        Mediator.all_game_objects.append(EnemyBullet(self.boss_xpos + 70, self.boss_ypos + 26, 0,6, False, self.img_bullet_blue_rect, 'e_bullet', self.mediator, self.screen))
 
 
     ## Burst of bullets with space in ##
@@ -165,21 +166,21 @@ class Boss(GameObject):
             if i == -200:
                 pass
             else:
-                self.mediator.all_game_objects.append(EnemyBullet(self.boss_xpos + 45, self.boss_ypos + 26, (i*0.4)
-                , 3.5, True, self.img_bullet_red, 'e_bullet', self.mediator, self.screen))
+                Mediator.all_game_objects.append(EnemyBullet(self.boss_xpos + 45, self.boss_ypos + 26, (i*0.4)
+                , 3.5, True, self.img_bullet_red, 'e_bullet',self.screen))
 
 
     ## Blue burst of bullets constant ##
     def boss_bullet_pattern_3(self):
         
         for i in range(-6, 9):
-            self.mediator.all_game_objects.append(EnemyBullet(self.boss_xpos + 45, self.boss_ypos + 26, (i*0.5) , 3, True, self.img_bullet_blue, 'e_bullet', self.mediator, self.screen))
+            Mediator.all_game_objects.append(EnemyBullet(self.boss_xpos + 45, self.boss_ypos + 26, (i*0.5) , 3, True, self.img_bullet_blue, 'e_bullet', self.mediator, self.screen))
 
 
     ## 
     def boss_bullet_pattern_4(self):
         for i in range(-6, 9):
-            self.mediator.all_game_objects.append(EnemyBullet(self.boss_xpos + 45, self.boss_ypos + 26, (i*0.5) , 3, True, self.img_bullet_blue, 'e_bullet', self.mediator, self.screen))
+            Mediator.all_game_objects.append(EnemyBullet(self.boss_xpos + 45, self.boss_ypos + 26, (i*0.5) , 3, True, self.img_bullet_blue, 'e_bullet', self.mediator, self.screen))
         
     def tp_boss(self):
         self.boss_xpos = random.randint(20, self.screen.get_width() - self.img.get_width() - 20)    

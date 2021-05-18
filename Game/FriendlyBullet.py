@@ -6,7 +6,7 @@ from JsonLoader import *
 
 class FriendlyBullet(GameObject):
     
-    def __init__(self, screen, xpos, ypos, object_ID, mediator):
+    def __init__(self, screen, xpos, ypos, object_ID):
         self.img = pygame.image.load("Game/sprites/bullets/red_bullet.png")
         self.bullet_x = xpos 
         self.bullet_y = ypos 
@@ -16,7 +16,8 @@ class FriendlyBullet(GameObject):
         self.bullet_rect = self.img.get_rect()
         self.bullet_damage = JsonLoader.get_bullet_damage(JsonLoader)*10
         self.object_ID = object_ID
-        self.mediator = mediator
+        self.alive = True
+
     
     ## For collision ##
     
@@ -44,7 +45,7 @@ class FriendlyBullet(GameObject):
         self.bullet_rect = self.img.get_rect(x=self.bullet_x, y=self.bullet_y)
 
         if self.bullet_y < -16:
-            self.mediator.to_be_removed.append(self)
+            Mediator.to_be_removed.append(self)
     
     def loop(self):
         self.bullet_move()

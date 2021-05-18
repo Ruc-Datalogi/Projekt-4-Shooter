@@ -6,9 +6,8 @@ from Player import *
 
 class Generator:
 
-    def __init__ (self, screen, mediator):
+    def __init__ (self, screen):
         self.screen = screen
-        self.mediator = mediator
         
         self.level = 1
         self.max_amount_of_waves = 3
@@ -38,7 +37,7 @@ class Generator:
     def generate_wave_1(self, amount, enemy_ID):
         enemy_list = self.get_spawn_points(amount)
         for i in range(len(enemy_list)):
-            self.mediator.all_game_objects.append(Enemy(enemy_list[i]*20, (random.randint(10, 30)), enemy_ID, 'enemy', self.mediator, self.screen))
+            Mediator.all_game_objects.append(Enemy(enemy_list[i]*20, (random.randint(10, 30)), enemy_ID, 'enemy', self.screen))
 
     def generate_wave_2(self):
         pass
@@ -48,14 +47,14 @@ class Generator:
 
         
     def check_for_enemy(self):
-        for enemy in self.mediator.all_game_objects:
+        for enemy in Mediator.all_game_objects:
             if enemy.get_object_ID() == 'enemy' or enemy.get_object_ID() == 'boss':
                 return True
         
         return False
 
     def check_for_boss(self):
-        for enemy in self.mediator.to_be_removed:
+        for enemy in Mediator.to_be_removed:
             if enemy.get_object_ID() == 'boss':
                 return True
         return False
@@ -112,7 +111,7 @@ class Generator:
         if self.level == 4:
  
             if not self.check_for_enemy():
-                self.mediator.all_game_objects.append(Boss(100,-20,0,'boss',self.mediator,self.screen))
+                Mediator.all_game_objects.append(Boss(100,-20,0,'boss',self.screen))
             
             if self.check_for_boss():
                     self.skip_level()
@@ -149,7 +148,7 @@ class Generator:
                 self.generate_wave_1(4,2)
 
             if not self.check_for_enemy():
-                self.mediator.all_game_objects.append(Boss(100,-20,0,'boss',self.mediator,self.screen, 2))
+                Mediator.all_game_objects.append(Boss(100,-20,0,'boss',self.screen, 2))
                   
             if self.check_for_boss():
                 self.skip_level() 

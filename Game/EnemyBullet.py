@@ -5,7 +5,7 @@ from Mediator import *
 
 class EnemyBullet(GameObject):
     
-    def __init__(self, xpos, ypos, bullet_speed_x ,bullet_speed_y, bullet_bend , img_bullet, object_ID, mediator, screen):
+    def __init__(self, xpos, ypos, bullet_speed_x ,bullet_speed_y, bullet_bend , img_bullet, object_ID, screen):
         self.img = img_bullet
 
         self.enemy_bullet_x = xpos 
@@ -24,8 +24,9 @@ class EnemyBullet(GameObject):
         self.enemy_bullet_Rect = self.img.get_rect()
         self.enemy_bullet_damage = 10
         self.object_ID = object_ID
-        self.mediator = mediator
         self.screen = screen
+        self.alive = True
+
     
     
     ## For collision ##
@@ -51,15 +52,15 @@ class EnemyBullet(GameObject):
         self.enemy_bullet_Rect = self.img.get_rect(x=self.enemy_bullet_x, y=self.enemy_bullet_y)
 
         if self.enemy_bullet_x > 400:
-            self.mediator.to_be_removed.append(self)
+            Mediator.to_be_removed.append(self)
         if self.enemy_bullet_x < -40:
-            self.mediator.to_be_removed.append(self)
+            Mediator.to_be_removed.append(self)
 
         if self.enemy_bullet_y < -30:
-            self.mediator.to_be_removed.append(self)
+            Mediator.to_be_removed.append(self)
         
         if self.enemy_bullet_y > 400:
-            self.mediator.to_be_removed.append(self)
+            Mediator.to_be_removed.append(self)
     
 
     def loop(self):
