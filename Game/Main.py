@@ -73,12 +73,9 @@ class Main:
                 for object in Mediator.all_game_objects:
                     object.loop()
                     object.draw()
-                    #print(object.get_object_ID())
 
                 generator.generate()
 
-                print(len(Mediator.all_game_objects), end=' ')
-                print(len(Mediator.to_be_removed))
 
                 Mediator.all_game_objects = [i for i in Mediator.all_game_objects if i not in Mediator.to_be_removed]
                 hud.draw_HUD()

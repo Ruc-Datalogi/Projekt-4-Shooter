@@ -83,9 +83,9 @@ class Boss(GameObject):
                 self.boss_x_speed = 0.4
         
 
-        if self.boss_xpos + self.img.get_width() > self.screen.get_width():
+        if self.boss_xpos + self.img.get_width() + 2 > self.screen.get_width():
             self.boss_x_speed *= -1
-        if self.boss_xpos < 0:
+        if self.boss_xpos < 2:
             self.boss_x_speed *=-1
 
         self.boss_rect = pygame.Rect(self.boss_xpos,self.boss_ypos,self.img.get_width(),self.img.get_height())
@@ -94,11 +94,13 @@ class Boss(GameObject):
         if self.boss_ready and self.level == 1:
             if self.boss_health > 1400:
                 if self.timer > 10:
+                    self.boss_x_speed = 0.4
                     self.timer = 0
                     self.boss_bullet_pattern_1()
 
             elif self.boss_health > 900:
                 if self.timer > 40:
+                    self.boss_x_speed = 0.2
                     self.timer = 0
                     self.boss_bullet_pattern_2()
             else:
@@ -149,8 +151,8 @@ class Boss(GameObject):
     ## Shower of bullets ##
     def boss_bullet_pattern_1(self):
 
-        Mediator.all_game_objects.append(EnemyBullet(self.boss_xpos + 6, self.boss_ypos + 26, 0,6, False, self.img_bullet_blue_rect, 'e_bullet', self.mediator, self.screen))
-        Mediator.all_game_objects.append(EnemyBullet(self.boss_xpos + 70, self.boss_ypos + 26, 0,6, False, self.img_bullet_blue_rect, 'e_bullet', self.mediator, self.screen))
+        Mediator.all_game_objects.append(EnemyBullet(self.boss_xpos + 6, self.boss_ypos + 26, 0,6, False, self.img_bullet_blue_rect, 'e_bullet', self.screen))
+        Mediator.all_game_objects.append(EnemyBullet(self.boss_xpos + 70, self.boss_ypos + 26, 0,6, False, self.img_bullet_blue_rect, 'e_bullet', self.screen))
 
 
     ## Burst of bullets with space in ##
@@ -174,13 +176,13 @@ class Boss(GameObject):
     def boss_bullet_pattern_3(self):
         
         for i in range(-6, 9):
-            Mediator.all_game_objects.append(EnemyBullet(self.boss_xpos + 45, self.boss_ypos + 26, (i*0.5) , 3, True, self.img_bullet_blue, 'e_bullet', self.mediator, self.screen))
+            Mediator.all_game_objects.append(EnemyBullet(self.boss_xpos + 45, self.boss_ypos + 26, (i*0.5) , 3, True, self.img_bullet_blue, 'e_bullet', self.screen))
 
 
     ## 
     def boss_bullet_pattern_4(self):
         for i in range(-6, 9):
-            Mediator.all_game_objects.append(EnemyBullet(self.boss_xpos + 45, self.boss_ypos + 26, (i*0.5) , 3, True, self.img_bullet_blue, 'e_bullet', self.mediator, self.screen))
+            Mediator.all_game_objects.append(EnemyBullet(self.boss_xpos + 45, self.boss_ypos + 26, (i*0.5) , 3, True, self.img_bullet_blue, 'e_bullet', self.screen))
         
     def tp_boss(self):
         self.boss_xpos = random.randint(20, self.screen.get_width() - self.img.get_width() - 20)    

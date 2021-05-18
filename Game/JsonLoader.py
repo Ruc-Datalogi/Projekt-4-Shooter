@@ -49,8 +49,8 @@ class JsonLoader(object):
             tmp = data['coins']
             tmp2 = data['total_coins'] 
         
-            tmp = int(tmp) + 1 
-            tmp2 = int(tmp2) + 1
+            tmp = int(tmp) + 10 
+            tmp2 = int(tmp2) + 10
             data['coins'] = str(tmp)
             data['total_coins'] = str(tmp2)
             JsonLoader.coins = data["coins"]

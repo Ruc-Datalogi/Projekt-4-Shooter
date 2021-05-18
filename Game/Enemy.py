@@ -121,7 +121,9 @@ class Enemy(GameObject):
         if self.enemy_health <= 0.0:
             Mediator.to_be_removed.append(self)
             self.alive = False
-            Mediator.all_game_objects.append(Collectables (self.enemy_x, self.enemy_y, self.screen,'coin'))
+            
+            if random.randint(0,9) == 5:
+                Mediator.all_game_objects.append(Collectables (self.enemy_x, self.enemy_y, self.screen,'coin'))
             JsonLoader.updateJsonFile(JsonLoader,'enemy')
 
     def draw(self):
