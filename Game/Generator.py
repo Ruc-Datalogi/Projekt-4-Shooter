@@ -9,7 +9,7 @@ class Generator:
     def __init__ (self, screen):
         self.screen = screen
         
-        self.level = 3
+        self.level = 9
         self.max_amount_of_waves = 3
         self.current_wave = 0
         
@@ -142,11 +142,11 @@ class Generator:
             self.next_level()
 
         if self.level == 9:
-            if self.next_wave():
-                self.generate_wave_1(4,0)
-                self.generate_wave_1(4,1)
-                self.generate_wave_1(4,2)
-
+            #if self.next_wave():
+                #self.generate_wave_1(4,0)
+                #self.generate_wave_1(4,1)
+                #self.generate_wave_1(4,2)
+                
             if not self.check_for_enemy():
                 Mediator.all_game_objects.append(Boss(100,-20,0,'boss',self.screen, 2))
                   

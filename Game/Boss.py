@@ -21,6 +21,7 @@ class Boss(GameObject):
         self.img_bullet_blue_rect = self.ss2.image_at(pygame.Rect(111, 108, 11, 36))
         self.img_bullet_red = self.ss2.image_at(pygame.Rect(27,106,17,16))
         self.img_bullet_blue = self.ss2.image_at(pygame.Rect(8,129,17,16))
+        self.img_bullet_green = self.ss2.image_at(pygame.Rect(27,129,17,16))
 
         self.boss_xpos = xpos
         self.boss_ypos = ypos
@@ -119,11 +120,11 @@ class Boss(GameObject):
                     self.timer = 0
                     self.boss_bullet_pattern_2()
             else:
-                
-                if self.timer > 30 and self.tp_timer > 10:
+                self.boss_x_speed = 0
+                if self.timer > 30 and self.tp_timer > 20:
                     self.timer = 0
                     self.boss_bullet_pattern_3()
-                if self.tp_timer > 60:
+                if self.tp_timer > 180:
                     self.tp_timer = 0
                     self.tp_boss()
 
@@ -182,10 +183,14 @@ class Boss(GameObject):
     ## 
     def boss_bullet_pattern_4(self):
         for i in range(-6, 9):
-            Mediator.all_game_objects.append(EnemyBullet(self.boss_xpos + 45, self.boss_ypos + 26, (i*0.5) , 3, True, self.img_bullet_blue, 'e_bullet', self.screen))
+            Mediator.all_game_objects.append(EnemyBullet(self.boss_xpos + 45, self.boss_ypos + 26, (i*0.5) , 3, True, self.img_bullet_green, 'e_bullet', self.screen))
         
     def tp_boss(self):
-        self.boss_xpos = random.randint(20, self.screen.get_width() - self.img.get_width() - 20)    
+        if self.boss_xpos >= self.screen.get_width()/2:
+            self.boss_xpos = random.randint(self.img.get_width() + 6, (self.screen.get_width()/2))
+        else:
+            print("hello")
+            self.boss_xpos = random.randint(self.screen.get_width()/2, self.screen.get_width() - self.img.get_width())
        
             
     def draw_boss_rect(self):
