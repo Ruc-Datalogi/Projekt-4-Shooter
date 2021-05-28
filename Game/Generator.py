@@ -9,7 +9,7 @@ class Generator:
     def __init__ (self, screen):
         self.screen = screen
         
-        self.level = 9
+        self.level = 1
         self.max_amount_of_waves = 3
         self.current_wave = 0
         
