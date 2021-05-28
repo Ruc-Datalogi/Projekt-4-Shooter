@@ -451,7 +451,6 @@ class Menu:
                     self.select_options -= 1
                 
                 if event.key == pygame.K_RETURN:
-                    print('fuhdufhs')
                     if self.select_options == 3:
                         self.options_on = False
                         self.front_screen = True

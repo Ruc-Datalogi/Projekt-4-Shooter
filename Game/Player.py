@@ -70,14 +70,6 @@ class Player(GameObject):
             pygame.draw.circle(self.screen,(115,220,255,0.5),(self.player_x+self.img.get_width()/2,self.player_y+1+self.img.get_height()/2),13,1)
 
 
-        
-            
-            
-        
-
-       
-
-
     ## Character move and game boundaries ##
     def player_move(self):
         self.player_x += self.player_speed_x

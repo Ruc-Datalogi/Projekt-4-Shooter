@@ -53,7 +53,6 @@ class Soundplayer:
     
     @staticmethod
     def change_volume_music(self, volume):
-        print(volume)
         pygame.mixer.music.set_volume((self.start_volume * volume)/100)
 
     @staticmethod

@@ -47,7 +47,6 @@ class Boss(GameObject):
 
         self.level = level
         self.update_boss()
-        print(self.level)
         self.alive = True
 
         
@@ -189,7 +188,6 @@ class Boss(GameObject):
         if self.boss_xpos >= self.screen.get_width()/2:
             self.boss_xpos = random.randint(self.img.get_width() + 6, (self.screen.get_width()/2))
         else:
-            print("hello")
             self.boss_xpos = random.randint(self.screen.get_width()/2, self.screen.get_width() - self.img.get_width())
        
             
